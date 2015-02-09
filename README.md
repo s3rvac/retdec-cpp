@@ -65,6 +65,7 @@ Build and Installation
 
 * Clone the repository or download the sources into a directory. Lets call the directory `retdec`.
 * `cd retdec`
+* `mkdir build && cd build`
 * `cmake ..`
 * `make && make install`
 
