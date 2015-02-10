@@ -1,8 +1,9 @@
 retdec-cpp
 ==========
 
-A C++ library providing easy access to the [retdec.com](https://retdec.com)
-decompilation service through their public [REST API](https://retdec.com/api/).
+A C++ library and tools providing easy access to the
+[retdec.com](https://retdec.com) decompilation service through their public
+[REST API](https://retdec.com/api/).
 
 Development Status
 ------------------
