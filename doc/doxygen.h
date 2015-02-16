@@ -65,6 +65,8 @@ Decompiler decompiler(
 @endcode
 This is handy if you want to use the settings only in a single place.
 
+See the description of <code>Settings</code> for all the available options.
+
 @section SectionStartingDecompilations Starting Decompilations
 
 After you have created a decompiler, you can run decompilations. To start a decompilation, call <code>Decompiler::runDecompilation()</code> and provide its arguments, represented by an instance of class <code>DecompilationArguments</code>. This class also provides a fluent interface. Example:
