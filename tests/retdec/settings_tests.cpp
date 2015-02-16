@@ -7,9 +7,11 @@
 
 #include <gtest/gtest.h>
 
+#include "retdec/internal/utilities/os.h"
 #include "retdec/settings.h"
 
 using namespace testing;
+using namespace retdec::internal;
 
 namespace retdec {
 namespace tests {
@@ -30,10 +32,16 @@ DefaultApiKeyHasCorrectValue) {
 }
 
 TEST_F(SettingsTests,
+DefaultUserAgentHasCorrectValue) {
+	EXPECT_EQ("retdec-cpp/" + operatingSystemName(), Settings::DefaultUserAgent);
+}
+
+TEST_F(SettingsTests,
 HasDefaultValuesWhenCreatedWithDefaultConstructor) {
 	Settings settings;
 	EXPECT_EQ(Settings::DefaultApiKey, settings.apiKey());
 	EXPECT_EQ(Settings::DefaultApiUrl, settings.apiUrl());
+	EXPECT_EQ(Settings::DefaultUserAgent, settings.userAgent());
 }
 
 TEST_F(SettingsTests,
@@ -62,6 +70,20 @@ WithApiUrlReturnsSettingsWithNewApiUrl) {
 	Settings settings;
 	auto newSettings = settings.withApiUrl("http://127.0.0.1/api");
 	EXPECT_EQ("http://127.0.0.1/api", newSettings.apiUrl());
+}
+
+TEST_F(SettingsTests,
+UserAgentChangesSettingsInPlace) {
+	Settings settings;
+	settings.userAgent("my user agent");
+	EXPECT_EQ("my user agent", settings.userAgent());
+}
+
+TEST_F(SettingsTests,
+WithUserAgentReturnsSettingsWithNewUserAgent) {
+	Settings settings;
+	auto newSettings = settings.withUserAgent("my user agent");
+	EXPECT_EQ("my user agent", newSettings.userAgent());
 }
 
 TEST_F(SettingsTests,

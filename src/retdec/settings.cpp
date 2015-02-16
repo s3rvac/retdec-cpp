@@ -7,7 +7,10 @@
 
 #include <utility>
 
+#include "retdec/internal/utilities/os.h"
 #include "retdec/settings.h"
+
+using namespace retdec::internal;
 
 namespace retdec {
 
@@ -15,7 +18,8 @@ namespace retdec {
 /// Constructs a default settings.
 ///
 Settings::Settings():
-	apiUrl_(DefaultApiUrl), apiKey_(DefaultApiKey) {}
+	apiUrl_(DefaultApiUrl), apiKey_(DefaultApiKey),
+	userAgent_(DefaultUserAgent) {}
 
 ///
 /// Copy-constructs settings from the given settings.
@@ -94,10 +98,40 @@ std::string Settings::apiUrl() const {
 	return apiUrl_;
 }
 
+///
+/// Sets a new user agent.
+///
+/// @returns Reference to the modified settings (i.e. @c *this).
+///
+Settings &Settings::userAgent(const std::string &userAgent) {
+	userAgent_ = userAgent;
+	return *this;
+}
+
+///
+/// Returns a copy of the settings with a new user agent.
+///
+Settings Settings::withUserAgent(const std::string &userAgent) const {
+	auto copy = *this;
+	copy.userAgent(userAgent);
+	return copy;
+}
+
+///
+/// Returns the user agent.
+///
+std::string Settings::userAgent() const {
+	return userAgent_;
+}
+
 /// Default URL to the API.
 const std::string Settings::DefaultApiUrl = "https://retdec.com/service/api";
 
 /// Default API key.
 const std::string Settings::DefaultApiKey = "";
+
+/// Default user agent.
+const std::string Settings::DefaultUserAgent = "retdec-cpp/" +
+	operatingSystemName();
 
 } // namespace retdec

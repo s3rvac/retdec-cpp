@@ -42,11 +42,19 @@ public:
 	std::string apiUrl() const;
 	/// @}
 
+	/// @name User Agent
+	/// @{
+	Settings &userAgent(const std::string &userAgent);
+	Settings withUserAgent(const std::string &userAgent) const;
+	std::string userAgent() const;
+	/// @}
+
 public:
 	/// @name Default Values
 	/// @{
 	static const std::string DefaultApiUrl;
 	static const std::string DefaultApiKey;
+	static const std::string DefaultUserAgent;
 	/// @}
 
 private:
@@ -55,6 +63,9 @@ private:
 
 	/// API key.
 	std::string apiKey_;
+
+	/// User agent.
+	std::string userAgent_;
 };
 
 } // namespace retdec
