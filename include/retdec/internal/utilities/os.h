@@ -10,10 +10,20 @@
 
 #include <string>
 
-// Obtain the used operating system. Currently, we only distinguish between "MS
-// Windows" and "other operating systems".
-#if defined(__WIN) || defined(_WIN32) || defined(__WIN32__) || defined(__CYGWIN__)
+// Obtain the used operating system.
+// http://sourceforge.net/p/predef/wiki/OperatingSystems/
+#if defined(_WIN32) || defined(_WIN64) || defined(__WIN32__) || defined(__WINDOWS__) || defined(__CYGWIN__)
 	#define RETDEC_OS_WINDOWS
+#elif defined(__ANDROID__)
+	#define RETDEC_OS_ANDROID
+#elif defined(__linux__)
+	#define RETDEC_OS_LINUX
+#elif defined(__APPLE__) || defined(__MACH__)
+	#define RETDEC_OS_MACOS
+#elif defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__)
+	#define RETDEC_OS_BSD
+#elif defined(__unix__) || defined(__unix)
+	#define RETDEC_OS_UNIX
 #endif
 
 namespace retdec {
