@@ -187,6 +187,18 @@ GetWithoutArgumentsSendsRequestWithCorrectMethodAndDestinationAndHttpVersion) {
 	EXPECT_CONTAINS(response, "GET /api/test HTTP/1.1");
 }
 
+TEST_F(RealConnectionTests,
+GetSendsRequestWithUserAgentHeader) {
+	const auto ApiUrl = HttpServerUrl + "/api";
+	RealConnection conn(
+		Settings()
+			.withApiUrl(ApiUrl)
+			.withUserAgent("my user agent")
+	);
+	auto response = conn.sendGetRequest(ApiUrl);
+	EXPECT_CONTAINS(response, "User-Agent: my user agent");
+}
+
 } // namespace tests
 } // namespace internal
 } // namespace retdec

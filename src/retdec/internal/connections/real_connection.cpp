@@ -112,6 +112,7 @@ struct RealConnection::Impl {
 
 	std::string createQuery(const RequestArguments &args);
 	void addAuthToRequest(HttpClient::request &request);
+	void addUserAgentToRequest(HttpClient::request &request);
 	std::string addFilesToRequest(const RequestFiles &files,
 		HttpClient::request &request);
 	HttpClient::request createRequest(const Url &url,
@@ -150,6 +151,13 @@ void RealConnection::Impl::addAuthToRequest(HttpClient::request &request) {
 }
 
 ///
+/// Adds a user-agent string to the given request.
+///
+void RealConnection::Impl::addUserAgentToRequest(HttpClient::request &request) {
+	request << boost::network::header("User-Agent", settings.userAgent());
+}
+
+///
 /// Adds the given files to the given request.
 ///
 /// @returns Body of the request to be used when sending a POST request.
@@ -185,6 +193,7 @@ HttpClient::request RealConnection::Impl::createRequest(const Url &url,
 		const RequestArguments &args) {
 	HttpClient::request request(url + createQuery(args));
 	addAuthToRequest(request);
+	addUserAgentToRequest(request);
 	return request;
 }
 
