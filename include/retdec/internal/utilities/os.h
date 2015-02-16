@@ -32,6 +32,7 @@ namespace internal {
 /// @name Operating System
 /// @{
 
+std::string operatingSystemName();
 std::string fileNameFromPath(const std::string &path);
 std::string readFile(const std::string &path);
 void writeFile(const std::string &path, const std::string &content);

@@ -17,6 +17,29 @@ namespace retdec {
 namespace internal {
 
 ///
+/// Returns a name of the operating system.
+///
+/// If the name cannot be determined, it returns @c "Unknown".
+///
+std::string operatingSystemName() {
+#if defined(RETDEC_OS_WINDOWS)
+	return "Windows";
+#elif defined(RETDEC_OS_ANDROID)
+	return "Android";
+#elif defined(RETDEC_OS_LINUX)
+	return "Linux";
+#elif defined(RETDEC_OS_MACOS)
+	return "MacOS";
+#elif defined(RETDEC_OS_BSD)
+	return "BSD";
+#elif defined(RETDEC_OS_UNIX)
+	return "UNIX";
+#else
+	return "Unknown";
+#endif
+}
+
+///
 /// Returns the file name from the given path.
 ///
 /// @param[in] path Path to the file.
