@@ -59,7 +59,7 @@ Requirements
 
 The [Boost](http://www.boost.org/) and [OpenSSL](https://www.openssl.org/)
 libraries have to be installed on your system. Other libraries are
-automatically downloaded and build if they are not present on your system.
+automatically downloaded and built if they are not present on your system.
 
 Build and Installation
 ----------------------
