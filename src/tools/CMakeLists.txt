@@ -10,11 +10,11 @@ if(NOT RETDEC_TOOLS)
 	return()
 endif()
 
-set(DECOMPILE_SOURCES
-	decompile.cpp
+set(DECOMPILER_SOURCES
+	decompiler.cpp
 )
 
-add_executable(decompile ${DECOMPILE_SOURCES})
-target_link_libraries(decompile retdec)
+add_executable(decompiler ${DECOMPILER_SOURCES})
+target_link_libraries(decompiler retdec)
 
-install(TARGETS decompile DESTINATION "${INSTALL_BIN_DIR}")
+install(TARGETS decompiler DESTINATION "${INSTALL_BIN_DIR}")
