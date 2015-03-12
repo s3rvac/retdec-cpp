@@ -96,3 +96,14 @@ License
 Copyright (c) 2015 Petr Zemek (<s3rvac@gmail.com>) and contributors.
 
 Distributed under the MIT license. See the `LICENSE` file for more details.
+
+Access from Other Languages
+---------------------------
+
+If you want to access the [retdec.com](https://retdec.com) decompilation
+service from other languages, check out the following projects:
+
+* [retdec-python](https://github.com/s3rvac/retdec-python) - A library and
+  tools for accessing the service from Python.
+* [retdec-sh](https://github.com/s3rvac/retdec-sh) - Scripts for accessing the
+  service from shell.
