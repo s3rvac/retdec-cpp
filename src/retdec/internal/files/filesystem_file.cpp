@@ -20,7 +20,7 @@ FilesystemFile::FilesystemFile(const std::string &path):
 	path(path), name(fileNameFromPath(path)) {}
 
 ///
-/// Constructs a file with a custom name name.
+/// Constructs a file with a custom name.
 ///
 /// @param[in] path Path to the file in a filesystem.
 /// @param[in] name Name to be used as the file's name.
