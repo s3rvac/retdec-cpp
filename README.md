@@ -51,7 +51,7 @@ int main(int argc, char **argv) {
 Requirements
 ------------
 
-* [CMake](http://www.boost.org/) (version >= 3.0)
+* [CMake](https://cmake.org/) (version >= 3.0)
 * [Boost](http://www.boost.org/) (any recent version)
 * [cpp-netlib](http://cpp-netlib.org/) (version >= 0.11)
 * [OpenSSL](https://www.openssl.org/) (version >= 1.0)
@@ -89,7 +89,7 @@ The `make` call supports standard parameters, such as:
 Use
 ---
 
-If you use [CMake](http://www.boost.org/), you can incorporate the library into
+If you use [CMake](https://cmake.org/), you can incorporate the library into
 your project in the following way.
 
 ```
