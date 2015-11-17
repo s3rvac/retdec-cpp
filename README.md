@@ -78,7 +78,7 @@ You can pass additional parameters to `cmake`:
 * `-DRETDEC_COVERAGE=1` to build with code coverage support (requires
     [LCOV](http://ltp.sourceforge.net/coverage/lcov.php), disabled by default).
 * `-DCMAKE_BUILD_TYPE=debug` to build with debugging information, which is
-    useful during the development. By default, the library is built in the
+    useful during development. By default, the library is built in the
     `release` mode.
 * `-DCMAKE_INSTALL_PREFIX:PATH=/usr` to set a custom installation path.
 
@@ -90,7 +90,7 @@ Use
 ---
 
 If you use [CMake](https://cmake.org/), you can incorporate the library into
-your project in the following way.
+your project in the following way:
 
 ```
 set(retdec_DIR "/path/to/installed/retdec/lib/cmake")
@@ -104,7 +104,8 @@ target_link_libraries(your_app retdec)
 API Documentation
 -----------------
 
-The API documentation is available [here](http://projects.petrzemek.net/retdec-cpp/doc/).
+The latest API documentation is available
+[here](http://projects.petrzemek.net/retdec-cpp/doc/).
 
 License
 -------
