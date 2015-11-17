@@ -15,10 +15,10 @@ project(retdec-cpp CXX C)
 ##
 
 option(RETDEC_DOC "Build public API documentation (requires Doxygen)." OFF)
-option(RETDEC_INTERNAL_DOC "Build also the internal part of the API documentation." OFF)
+option(RETDEC_INTERNAL_DOC "Build also the internal parts of the API documentation." OFF)
 option(RETDEC_TOOLS "Build tools." OFF)
 option(RETDEC_COVERAGE "Build with code coverage support (requires lcov and build with tests)." OFF)
-option(RETDEC_TESTS "Build unit tests." OFF)
+option(RETDEC_TESTS "Build tests." OFF)
 
 if(${RETDEC_INTERNAL_DOC})
 	set(RETDEC_DOC ON)
@@ -165,8 +165,8 @@ if(RETDEC_COVERAGE)
 		COMMAND lcov --capture --no-external
 			--directory include --directory "${PROJECT_BINARY_DIR}/include"
 			--directory src --directory "${PROJECT_BINARY_DIR}/src"
-			# Comment out the next line if you want to omit the test code from
-			# the coverage.
+			# Comment out the next line if you want to omit test code from the
+			# coverage.
 			--directory tests --directory "${PROJECT_BINARY_DIR}/tests"
 			--output-file coverage/coverage.info
 		COMMAND genhtml --show-details --num-spaces 4 --demangle-cpp
