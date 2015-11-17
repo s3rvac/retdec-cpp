@@ -91,7 +91,7 @@ add_definitions(-DBOOST_NETWORK_ENABLE_HTTPS)
 find_package(JsonCpp)
 if(NOT JsonCpp_FOUND)
 	ExternalProject_Add(json-cpp
-		URL https://github.com/open-source-parsers/jsoncpp/archive/1.0.0.zip
+		URL https://github.com/open-source-parsers/jsoncpp/archive/1.6.5.zip
 		INSTALL_COMMAND ""
 		# Wrap the download, configure and build steps in a script to log the
 		# output.
