@@ -51,7 +51,7 @@ int main(int argc, char **argv) {
 Requirements
 ------------
 
-* [CMake](https://cmake.org/) (version >= 3.0)
+* [CMake](https://cmake.org/) (version >= 2.8)
 * [Boost](http://www.boost.org/) (any recent version)
 * [cpp-netlib](http://cpp-netlib.org/) (version >= 0.11)
 * [OpenSSL](https://www.openssl.org/) (version >= 1.0)
