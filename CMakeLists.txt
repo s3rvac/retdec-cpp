@@ -145,6 +145,15 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang
 	# Compiler-specific warnings.
 	if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wuseless-cast")
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wzero-as-null-pointer-constant")
+	elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wconditional-uninitialized")
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wheader-hygiene")
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-literal-null-conversion")
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wreserved-id-macro")
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wsometimes-uninitialized")
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wunreachable-code")
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wunused-exception-parameter")
 	endif()
 endif()
 
