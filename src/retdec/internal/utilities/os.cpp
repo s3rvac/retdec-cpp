@@ -96,7 +96,7 @@ std::string readFile(const std::string &path) {
 		content.resize(file.tellg());
 		file.seekg(0, std::ios::beg);
 		file.read(&content[0], content.size());
-	} catch (const std::ifstream::failure &e) {
+	} catch (const std::ifstream::failure &) {
 		throw FilesystemError("cannot read file \"" + path + "\"");
 	}
 	return content;
@@ -130,7 +130,7 @@ void copyFile(const std::string &srcPath, const std::string &dstPath) {
 	try {
 		boost::filesystem::copy_file(srcPath, dstPath,
 			boost::filesystem::copy_option::overwrite_if_exists);
-	} catch (const boost::filesystem::filesystem_error &ex) {
+	} catch (const boost::filesystem::filesystem_error &) {
 		throw FilesystemError("cannot copy file \"" + srcPath +
 			"\" to \"" + dstPath + "\"");
 	}

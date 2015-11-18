@@ -37,7 +37,7 @@ void verifyRequestSucceeded(const Connection::Response &response) {
 				jsonBody.get("message", response.statusMessage()).asString(),
 				jsonBody.get("description", "").asString()
 			);
-		} catch (const JsonDecodingError &ex) {
+		} catch (const JsonDecodingError &) {
 			throw ApiError(
 				response.statusCode(),
 				response.statusMessage()
