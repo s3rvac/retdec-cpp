@@ -17,7 +17,7 @@ project(retdec-cpp CXX C)
 option(RETDEC_DOC "Build public API documentation (requires Doxygen)." OFF)
 option(RETDEC_INTERNAL_DOC "Build also the internal parts of the API documentation." OFF)
 option(RETDEC_TOOLS "Build tools." OFF)
-option(RETDEC_COVERAGE "Build with code coverage support (requires lcov and build with tests)." OFF)
+option(RETDEC_COVERAGE "Build with code coverage support (requires GCC and lcov)." OFF)
 option(RETDEC_TESTS "Build tests." OFF)
 
 if(${RETDEC_INTERNAL_DOC})
@@ -26,6 +26,11 @@ endif()
 
 if(${RETDEC_COVERAGE})
 	set(RETDEC_TESTS ON)
+
+	# The coverage currently works only for GCC builds.
+	if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+		message(FATAL_ERROR "Code coverage support requires GCC to be used.")
+	endif()
 endif()
 
 ##
