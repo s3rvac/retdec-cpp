@@ -51,6 +51,10 @@ int main(int argc, char **argv) {
 Requirements
 ------------
 
+To build the library and tools, you need:
+* A compiler supporting C++14. Supported compilers are:
+  * [GCC](https://gcc.gnu.org/) (version >= 4.9)
+  * [Clang](http://clang.llvm.org/) (version >= 3.4)
 * [CMake](https://cmake.org/) (version >= 2.8)
 * [Boost](http://www.boost.org/) (any recent version)
 * [cpp-netlib](http://cpp-netlib.org/) (version >= 0.11)
