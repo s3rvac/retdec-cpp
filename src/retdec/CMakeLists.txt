@@ -21,7 +21,6 @@ set(RETDEC_SOURCES
 	internal/utilities/connection.cpp
 	internal/utilities/json.cpp
 	internal/utilities/os.cpp
-	internal/utilities/smart_ptr.cpp
 	internal/utilities/string.cpp
 	settings.cpp
 )
