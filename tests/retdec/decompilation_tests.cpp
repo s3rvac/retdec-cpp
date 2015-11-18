@@ -12,7 +12,6 @@
 #include "retdec/decompilation.h"
 #include "retdec/internal/connection_mock.h"
 #include "retdec/internal/utilities/json.h"
-#include "retdec/internal/utilities/smart_ptr.h"
 #include "retdec/settings.h"
 
 using namespace testing;
@@ -49,7 +48,7 @@ GetIdReturnsCorrectValue) {
 
 TEST_F(DecompilationTests,
 HasFinishedSendsCorrectRequestWhenNoFinishedInfo) {
-	auto refResponse = make_unique<NiceMock<ResponseMock>>();
+	auto refResponse = std::make_unique<NiceMock<ResponseMock>>();
 	ON_CALL(*refResponse, statusCode())
 		.WillByDefault(Return(200)); // HTTP 200 OK
 	ON_CALL(*refResponse, bodyAsJson())

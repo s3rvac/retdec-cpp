@@ -17,14 +17,6 @@ namespace internal {
 /// @{
 
 ///
-/// Implementation of @c std::make_unique from C++14.
-///
-template <typename T, typename... Args>
-std::unique_ptr<T> make_unique(Args &&... args) {
-	return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
-}
-
-///
 /// Casts the given shared pointer to a pointer of a different type.
 ///
 /// @param[in] ptr Pointer to be casted.

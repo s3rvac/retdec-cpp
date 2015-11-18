@@ -9,11 +9,11 @@
 #include <boost/network/utils/base64/encode.hpp>
 #include <boost/system/system_error.hpp>
 #include <json/json.h>
+#include <memory>
 
 #include "retdec/internal/connections/real_connection.h"
 #include "retdec/internal/files/string_file.h"
 #include "retdec/internal/utilities/json.h"
-#include "retdec/internal/utilities/smart_ptr.h"
 #include "retdec/internal/utilities/string.h"
 #include "retdec/settings.h"
 
@@ -89,7 +89,7 @@ Json::Value RealResponse::bodyAsJson() const {
 
 // Override.
 std::unique_ptr<File> RealResponse::bodyAsFile() const {
-	return make_unique<StringFile>(response.body(), attachedFileName());
+	return std::make_unique<StringFile>(response.body(), attachedFileName());
 }
 
 ///
@@ -201,7 +201,7 @@ HttpClient::request RealConnection::Impl::createRequest(const Url &url,
 /// Constructs a connection.
 ///
 RealConnection::RealConnection(const Settings &settings):
-	impl(make_unique<Impl>(settings)) {}
+	impl(std::make_unique<Impl>(settings)) {}
 
 // Override.
 RealConnection::~RealConnection() = default;
@@ -223,7 +223,7 @@ std::unique_ptr<Connection::Response> RealConnection::sendGetRequest(
 	auto request = impl->createRequest(url, args);
 	try {
 		auto response = impl->client.get(request);
-		return make_unique<RealResponse>(response);
+		return std::make_unique<RealResponse>(response);
 	} catch (const boost::system::system_error &ex) {
 		throw ConnectionError(ex.what());
 	}
@@ -243,7 +243,7 @@ std::unique_ptr<Connection::Response> RealConnection::sendPostRequest(
 	auto body = impl->addFilesToRequest(files, request);
 	try {
 		auto response = impl->client.post(request, body);
-		return make_unique<RealResponse>(response);
+		return std::make_unique<RealResponse>(response);
 	} catch (const boost::system::system_error &ex) {
 		throw ConnectionError(ex.what());
 	}

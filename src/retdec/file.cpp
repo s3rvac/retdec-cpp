@@ -5,10 +5,11 @@
 /// @brief     Implementation of the base class and factory of files.
 ///
 
+#include <memory>
+
 #include "retdec/file.h"
 #include "retdec/internal/files/filesystem_file.h"
 #include "retdec/internal/files/string_file.h"
-#include "retdec/internal/utilities/smart_ptr.h"
 
 using namespace retdec::internal;
 
@@ -55,7 +56,7 @@ File::~File() = default;
 ///
 std::unique_ptr<File> File::fromContentWithName(const std::string &content,
 		const std::string &name) {
-	return make_unique<StringFile>(content, name);
+	return std::make_unique<StringFile>(content, name);
 }
 
 ///
@@ -66,7 +67,7 @@ std::unique_ptr<File> File::fromContentWithName(const std::string &content,
 /// The name of the file is obtained automatically.
 ///
 std::unique_ptr<File> File::fromFilesystem(const std::string &path) {
-	return make_unique<FilesystemFile>(path);
+	return std::make_unique<FilesystemFile>(path);
 }
 
 ///
@@ -80,7 +81,7 @@ std::unique_ptr<File> File::fromFilesystem(const std::string &path) {
 ///
 std::unique_ptr<File> File::fromFilesystemWithOtherName(
 		const std::string &path, const std::string &name) {
-	return make_unique<FilesystemFile>(path, name);
+	return std::make_unique<FilesystemFile>(path, name);
 }
 
 } // namespace retdec

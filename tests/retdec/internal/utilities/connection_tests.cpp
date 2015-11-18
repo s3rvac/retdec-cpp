@@ -7,12 +7,12 @@
 
 #include <gtest/gtest.h>
 #include <json/json.h>
+#include <memory>
 
 #include "retdec/exceptions.h"
 #include "retdec/internal/connection_mock.h"
 #include "retdec/internal/utilities/connection.h"
 #include "retdec/internal/utilities/json.h"
-#include "retdec/internal/utilities/smart_ptr.h"
 
 using namespace testing;
 
@@ -122,7 +122,7 @@ public:
 ///
 std::unique_ptr<NiceMock<ResponseMock>>
 		ResponseVerifyingConnectionTests::responseForFailedRequest() {
-	auto response = make_unique<NiceMock<ResponseMock>>();
+	auto response = std::make_unique<NiceMock<ResponseMock>>();
 	ON_CALL(*response, statusCode())
 		.WillByDefault(Return(422)); // HTTP 422 Unprocessable Entity
 	ON_CALL(*response, statusMessage())

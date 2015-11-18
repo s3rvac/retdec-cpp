@@ -7,11 +7,9 @@
 
 #include <boost/filesystem.hpp>
 #include <fstream>
+#include <memory>
 
-#include "retdec/internal/utilities/smart_ptr.h"
 #include "retdec/test_utilities/tmp_file.h"
-
-using namespace retdec::internal;
 
 namespace retdec {
 namespace tests {
@@ -30,7 +28,7 @@ struct TmpFile::Impl {
 ///
 /// Creates a temporary file with the given content.
 ///
-TmpFile::TmpFile(const std::string &content): impl(make_unique<Impl>()) {
+TmpFile::TmpFile(const std::string &content): impl(std::make_unique<Impl>()) {
 	std::ofstream file(impl->path.native(), std::ios::out | std::ios::binary);
 	file << content;
 }

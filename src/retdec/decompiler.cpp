@@ -7,6 +7,7 @@
 
 #include <algorithm>
 #include <json/json.h>
+#include <memory>
 #include <utility>
 
 #include "retdec/decompilation.h"
@@ -15,7 +16,6 @@
 #include "retdec/internal/connection_managers/real_connection_manager.h"
 #include "retdec/internal/connections/real_connection.h"
 #include "retdec/internal/utilities/connection.h"
-#include "retdec/internal/utilities/smart_ptr.h"
 #include "retdec/settings.h"
 
 using namespace retdec::internal;
@@ -74,7 +74,7 @@ struct Decompiler::Impl {
 /// Constructs a decompiler with the given settings.
 ///
 Decompiler::Decompiler(const Settings &settings):
-	impl(make_unique<Impl>(settings, std::make_shared<RealConnectionManager>())) {}
+	impl(std::make_unique<Impl>(settings, std::make_shared<RealConnectionManager>())) {}
 
 ///
 /// Constructs a decompiler with the given settings and connection manager.
@@ -83,7 +83,7 @@ Decompiler::Decompiler(const Settings &settings,
 		// The qualification in ::ConnectionManager below has to be be used due
 		// to doxygen limitations.
 		const std::shared_ptr<::ConnectionManager> &connectionManager):
-	impl(make_unique<Impl>(settings, connectionManager)) {}
+	impl(std::make_unique<Impl>(settings, connectionManager)) {}
 
 ///
 /// Destructs the decompiler.
@@ -104,7 +104,7 @@ std::unique_ptr<Decompilation> Decompiler::runDecompilation(
 	verifyRequestSucceeded(*response);
 	auto jsonBody = response->bodyAsJson();
 	auto id = jsonBody.get("id", "?").asString();
-	return make_unique<Decompilation>(id, conn);
+	return std::make_unique<Decompilation>(id, conn);
 }
 
 } // namespace retdec

@@ -6,6 +6,7 @@
 ///
 
 #include <json/json.h>
+#include <memory>
 #include <utility>
 
 #include "retdec/decompilation.h"
@@ -14,7 +15,6 @@
 #include "retdec/internal/connections/real_connection.h"
 #include "retdec/internal/utilities/connection.h"
 #include "retdec/internal/utilities/os.h"
-#include "retdec/internal/utilities/smart_ptr.h"
 
 using namespace retdec::internal;
 
@@ -121,7 +121,7 @@ Decompilation::Decompilation(const std::string &id,
 		// The qualification in ::Connection below has to be be used due to
 		// doxygen limitations.
 		const std::shared_ptr<::Connection> &conn):
-	impl(make_unique<Impl>(id, conn)) {}
+	impl(std::make_unique<Impl>(id, conn)) {}
 
 ///
 /// Destructs the decompilation.
