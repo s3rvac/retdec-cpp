@@ -144,9 +144,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang
 
 	# Compiler-specific warnings.
 	if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-		if(NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8))
-			set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wuseless-cast")
-		endif()
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wuseless-cast")
 	endif()
 endif()
 
