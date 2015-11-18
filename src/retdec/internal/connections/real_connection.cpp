@@ -5,11 +5,12 @@
 /// @brief     Implementation of the connection to the API.
 ///
 
+#include <memory>
+
 #include <boost/network/protocol/http/client.hpp>
 #include <boost/network/utils/base64/encode.hpp>
 #include <boost/system/system_error.hpp>
 #include <json/json.h>
-#include <memory>
 
 #include "retdec/internal/connections/real_connection.h"
 #include "retdec/internal/files/string_file.h"

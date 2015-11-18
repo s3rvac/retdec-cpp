@@ -5,9 +5,10 @@
 /// @brief     Implementation of the temporary file utilities.
 ///
 
-#include <boost/filesystem.hpp>
 #include <fstream>
 #include <memory>
+
+#include <boost/filesystem.hpp>
 
 #include "retdec/test_utilities/tmp_file.h"
 

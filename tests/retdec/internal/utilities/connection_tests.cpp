@@ -5,9 +5,10 @@
 /// @brief     Tests for connection utilities.
 ///
 
+#include <memory>
+
 #include <gtest/gtest.h>
 #include <json/json.h>
-#include <memory>
 
 #include "retdec/exceptions.h"
 #include "retdec/internal/connection_mock.h"

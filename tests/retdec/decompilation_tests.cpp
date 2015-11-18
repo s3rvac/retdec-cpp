@@ -5,9 +5,10 @@
 /// @brief     Tests for the decompilation.
 ///
 
+#include <memory>
+
 #include <gtest/gtest.h>
 #include <json/json.h>
-#include <memory>
 
 #include "retdec/decompilation.h"
 #include "retdec/internal/connection_mock.h"

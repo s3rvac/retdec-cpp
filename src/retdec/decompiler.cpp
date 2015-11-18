@@ -6,9 +6,10 @@
 ///
 
 #include <algorithm>
-#include <json/json.h>
 #include <memory>
 #include <utility>
+
+#include <json/json.h>
 
 #include "retdec/decompilation.h"
 #include "retdec/decompilation_arguments.h"

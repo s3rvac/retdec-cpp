@@ -5,9 +5,10 @@
 /// @brief     Implementation of the decompilation.
 ///
 
-#include <json/json.h>
 #include <memory>
 #include <utility>
+
+#include <json/json.h>
 
 #include "retdec/decompilation.h"
 #include "retdec/exceptions.h"

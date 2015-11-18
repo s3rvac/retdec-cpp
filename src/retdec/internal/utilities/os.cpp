@@ -5,10 +5,11 @@
 /// @brief     Implementation of the operating-system-related utilities.
 ///
 
+#include <fstream>
+
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/thread/thread.hpp>
-#include <fstream>
 
 #include "retdec/exceptions.h"
 #include "retdec/internal/utilities/os.h"

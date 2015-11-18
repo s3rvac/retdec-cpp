@@ -9,13 +9,14 @@
 #include "retdec/internal/utilities/os.h"
 #ifndef RETDEC_OS_WINDOWS
 
-#include <boost/network/protocol/http/server.hpp>
 #include <cstdlib>
-#include <gtest/gtest.h>
 #include <signal.h>
 #include <sstream>
 #include <sys/types.h>
 #include <unistd.h>
+
+#include <boost/network/protocol/http/server.hpp>
+#include <gtest/gtest.h>
 
 #include "retdec/internal/connections/real_connection.h"
 #include "retdec/settings.h"

@@ -8,8 +8,9 @@
 #ifndef RETDEC_INTERNAL_UTILITIES_JSON_H
 #define RETDEC_INTERNAL_UTILITIES_JSON_H
 
-#include <json/json.h>
 #include <string>
+
+#include <json/json.h>
 
 #include "retdec/exceptions.h"
 
