@@ -56,7 +56,7 @@ To build the library and tools, you need:
   * [GCC](https://gcc.gnu.org/) (version >= 4.9)
   * [Clang](http://clang.llvm.org/) (version >= 3.4)
 * [CMake](https://cmake.org/) (version >= 2.8)
-* [Boost](http://www.boost.org/) (any recent version)
+* [Boost](http://www.boost.org/) (version >= 1.55)
 * [cpp-netlib](http://cpp-netlib.org/) (version >= 0.11)
 * [OpenSSL](https://www.openssl.org/) (version >= 1.0)
 * [JsonCpp](https://github.com/open-source-parsers/jsoncpp) (version >= 1.0)
