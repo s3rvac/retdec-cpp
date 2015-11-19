@@ -14,6 +14,8 @@
 #include "retdec/exceptions.h"
 #include "retdec/internal/utilities/os.h"
 
+using namespace std::string_literals;
+
 namespace retdec {
 namespace internal {
 
@@ -51,7 +53,7 @@ std::string fileNameFromPath(const std::string &path) {
 	// For a path without a filename, boost::filesystem::path::filename()
 	// returns ".", but we want to return the empty string in such a case.
 	auto fileName = boost::filesystem::path(path).filename().string();
-	return fileName != "." ? fileName : std::string();
+	return fileName != "." ? fileName : ""s;
 }
 
 ///
