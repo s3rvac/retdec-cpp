@@ -19,6 +19,8 @@ find_package(GTest)
 if(NOT GTEST_FOUND)
 	ExternalProject_Add(googletest
 		URL http://googletest.googlecode.com/files/gtest-1.7.0.zip
+		CMAKE_ARGS
+			-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
 		# Disable the install step.
 		INSTALL_COMMAND ""
 		# Wrap the download, configure and build steps in a script to log the
@@ -42,6 +44,8 @@ if(NOT GMOCK_FOUND)
 	ExternalProject_Add(googlemock
 		URL http://googlemock.googlecode.com/files/gmock-1.7.0.zip
 		# Disable the install step.
+		CMAKE_ARGS
+			-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
 		INSTALL_COMMAND ""
 		# Wrap the download, configure and build steps in a script to log the
 		# output.

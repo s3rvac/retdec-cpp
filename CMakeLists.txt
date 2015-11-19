@@ -73,6 +73,7 @@ if(NOT CPP-NETLIB_FOUND)
 	ExternalProject_Add(cpp-netlib
 		URL http://downloads.cpp-netlib.org/0.11.2/cpp-netlib-0.11.2-final.zip
 		CMAKE_ARGS
+			-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
 			-DCPP-NETLIB_BUILD_TESTS:BOOL=OFF
 			-DCPP-NETLIB_BUILD_EXAMPLES:BOOL=OFF
 		# Disable the install step.
@@ -100,6 +101,8 @@ find_package(JsonCpp)
 if(NOT JsonCpp_FOUND)
 	ExternalProject_Add(json-cpp
 		URL https://github.com/open-source-parsers/jsoncpp/archive/1.6.5.zip
+		CMAKE_ARGS
+			-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
 		# Disable the install step.
 		INSTALL_COMMAND ""
 		# Wrap the download, configure and build steps in a script to log the
