@@ -72,7 +72,9 @@ find_package(CPP-NETLIB COMPONENTS "uri" "client-connections")
 if(NOT CPP-NETLIB_FOUND)
 	ExternalProject_Add(cpp-netlib
 		URL http://downloads.cpp-netlib.org/0.11.2/cpp-netlib-0.11.2-final.zip
-		CMAKE_ARGS -DCPP-NETLIB_BUILD_TESTS:BOOL=OFF -DCPP-NETLIB_BUILD_EXAMPLES:BOOL=OFF
+		CMAKE_ARGS
+			-DCPP-NETLIB_BUILD_TESTS:BOOL=OFF
+			-DCPP-NETLIB_BUILD_EXAMPLES:BOOL=OFF
 		INSTALL_COMMAND ""
 		# Wrap the download, configure and build steps in a script to log the
 		# output.
