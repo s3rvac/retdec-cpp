@@ -75,6 +75,7 @@ if(NOT CPP-NETLIB_FOUND)
 		CMAKE_ARGS
 			-DCPP-NETLIB_BUILD_TESTS:BOOL=OFF
 			-DCPP-NETLIB_BUILD_EXAMPLES:BOOL=OFF
+		# Disable the install step.
 		INSTALL_COMMAND ""
 		# Wrap the download, configure and build steps in a script to log the
 		# output.
@@ -99,6 +100,7 @@ find_package(JsonCpp)
 if(NOT JsonCpp_FOUND)
 	ExternalProject_Add(json-cpp
 		URL https://github.com/open-source-parsers/jsoncpp/archive/1.6.5.zip
+		# Disable the install step.
 		INSTALL_COMMAND ""
 		# Wrap the download, configure and build steps in a script to log the
 		# output.
