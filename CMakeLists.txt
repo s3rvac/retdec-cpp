@@ -65,7 +65,7 @@ include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
 
 # OpenSSL
 find_package(OpenSSL REQUIRED)
-include_directories(SYSTEM ${OPENSSL_INCLUDE_DIRS})
+include_directories(SYSTEM ${OPENSSL_INCLUDE_DIR})
 
 # cpp-netlib
 find_package(CPP-NETLIB COMPONENTS "uri" "client-connections")
