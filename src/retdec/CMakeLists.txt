@@ -26,7 +26,7 @@ set(RETDEC_SOURCES
 )
 
 add_library(retdec ${RETDEC_SOURCES})
-if(NOT CPP-NETLIB_FOUND)
+if(NOT CPPNETLIB_FOUND)
 	add_dependencies(retdec cpp-netlib)
 endif()
 if(NOT JsonCpp_FOUND)
@@ -35,7 +35,7 @@ endif()
 target_link_libraries(retdec
 	${Boost_LIBRARIES}
 	${OPENSSL_LIBRARIES}
-	${CPP-NETLIB_LIBRARIES}
+	${CPPNETLIB_LIBRARIES}
 	${JsonCpp_LIBRARY}
 	${CMAKE_THREAD_LIBS_INIT}
 )

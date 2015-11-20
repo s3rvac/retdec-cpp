@@ -1,65 +1,107 @@
 #
-# From:        https://github.com/kirkshoop/allup
-# Author:      Kirk Shoop <http://kirkshoop.blogspot.com/>
-# Modified By: Petr Zemek <s3rvac@gmail.com>
-# Licence:     Boost Software License
+# From:    https://github.com/Eyescale/CMake/
+# Author:  Grigori Chevtchenko <grigori.chevtchenko@epfl.ch>, 2015
+# Licence: BSD
 #
 
-# Finds the C++ Network (CPP-NETLIB) Library
 #
-#  CPP-NETLIB_INCLUDE_DIR   - Directory to include to get CPP-NETLIB headers
-#  CPP-NETLIB_LIBRARIES     - Libraries to link against for the common CPP-NETLIB
-
-SET(_CPP-NETLIB_ALL_PLUGINS    uri client-connections server-parsers)
-SET(_CPP-NETLIB_REQUIRED_VARS  CPP-NETLIB_LIBRARIES CPP-NETLIB_INCLUDE_DIR)
-
+# Copyright 2015 Grigori Chevtchenko <grigori.chevtchenko@epfl.ch>
 #
-# Find the headers.
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
 #
-FIND_PATH(
-    CPP-NETLIB_INCLUDE_DIR boost/network/protocol/http/client.hpp
-    PATH "${CPP-NETLIB_SOURCE_DIR}"
-    DOC "cppnetlib include directory")
-MARK_AS_ADVANCED(CPP-NETLIB_INCLUDE_DIR)
-
+# - Redistributions of source code must retain the above copyright notice, this
+# list of conditions and the following disclaimer.
+# - Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation
+# and/or other materials provided with the distribution.
+# - Neither the name of Eyescale Software GmbH nor the names of its
+# contributors may be used to endorse or promote products derived from this
+# software without specific prior written permission.
 #
-# Find all installed plugins if the header was found.
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
 #
-IF(CPP-NETLIB_INCLUDE_DIR)
+# =============================================================================
+#
+# CPPNETLIB
+#
+#==============================================================================
+# This module uses the following input variables:
+#
+# CPPNETLIB_ROOT - Path to the cpp-netlib module
+#
+# This module defines the following output variables:
+#
+# CPPNETLIB_FOUND - Was cppnetlib and all of the specified components found?
+#
+# CPPNETLIB_INCLUDE_DIRS - Where to find the headers
+#
+# CPPNETLIB_LIBRARIES - The cppnetlib libraries
+#==============================================================================
+#
 
-    FOREACH(plugin IN LISTS _CPP-NETLIB_ALL_PLUGINS)
-        FIND_LIBRARY(
-            CPP-NETLIB_${plugin}_PLUGIN
-            NAMES cppnetlib-${plugin}
-            HINTS ${CPP-NETLIB_TARGET_DIR}
-			PATH_SUFFIXES "" "network/src" "lib${LIB_SUFFIX}")
-        MARK_AS_ADVANCED(CPP-NETLIB_${plugin}_PLUGIN)
+# Assume not found.
+set(CPPNETLIB_FOUND FALSE)
+set(CPPNETLIB_PATH)
 
-        IF(CPP-NETLIB_${plugin}_PLUGIN)
-            SET(CPP-NETLIB_${plugin}_FOUND True)
-            SET(CPP-NETLIB_LIBRARY ${CPP-NETLIB_LIBRARY} ${CPP-NETLIB_${plugin}_PLUGIN})
-        ENDIF()
-    ENDFOREACH()
+# Find headers
+find_path(CPPNETLIB_INCLUDE_DIR boost/network.hpp
+  HINTS ${CPPNETLIB_ROOT}/include $ENV{CPPNETLIB_ROOT}/include
+  ${COMMON_SOURCE_DIR}/cppnetlib ${CMAKE_SOURCE_DIR}/cppnetlib
+  /usr/local/include
+  /usr/include)
 
-    #
-    # Check if the required components were all found.
-    #
-    MESSAGE(STATUS "Found the following CPP-NETLIB libraries:")
-    FOREACH(component ${CPP-NETLIB_FIND_COMPONENTS})
-        IF(${CPP-NETLIB_${component}_FOUND})
-            MESSAGE(STATUS "  ${component}")
-            # Does not work with NOT ... . No idea why.
-        ELSE()
-            MESSAGE(SEND_ERROR "Required component ${component} not found.")
-        ENDIF()
-    ENDFOREACH()
+if(CPPNETLIB_INCLUDE_DIR)
+    set(CPPNETLIB_PATH "${CPPNETLIB_INCLUDE_DIR}/..")
+endif()
 
-ENDIF()
+# Find dynamic libraries
+if(CPPNETLIB_PATH)
+    set(__libraries cppnetlib-client-connections
+                    cppnetlib-server-parsers
+                    cppnetlib-uri)
 
-FOREACH(component ${CPP-NETLIB_FIND_COMPONENTS})
-    SET(CPP-NETLIB_LIBRARIES ${CPP-NETLIB_LIBRARIES} ${CPP-NETLIB_${component}_PLUGIN})
-ENDFOREACH()
+    foreach(__library ${__libraries})
+    if(TARGET ${__library})
+      list(APPEND CPPNETLIB_LIBRARIES ${__library})
+      set(CPPNETLIB_FOUND_SUBPROJECT ON)
+    else()
+      find_library(${__library} NAMES ${__library}
+        HINTS ${CPPNETLIB_ROOT} $ENV{CPPNETLIB_ROOT}
+        PATHS ${CPPNETLIB_PATH}/lib64 ${CPPNETLIB_PATH}/lib)
+      list(APPEND CPPNETLIB_LIBRARIES ${${__library}})
+    endif()
+    endforeach()
+    mark_as_advanced(CPPNETLIB_LIBRARIES)
+endif()
 
-# Adhere to standards.
+if(NOT cppnetlib_FIND_QUIETLY)
+  set(_cppnetlib_output 1)
+endif()
+
 include(FindPackageHandleStandardArgs)
-FIND_PACKAGE_HANDLE_STANDARD_ARGS(CPP-NETLIB DEFAULT_MSG ${_CPP-NETLIB_REQUIRED_VARS})
+find_package_handle_standard_args(cppnetlib DEFAULT_MSG
+                                  CPPNETLIB_LIBRARIES
+                                  CPPNETLIB_INCLUDE_DIR)
+
+if(CPPNETLIB_FOUND)
+  set(CPPNETLIB_INCLUDE_DIRS ${CPPNETLIB_INCLUDE_DIR})
+  if(_cppnetlib_output )
+    message(STATUS "Found cppnetlib in ${CPPNETLIB_INCLUDE_DIR}:${CPPNETLIB_LIBRARIES}")
+  endif()
+else()
+  set(CPPNETLIB_FOUND)
+  set(CPPNETLIB_INCLUDE_DIR)
+  set(CPPNETLIB_INCLUDE_DIRS)
+  set(CPPNETLIB_LIBRARIES)
+endif()

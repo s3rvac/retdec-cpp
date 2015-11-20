@@ -69,7 +69,7 @@ include_directories(SYSTEM ${OPENSSL_INCLUDE_DIR})
 
 # cpp-netlib
 find_package(CPP-NETLIB COMPONENTS "uri" "client-connections")
-if(NOT CPP-NETLIB_FOUND)
+if(NOT CPPNETLIB_FOUND)
 	ExternalProject_Add(cpp-netlib
 		URL http://downloads.cpp-netlib.org/0.11.2/cpp-netlib-0.11.2-final.zip
 		CMAKE_ARGS
@@ -86,12 +86,12 @@ if(NOT CPP-NETLIB_FOUND)
 	)
 	ExternalProject_Get_Property(cpp-netlib source_dir)
 	ExternalProject_Get_Property(cpp-netlib binary_dir)
-	set(CPP-NETLIB_INCLUDE_DIR "${source_dir}")
-	set(CPP-NETLIB_LIBRARY_DIR "${binary_dir}/libs/network/src")
-	set(CPP-NETLIB_LIBRARIES "cppnetlib-uri" "cppnetlib-client-connections")
-	link_directories(${CPP-NETLIB_LIBRARY_DIR})
+	set(CPPNETLIB_INCLUDE_DIR "${source_dir}")
+	set(CPPNETLIB_LIBRARY_DIR "${binary_dir}/libs/network/src")
+	set(CPPNETLIB_LIBRARIES "cppnetlib-uri" "cppnetlib-client-connections")
+	link_directories(${CPPNETLIB_LIBRARY_DIR})
 endif()
-include_directories(SYSTEM ${CPP-NETLIB_INCLUDE_DIR})
+include_directories(SYSTEM ${CPPNETLIB_INCLUDE_DIR})
 # Enable HTTPS. The following symbol has to be defined prior to including
 # cpp-netlib headers.
 add_definitions(-DBOOST_NETWORK_ENABLE_HTTPS)
