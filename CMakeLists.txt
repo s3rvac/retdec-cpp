@@ -70,6 +70,7 @@ include_directories(SYSTEM ${OPENSSL_INCLUDE_DIR})
 # cpp-netlib
 find_package(CPP-NETLIB COMPONENTS "uri" "client-connections")
 if(NOT CPPNETLIB_FOUND)
+	message(STATUS "  --> cppnetlib will be built as an external project")
 	ExternalProject_Add(cpp-netlib
 		URL http://downloads.cpp-netlib.org/0.11.2/cpp-netlib-0.11.2-final.zip
 		CMAKE_ARGS
@@ -99,6 +100,7 @@ add_definitions(-DBOOST_NETWORK_ENABLE_HTTPS)
 # json-cpp
 find_package(JsonCpp)
 if(NOT JsonCpp_FOUND)
+	message(STATUS "  --> JsonCpp will be built as an external project")
 	ExternalProject_Add(json-cpp
 		URL https://github.com/open-source-parsers/jsoncpp/archive/1.6.5.zip
 		CMAKE_ARGS

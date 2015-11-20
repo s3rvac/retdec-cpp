@@ -17,6 +17,7 @@ endif()
 # Google Test
 find_package(GTest)
 if(NOT GTEST_FOUND)
+	message(STATUS "  --> GTest will be built as an external project")
 	ExternalProject_Add(googletest
 		URL http://googletest.googlecode.com/files/gtest-1.7.0.zip
 		CMAKE_ARGS
@@ -41,6 +42,7 @@ include_directories(SYSTEM ${GTEST_INCLUDE_DIR})
 # Google Mock
 find_package(GMock)
 if(NOT GMOCK_FOUND)
+	message(STATUS "  --> GMock will be built as an external project")
 	ExternalProject_Add(googlemock
 		URL http://googlemock.googlecode.com/files/gmock-1.7.0.zip
 		# Disable the install step.
