@@ -81,9 +81,9 @@ You can pass additional parameters to `cmake`:
 * `-DRETDEC_TOOLS=1` to build with tools (disabled by default).
 * `-DRETDEC_COVERAGE=1` to build with code coverage support (requires
     [LCOV](http://ltp.sourceforge.net/coverage/lcov.php), disabled by default).
-* `-DCMAKE_BUILD_TYPE=debug` to build with debugging information, which is
+* `-DCMAKE_BUILD_TYPE=Debug` to build with debugging information, which is
     useful during development. By default, the library is built in the
-    `release` mode.
+    `Release` mode.
 * `-DCMAKE_INSTALL_PREFIX:PATH=/usr` to set a custom installation path.
 
 The `make` call supports standard parameters, such as:
