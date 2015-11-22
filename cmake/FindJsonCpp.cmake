@@ -8,6 +8,10 @@
 ########################################################################
 # Cmake module for finding JsonCpp
 #
+# The following variables are used as inputs:
+#
+#  JsonCpp_ROOT
+#
 # The following variables will be defined:
 #
 #  JsonCpp_FOUND
@@ -21,9 +25,8 @@
 FIND_PATH(JsonCpp_INCLUDE_DIR
   NAMES
     json/json.h
-  PATHS
-    ${JsonCpp_SOURCE_DIR}/jsoncpp
-    ${JsonCpp_SOURCE_DIR}/jsoncpp/include
+  HINTS
+    ${JsonCpp_ROOT_DIR}/include
 )
 
 # ----------------------------------------------------------------------
@@ -34,17 +37,15 @@ if(WIN32 AND MSVC)
   find_library(JsonCpp_DEBUG_LIBRARY
     NAMES
       jsoncppd
-    PATHS
-      ${JsonCpp_BUILD_DIR}/jsoncpp
-      ${JsonCpp_INSTALL_DIR}/lib
+    HINTS
+      ${JsonCpp_ROOT_DIR}/lib
     )
 
   find_library(JsonCpp_RELEASE_LIBRARY
     NAMES
       jsoncpp
-    PATHS
-      ${JsonCpp_BUILD_DIR}/jsoncpp
-      ${JsonCpp_INSTALL_DIR}/lib
+    HINTS
+      ${JsonCpp_ROOT_DIR}/lib
     )
 
   if(JsonCpp_DEBUG_LIBRARY OR JsonCpp_RELEASE_LIBRARY)
@@ -71,9 +72,8 @@ else()
     NAMES
       jsoncpp
       libjsoncpp
-    PATHS
-       ${JsonCpp_BUILD_DIR}/jsoncpp
-       ${JsonCpp_INSTALL_DIR}/lib
+    HINTS
+       ${JsonCpp_ROOT_DIR}/lib
     )
 
 endif()
