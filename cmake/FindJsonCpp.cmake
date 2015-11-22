@@ -8,7 +8,7 @@
 ########################################################################
 # Cmake module for finding JsonCpp
 #
-# The following variabled will be defined:
+# The following variables will be defined:
 #
 #  JsonCpp_FOUND
 #  JsonCpp_INCLUDE_DIR
