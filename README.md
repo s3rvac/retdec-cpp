@@ -88,6 +88,13 @@ You can pass additional parameters to `cmake`:
     `Release` mode.
 * `-DCMAKE_INSTALL_PREFIX:PATH=/usr` to set a custom installation path.
 
+You can force a specific version of the required libraries by using the
+following `cmake` parameters:
+* `-DBOOST_ROOT=$BOOST_DIR`
+* `-DCPPNETLIB_ROOT=$CPPNETLIB_DIR`
+* `-DOPENSSL_ROOT_DIR=$OPENSSL_DIR`
+* `-DJsonCpp_ROOT_DIR=$JSONCPP_DIR`
+
 The `make` call supports standard parameters, such as:
 * `-j N` to build the library by using `N` processors.
 * `VERBOSE=1` to show verbose output when building the library.
