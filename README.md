@@ -79,8 +79,8 @@ Build and Installation
 You can pass additional parameters to `cmake`:
 * `-DRETDEC_DOC=1` to build with API documentation (requires
     [Doxygen](http://www.doxygen.org/), disabled by default).
-* `-DRETDEC_TESTS=1` to build with unit tests (disabled by default).
 * `-DRETDEC_TOOLS=1` to build with tools (disabled by default).
+* `-DRETDEC_TESTS=1` to build with unit tests (disabled by default).
 * `-DRETDEC_COVERAGE=1` to build with code coverage support (requires
     [LCOV](http://ltp.sourceforge.net/coverage/lcov.php), disabled by default).
 * `-DCMAKE_BUILD_TYPE=Debug` to build with debugging information, which is
