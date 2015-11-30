@@ -27,6 +27,7 @@ using HttpClient = boost::network::http::basic_client<
 	boost::network::http::tags::http_keepalive_8bit_tcp_resolve, 1, 1
 >;
 
+///
 /// Encodes the given string by using the Base64 encoding.
 ///
 std::string base64Encode(const std::string &str) {
