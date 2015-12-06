@@ -117,8 +117,8 @@ target_link_libraries(your_app retdec)
 API Documentation
 -----------------
 
-The latest API documentation is available
-[here](http://projects.petrzemek.net/retdec-cpp/doc/).
+The API documentation is available here:
+* [latest](http://projects.petrzemek.net/retdec-cpp/doc/)
 
 License
 -------
