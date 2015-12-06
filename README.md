@@ -120,6 +120,9 @@ API Documentation
 The API documentation is available here:
 * [latest](http://projects.petrzemek.net/retdec-cpp/doc/)
 
+You can also generate it by yourself (pass `-DRETDEC_DOC=1` to `cmake` and run
+`make doc`).
+
 License
 -------
 
