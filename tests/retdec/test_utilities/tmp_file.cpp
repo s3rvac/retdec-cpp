@@ -59,7 +59,7 @@ RemoveFileOnDestruction::RemoveFileOnDestruction(const std::string &path):
 	path(path) {}
 
 RemoveFileOnDestruction::~RemoveFileOnDestruction() {
-	std::remove(path.c_str());
+	boost::filesystem::remove(path);
 }
 
 } // namespace tests
