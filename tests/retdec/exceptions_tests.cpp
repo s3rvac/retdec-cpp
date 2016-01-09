@@ -25,7 +25,7 @@ WhatReturnsCorrectMessage) {
 
 	Error ex(RefErrorMessage);
 
-	EXPECT_EQ(RefErrorMessage, ex.what());
+	ASSERT_EQ(RefErrorMessage, ex.what());
 }
 
 ///
@@ -39,7 +39,7 @@ WhatReturnsCorrectMessage) {
 
 	IoError ex(RefIoErrorMessage);
 
-	EXPECT_EQ(RefIoErrorMessage, ex.what());
+	ASSERT_EQ(RefIoErrorMessage, ex.what());
 }
 
 ///
@@ -53,7 +53,7 @@ WhatReturnsCorrectMessage) {
 
 	FilesystemError ex(RefFilesystemErrorMessage);
 
-	EXPECT_EQ(RefFilesystemErrorMessage, ex.what());
+	ASSERT_EQ(RefFilesystemErrorMessage, ex.what());
 }
 
 ///
@@ -67,7 +67,7 @@ WhatReturnsCorrectMessage) {
 
 	ConnectionError ex(RefConnectionErrorMessage);
 
-	EXPECT_EQ(RefConnectionErrorMessage, ex.what());
+	ASSERT_EQ(RefConnectionErrorMessage, ex.what());
 }
 
 ///
@@ -79,17 +79,17 @@ TEST_F(ApiErrorTests,
 GettersAndWhatReturnCorrectValuesWhenDescriptionIsGiven) {
 	ApiError ex(404, "Not Found", "The page was not found.");
 
-	EXPECT_STREQ("404 Not Found", ex.what());
-	EXPECT_EQ(404, ex.getCode());
-	EXPECT_EQ("Not Found", ex.getMessage());
-	EXPECT_EQ("The page was not found.", ex.getDescription());
+	ASSERT_STREQ("404 Not Found", ex.what());
+	ASSERT_EQ(404, ex.getCode());
+	ASSERT_EQ("Not Found", ex.getMessage());
+	ASSERT_EQ("The page was not found.", ex.getDescription());
 }
 
 TEST_F(ApiErrorTests,
 GetDescriptionReturnsSameValueAsWhatWhenDescriptionIsNotGiven) {
 	ApiError e(404, "Not Found");
 
-	EXPECT_EQ(e.what(), e.getDescription());
+	ASSERT_EQ(e.what(), e.getDescription());
 }
 
 ///
@@ -103,7 +103,7 @@ WhatReturnsCorrectMessage) {
 
 	DecompilationError ex(RefDecompilationErrorMessage);
 
-	EXPECT_EQ(RefDecompilationErrorMessage, ex.what());
+	ASSERT_EQ(RefDecompilationErrorMessage, ex.what());
 }
 
 } // namespace tests

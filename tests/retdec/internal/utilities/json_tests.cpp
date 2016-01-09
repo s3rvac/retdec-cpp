@@ -26,7 +26,7 @@ WhatReturnsCorrectMessage) {
 	const std::string RefFormattedErrors("line 1 column 1");
 	JsonDecodingError e(RefFormattedErrors);
 
-	EXPECT_EQ("JSON decoding failed: " + RefFormattedErrors, e.what());
+	ASSERT_EQ("JSON decoding failed: " + RefFormattedErrors, e.what());
 }
 
 ///
@@ -38,21 +38,21 @@ TEST_F(ToJsonTests,
 StringAsJsonIsParsedCorrectly) {
 	auto asJson = toJson("\"text\"");
 
-	EXPECT_EQ("text", asJson.asString());
+	ASSERT_EQ("text", asJson.asString());
 }
 
 TEST_F(ToJsonTests,
 ObjectAsJsonIsParsedCorrectly) {
 	auto asJson = toJson("{\"id\": 1}");
 
-	EXPECT_TRUE(asJson.isMember("id"));
-	EXPECT_EQ(1, asJson.size());
-	EXPECT_EQ(1, asJson.get("id", 0).asInt());
+	ASSERT_TRUE(asJson.isMember("id"));
+	ASSERT_EQ(1, asJson.size());
+	ASSERT_EQ(1, asJson.get("id", 0).asInt());
 }
 
 TEST_F(ToJsonTests,
 ThrowsJsonDecodingErrorWhenStringIsInvalid) {
-	EXPECT_THROW(toJson("{xxx}"), JsonDecodingError);
+	ASSERT_THROW(toJson("{xxx}"), JsonDecodingError);
 }
 
 } // namespace tests

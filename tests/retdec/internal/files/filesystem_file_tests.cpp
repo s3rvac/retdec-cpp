@@ -31,14 +31,14 @@ GetNameReturnsCorrectValueWhenNoCustomNameIsGiven) {
 	FilesystemFile file("/path/to/file.txt");
 #endif
 
-	EXPECT_EQ("file.txt", file.getName());
+	ASSERT_EQ("file.txt", file.getName());
 }
 
 TEST_F(FilesystemFileTests,
 GetNameReturnsCorrectValueWhenCustomNameIsGiven) {
 	FilesystemFile file("/path/to/file.txt", "another_file.txt");
 
-	EXPECT_EQ("another_file.txt", file.getName());
+	ASSERT_EQ("another_file.txt", file.getName());
 }
 
 TEST_F(FilesystemFileTests,
@@ -46,7 +46,7 @@ GetContentReturnsCorrectContent) {
 	auto tmpFile = TmpFile::createWithContent("content");
 	FilesystemFile file(tmpFile->getPath());
 
-	EXPECT_EQ("content", file.getContent());
+	ASSERT_EQ("content", file.getContent());
 }
 
 TEST_F(FilesystemFileTests,
@@ -59,7 +59,7 @@ SaveCopyToSavesCopyOfFileToGivenDirectory) {
 	file.saveCopyTo(".");
 
 	RemoveFileOnDestruction remover(Name);
-	EXPECT_EQ(Content, readFile(Name));
+	ASSERT_EQ(Content, readFile(Name));
 }
 
 } // namespace tests

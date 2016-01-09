@@ -27,21 +27,21 @@ TEST_F(StringFileTests,
 FileHasCorrectContentUponCreation) {
 	StringFile file("content");
 
-	EXPECT_EQ("content", file.getContent());
+	ASSERT_EQ("content", file.getContent());
 }
 
 TEST_F(StringFileTests,
 GetNameReturnsCorrectNameWhenFileHasName) {
 	StringFile file("content", "file.txt");
 
-	EXPECT_EQ("file.txt", file.getName());
+	ASSERT_EQ("file.txt", file.getName());
 }
 
 TEST_F(StringFileTests,
 GetNameReturnsEmptyStringWhenFileHasNoName) {
 	StringFile file("content");
 
-	EXPECT_EQ("", file.getName());
+	ASSERT_EQ("", file.getName());
 }
 
 TEST_F(StringFileTests,
@@ -53,7 +53,7 @@ SaveCopyToSavesCopyOfFileToGivenDirectory) {
 	file.saveCopyTo(".");
 
 	RemoveFileOnDestruction remover(Name);
-	EXPECT_EQ(Content, readFile(Name));
+	ASSERT_EQ(Content, readFile(Name));
 }
 
 } // namespace tests

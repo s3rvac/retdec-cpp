@@ -29,7 +29,7 @@ NewConnectionReturnsRealConnection) {
 
 	auto conn = cm.newConnection(Settings());
 
-	EXPECT_TRUE(isa<RealConnection>(conn));
+	ASSERT_TRUE(isa<RealConnection>(conn));
 }
 
 } // namespace tests

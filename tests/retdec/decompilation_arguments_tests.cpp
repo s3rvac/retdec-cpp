@@ -29,7 +29,7 @@ ModeSetsNewModeInPlace) {
 
 	args.mode("c");
 
-	EXPECT_EQ("c", args.mode());
+	ASSERT_EQ("c", args.mode());
 }
 
 TEST_F(DecompilationArgumentsTests,
@@ -38,7 +38,7 @@ WithModeReturnsNewArgumentsWithCorrectMode) {
 
 	auto newArgs = args.withMode("c");
 
-	EXPECT_EQ("c", newArgs.mode());
+	ASSERT_EQ("c", newArgs.mode());
 }
 
 TEST_F(DecompilationArgumentsTests,
@@ -46,14 +46,14 @@ HasModeReturnsTrueWhenModeIsSet) {
 	auto args = DecompilationArguments()
 		.withMode("c");
 
-	EXPECT_TRUE(args.hasMode());
+	ASSERT_TRUE(args.hasMode());
 }
 
 TEST_F(DecompilationArgumentsTests,
 HasModeReturnsFalseWhenModeIsNotSet) {
 	DecompilationArguments args;
 
-	EXPECT_FALSE(args.hasMode());
+	ASSERT_FALSE(args.hasMode());
 }
 
 // Selective decompilation: ranges.
@@ -64,7 +64,7 @@ SelDecompRangesSetsNewRangesInPlace) {
 
 	args.selDecompRanges("0x0-0x1");
 
-	EXPECT_EQ("0x0-0x1", args.selDecompRanges());
+	ASSERT_EQ("0x0-0x1", args.selDecompRanges());
 }
 
 TEST_F(DecompilationArgumentsTests,
@@ -73,7 +73,7 @@ WithSelDecompRangesReturnsNewArgumentsWithCorrectRanges) {
 
 	auto newArgs = args.withSelDecompRanges("0x0-0x1");
 
-	EXPECT_EQ("0x0-0x1", newArgs.selDecompRanges());
+	ASSERT_EQ("0x0-0x1", newArgs.selDecompRanges());
 }
 
 TEST_F(DecompilationArgumentsTests,
@@ -81,14 +81,14 @@ HasSelDecompRangesReturnsTrueWhenSelDecompRangesIsSet) {
 	auto args = DecompilationArguments()
 		.withSelDecompRanges("0x0-0x1");
 
-	EXPECT_TRUE(args.hasSelDecompRanges());
+	ASSERT_TRUE(args.hasSelDecompRanges());
 }
 
 TEST_F(DecompilationArgumentsTests,
 HasSelDecompRangesReturnsFalseWhenSelDecompRangesIsNotSet) {
 	DecompilationArguments args;
 
-	EXPECT_FALSE(args.hasSelDecompRanges());
+	ASSERT_FALSE(args.hasSelDecompRanges());
 }
 
 // Selective decompilation: decoding.
@@ -99,7 +99,7 @@ SelDecompDecodingSetsNewDecodingInPlace) {
 
 	args.selDecompDecoding("only");
 
-	EXPECT_EQ("only", args.selDecompDecoding());
+	ASSERT_EQ("only", args.selDecompDecoding());
 }
 
 TEST_F(DecompilationArgumentsTests,
@@ -108,7 +108,7 @@ WithSelDecompDecodingReturnsNewArgumentsWithCorrectDecoding) {
 
 	auto newArgs = args.withSelDecompDecoding("only");
 
-	EXPECT_EQ("only", newArgs.selDecompDecoding());
+	ASSERT_EQ("only", newArgs.selDecompDecoding());
 }
 
 TEST_F(DecompilationArgumentsTests,
@@ -116,14 +116,14 @@ HasSelDecompDecodingReturnsTrueWhenSelDecompDecodingIsSet) {
 	auto args = DecompilationArguments()
 		.withSelDecompDecoding("only");
 
-	EXPECT_TRUE(args.hasSelDecompDecoding());
+	ASSERT_TRUE(args.hasSelDecompDecoding());
 }
 
 TEST_F(DecompilationArgumentsTests,
 HasSelDecompDecodingReturnsFalseWhenSelDecompDecodingIsNotSet) {
 	DecompilationArguments args;
 
-	EXPECT_FALSE(args.hasSelDecompDecoding());
+	ASSERT_FALSE(args.hasSelDecompDecoding());
 }
 
 // Files: input.
@@ -135,7 +135,7 @@ InputFileSetsNewInputFileInPlace) {
 
 	args.inputFile(file);
 
-	EXPECT_EQ(file, args.inputFile());
+	ASSERT_EQ(file, args.inputFile());
 }
 
 TEST_F(DecompilationArgumentsTests,
@@ -145,7 +145,7 @@ WithInputFileReturnsNewArgumentsWithCorrectInputFile) {
 
 	auto newArgs = args.withInputFile(file);
 
-	EXPECT_EQ(file, newArgs.inputFile());
+	ASSERT_EQ(file, newArgs.inputFile());
 }
 
 TEST_F(DecompilationArgumentsTests,
@@ -153,14 +153,14 @@ HasInputFileReturnsTrueWhenInputFileIsSet) {
 	auto args = DecompilationArguments()
 		.withInputFile(std::make_shared<FileMock>());
 
-	EXPECT_TRUE(args.hasInputFile());
+	ASSERT_TRUE(args.hasInputFile());
 }
 
 TEST_F(DecompilationArgumentsTests,
 HasInputFileReturnsFalseWhenInputFileIsNotSet) {
 	DecompilationArguments args;
 
-	EXPECT_FALSE(args.hasInputFile());
+	ASSERT_FALSE(args.hasInputFile());
 }
 
 // Generic access to arguments.
@@ -171,7 +171,7 @@ ArgumentSetsNewArgumentInPlace) {
 
 	args.argument("id", "value");
 
-	EXPECT_EQ("value", args.argument("id"));
+	ASSERT_EQ("value", args.argument("id"));
 }
 
 TEST_F(DecompilationArgumentsTests,
@@ -180,7 +180,7 @@ WithArgumentReturnsNewArgumentsWithCorrectArgument) {
 
 	auto newArgs = args.withArgument("id", "value");
 
-	EXPECT_EQ("value", newArgs.argument("id"));
+	ASSERT_EQ("value", newArgs.argument("id"));
 }
 
 TEST_F(DecompilationArgumentsTests,
@@ -188,14 +188,14 @@ HasArgumentReturnsTrueWhenArgumentIsSet) {
 	auto args = DecompilationArguments()
 		.withArgument("id", "value");
 
-	EXPECT_TRUE(args.hasArgument("id"));
+	ASSERT_TRUE(args.hasArgument("id"));
 }
 
 TEST_F(DecompilationArgumentsTests,
 HasArgumentReturnsFalseWhenArgumentIsNotSet) {
 	DecompilationArguments args;
 
-	EXPECT_FALSE(args.hasArgument("id"));
+	ASSERT_FALSE(args.hasArgument("id"));
 }
 
 TEST_F(DecompilationArgumentsTests,
@@ -205,13 +205,13 @@ IterationOverArgumentsWorksCorrectly) {
 		.withArgument("id2", "value2");
 
 	auto it = args.argumentsBegin();
-	EXPECT_EQ("id1", it->first);
-	EXPECT_EQ("value1", it->second);
+	ASSERT_EQ("id1", it->first);
+	ASSERT_EQ("value1", it->second);
 	++it;
-	EXPECT_EQ("id2", it->first);
-	EXPECT_EQ("value2", it->second);
+	ASSERT_EQ("id2", it->first);
+	ASSERT_EQ("value2", it->second);
 	++it;
-	EXPECT_EQ(args.argumentsEnd(), it);
+	ASSERT_EQ(args.argumentsEnd(), it);
 }
 
 // Generic access to files.
@@ -223,7 +223,7 @@ FileSetsNewFileInPlace) {
 
 	args.file("id", file);
 
-	EXPECT_EQ(file, args.file("id"));
+	ASSERT_EQ(file, args.file("id"));
 }
 
 TEST_F(DecompilationArgumentsTests,
@@ -233,14 +233,14 @@ WithFileReturnsNewFilesWithCorrectFile) {
 
 	auto newArgs = args.withFile("id", file);
 
-	EXPECT_EQ(file, newArgs.file("id"));
+	ASSERT_EQ(file, newArgs.file("id"));
 }
 
 TEST_F(DecompilationArgumentsTests,
 HasFileReturnsTrueWhenFileIsSet) {
 	auto args = DecompilationArguments()
 		.withFile("id", std::make_shared<FileMock>());
-	EXPECT_TRUE(args.hasFile("id"));
+	ASSERT_TRUE(args.hasFile("id"));
 
 }
 
@@ -248,7 +248,7 @@ TEST_F(DecompilationArgumentsTests,
 HasFileReturnsFalseWhenFileIsNotSet) {
 	DecompilationArguments args;
 
-	EXPECT_FALSE(args.hasFile("id"));
+	ASSERT_FALSE(args.hasFile("id"));
 }
 
 TEST_F(DecompilationArgumentsTests,
@@ -260,13 +260,13 @@ IterationOverFilesWorksCorrectly) {
 		.withFile("id2", file2);
 
 	auto it = args.filesBegin();
-	EXPECT_EQ("id1", it->first);
-	EXPECT_EQ(file1, it->second);
+	ASSERT_EQ("id1", it->first);
+	ASSERT_EQ(file1, it->second);
 	++it;
-	EXPECT_EQ("id2", it->first);
-	EXPECT_EQ(file2, it->second);
+	ASSERT_EQ("id2", it->first);
+	ASSERT_EQ(file2, it->second);
 	++it;
-	EXPECT_EQ(args.filesEnd(), it);
+	ASSERT_EQ(args.filesEnd(), it);
 }
 
 // Chaining.
@@ -279,8 +279,8 @@ InPlaceSettersAllowChainingForLValue) {
 	args.mode("c")
 		.inputFile(file);
 
-	EXPECT_EQ("c", args.mode());
-	EXPECT_EQ(file, args.inputFile());
+	ASSERT_EQ("c", args.mode());
+	ASSERT_EQ(file, args.inputFile());
 }
 
 TEST_F(DecompilationArgumentsTests,
@@ -291,8 +291,8 @@ InPlaceSettersAllowChainingForRValue) {
 		.mode("c")
 		.inputFile(file);
 
-	EXPECT_EQ("c", args.mode());
-	EXPECT_EQ(file, args.inputFile());
+	ASSERT_EQ("c", args.mode());
+	ASSERT_EQ(file, args.inputFile());
 }
 
 TEST_F(DecompilationArgumentsTests,
@@ -303,8 +303,8 @@ NotModifyingSettersAllowChaining) {
 		.withMode("c")
 		.withInputFile(file);
 
-	EXPECT_EQ("c", args.mode());
-	EXPECT_EQ(file, args.inputFile());
+	ASSERT_EQ("c", args.mode());
+	ASSERT_EQ(file, args.inputFile());
 }
 
 } // namespace tests

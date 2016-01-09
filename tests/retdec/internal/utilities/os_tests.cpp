@@ -26,23 +26,23 @@ class FileNameFromPathTests: public Test {};
 TEST_F(FileNameFromPathTests,
 FileNameFromPathReturnsCorrectNameForPathWithSeparators) {
 #ifdef RETDEC_OS_WINDOWS
-	EXPECT_EQ("file.txt", fileNameFromPath(R"(C:\\path\to\file.txt)"));
+	ASSERT_EQ("file.txt", fileNameFromPath(R"(C:\\path\to\file.txt)"));
 #else
-	EXPECT_EQ("file.txt", fileNameFromPath("/path/to/file.txt"));
+	ASSERT_EQ("file.txt", fileNameFromPath("/path/to/file.txt"));
 #endif
 }
 
 TEST_F(FileNameFromPathTests,
 FileNameFromPathContainingJustFileNameReturnsCorrectFileName) {
-	EXPECT_EQ("file.txt", fileNameFromPath("file.txt"));
+	ASSERT_EQ("file.txt", fileNameFromPath("file.txt"));
 }
 
 TEST_F(FileNameFromPathTests,
 FileNameFromPathContainingNoFileNameReturnsEmptyString) {
 #ifdef RETDEC_OS_WINDOWS
-	EXPECT_EQ("", fileNameFromPath(R"(C:\\path\to\dir\)"));
+	ASSERT_EQ("", fileNameFromPath(R"(C:\\path\to\dir\)"));
 #else
-	EXPECT_EQ("", fileNameFromPath("/path/to/dir/"));
+	ASSERT_EQ("", fileNameFromPath("/path/to/dir/"));
 #endif
 }
 
@@ -55,12 +55,12 @@ TEST_F(ReadFileTests,
 ReturnsCorrectContentWhenFileExists) {
 	auto tmpFile = TmpFile::createWithContent("content");
 
-	EXPECT_EQ("content", readFile(tmpFile->getPath()));
+	ASSERT_EQ("content", readFile(tmpFile->getPath()));
 }
 
 TEST_F(ReadFileTests,
 ThrowsFilesystemErrorWhenFileDoesNotExist) {
-	EXPECT_THROW(readFile("nonexisting-file"), FilesystemError);
+	ASSERT_THROW(readFile("nonexisting-file"), FilesystemError);
 }
 
 ///
@@ -101,7 +101,7 @@ WritesCorrectContentToFile) {
 
 TEST_F(CopyFileTests,
 ThrowsFilesystemErrorWhenSourceFileDoesNotExist) {
-	EXPECT_THROW(copyFile("nonexisting-file", "any-file"), FilesystemError);
+	ASSERT_THROW(copyFile("nonexisting-file", "any-file"), FilesystemError);
 }
 
 } // namespace tests

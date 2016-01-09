@@ -22,10 +22,10 @@
 #include "retdec/settings.h"
 
 ///
-/// Expects @a response to contain @a text.
+/// Asserts that @a response contains @a text.
 ///
-#define EXPECT_CONTAINS(response, text) \
-	EXPECT_TRUE(contains(response.get(), text)) << response->body();
+#define ASSERT_CONTAINS(response, text) \
+	ASSERT_TRUE(contains(response.get(), text)) << response->body();
 
 using namespace testing;
 
@@ -178,7 +178,7 @@ TEST_F(RealConnectionTests,
 ApiUrlReturnsCorrectUrl) {
 	RealConnection conn(Settings().withApiUrl("http://127.0.0.1:5000/api"));
 
-	EXPECT_EQ("http://127.0.0.1:5000/api", conn.getApiUrl());
+	ASSERT_EQ("http://127.0.0.1:5000/api", conn.getApiUrl());
 }
 
 TEST_F(RealConnectionTests,
@@ -188,7 +188,7 @@ GetWithoutArgumentsSendsRequestWithCorrectMethodAndDestinationAndHttpVersion) {
 
 	auto response = conn.sendGetRequest(ApiUrl + "/test");
 
-	EXPECT_CONTAINS(response, "GET /api/test HTTP/1.1");
+	ASSERT_CONTAINS(response, "GET /api/test HTTP/1.1");
 }
 
 TEST_F(RealConnectionTests,
@@ -202,7 +202,7 @@ GetSendsRequestWithUserAgentHeader) {
 
 	auto response = conn.sendGetRequest(ApiUrl);
 
-	EXPECT_CONTAINS(response, "User-Agent: my user agent");
+	ASSERT_CONTAINS(response, "User-Agent: my user agent");
 }
 
 } // namespace tests

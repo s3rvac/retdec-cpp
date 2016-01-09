@@ -24,8 +24,8 @@ TEST_F(FileTests,
 FromContentWithNameReturnsFileWithCorrectContentAndName) {
 	auto file = File::fromContentWithName("content", "file.txt");
 
-	EXPECT_EQ("content", file->getContent());
-	EXPECT_EQ("file.txt", file->getName());
+	ASSERT_EQ("content", file->getContent());
+	ASSERT_EQ("file.txt", file->getName());
 }
 
 TEST_F(FileTests,
@@ -36,7 +36,7 @@ FromFilesystemReturnsFileWithCorrectName) {
 	auto file = File::fromFilesystem("/path/to/file.txt");
 #endif
 
-	EXPECT_EQ("file.txt", file->getName());
+	ASSERT_EQ("file.txt", file->getName());
 }
 
 TEST_F(FileTests,
@@ -49,7 +49,7 @@ FromFilesystemWithOtherNameReturnsFileWithCorrectName) {
 		"/path/to/file.txt", "other.txt");
 #endif
 
-	EXPECT_EQ("other.txt", file->getName());
+	ASSERT_EQ("other.txt", file->getName());
 }
 
 } // namespace tests

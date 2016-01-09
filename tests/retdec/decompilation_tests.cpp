@@ -44,7 +44,7 @@ GetIdReturnsCorrectValue) {
 
 	Decompilation decompilation("123", conn);
 
-	EXPECT_EQ("123", decompilation.getId());
+	ASSERT_EQ("123", decompilation.getId());
 }
 
 TEST_F(DecompilationTests,
