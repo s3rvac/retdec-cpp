@@ -37,7 +37,6 @@ std::string fileNameFromPath(const std::string &path);
 std::string readFile(const std::string &path);
 void writeFile(const std::string &path, const std::string &content);
 void copyFile(const std::string &srcPath, const std::string &dstPath);
-std::string joinPaths(const std::string &path);
 std::string joinPaths(const std::string &path1, const std::string &path2);
 
 ///

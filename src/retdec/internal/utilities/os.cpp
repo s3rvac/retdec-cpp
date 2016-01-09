@@ -57,13 +57,6 @@ std::string fileNameFromPath(const std::string &path) {
 }
 
 ///
-/// A base case for joinPaths() that simply returns @a path.
-///
-std::string joinPaths(const std::string &path) {
-	return path;
-}
-
-///
 /// Joins the given two paths.
 ///
 std::string joinPaths(const std::string &path1, const std::string &path2) {
