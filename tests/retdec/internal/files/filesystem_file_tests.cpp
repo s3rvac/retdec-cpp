@@ -46,6 +46,19 @@ GetContentReturnsCorrectContent) {
 	EXPECT_EQ("content", file.getContent());
 }
 
+TEST_F(FilesystemFileTests,
+SaveCopyToSavesCopyOfFileToGivenDirectory) {
+	const std::string Content("content");
+	auto tmpFile = TmpFile::createWithContent(Content);
+	const std::string Name("retdec-cpp-filesystem-file-save-copy-to-test.txt");
+	FilesystemFile file(tmpFile->getPath(), Name);
+
+	file.saveCopyTo(".");
+
+	RemoveFileOnDestruction remover(Name);
+	EXPECT_EQ(Content, readFile(Name));
+}
+
 } // namespace tests
 } // namespace internal
 } // namespace retdec

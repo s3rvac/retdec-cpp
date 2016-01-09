@@ -8,8 +8,11 @@
 #include <gtest/gtest.h>
 
 #include "retdec/internal/files/string_file.h"
+#include "retdec/internal/utilities/os.h"
+#include "retdec/test_utilities/tmp_file.h"
 
 using namespace testing;
+using namespace retdec::tests;
 
 namespace retdec {
 namespace internal {
@@ -36,6 +39,18 @@ TEST_F(StringFileTests,
 GetNameReturnsEmptyStringWhenFileHasNoName) {
 	StringFile file("content");
 	EXPECT_EQ("", file.getName());
+}
+
+TEST_F(StringFileTests,
+SaveCopyToSavesCopyOfFileToGivenDirectory) {
+	const std::string Content("content");
+	const std::string Name("retdec-cpp-string-file-save-copy-to-test.txt");
+	StringFile file{Content, Name};
+
+	file.saveCopyTo(".");
+
+	RemoveFileOnDestruction remover(Name);
+	EXPECT_EQ(Content, readFile(Name));
 }
 
 } // namespace tests
