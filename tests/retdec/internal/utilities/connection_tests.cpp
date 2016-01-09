@@ -31,6 +31,7 @@ ReturnsTrueWhenStatusCodeIs200) {
 	StrictMock<ResponseMock> response;
 	EXPECT_CALL(response, statusCode())
 		.WillOnce(Return(200)); // HTTP 200 OK
+
 	EXPECT_TRUE(requestSucceeded(response));
 }
 
@@ -39,6 +40,7 @@ ReturnsTrueWhenStatusCodeIs201) {
 	StrictMock<ResponseMock> response;
 	EXPECT_CALL(response, statusCode())
 		.WillOnce(Return(201)); // HTTP 201 Created
+
 	EXPECT_TRUE(requestSucceeded(response));
 }
 
@@ -47,6 +49,7 @@ ReturnsTrueWhenStatusCodeIs300) {
 	StrictMock<ResponseMock> response;
 	EXPECT_CALL(response, statusCode())
 		.WillOnce(Return(300)); // HTTP 300 Multiple Choices
+
 	EXPECT_FALSE(requestSucceeded(response));
 }
 

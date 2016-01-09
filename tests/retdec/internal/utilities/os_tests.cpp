@@ -54,6 +54,7 @@ class ReadFileTests: public Test {};
 TEST_F(ReadFileTests,
 ReturnsCorrectContentWhenFileExists) {
 	auto tmpFile = TmpFile::createWithContent("content");
+
 	EXPECT_EQ("content", readFile(tmpFile->getPath()));
 }
 

@@ -23,6 +23,7 @@ class FileTests: public Test {};
 TEST_F(FileTests,
 FromContentWithNameReturnsFileWithCorrectContentAndName) {
 	auto file = File::fromContentWithName("content", "file.txt");
+
 	EXPECT_EQ("content", file->getContent());
 	EXPECT_EQ("file.txt", file->getName());
 }
@@ -34,6 +35,7 @@ FromFilesystemReturnsFileWithCorrectName) {
 #else
 	auto file = File::fromFilesystem("/path/to/file.txt");
 #endif
+
 	EXPECT_EQ("file.txt", file->getName());
 }
 
@@ -46,6 +48,7 @@ FromFilesystemWithOtherNameReturnsFileWithCorrectName) {
 	auto file = File::fromFilesystemWithOtherName(
 		"/path/to/file.txt", "other.txt");
 #endif
+
 	EXPECT_EQ("other.txt", file->getName());
 }
 

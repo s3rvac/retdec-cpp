@@ -26,18 +26,21 @@ class StringFileTests: public Test {};
 TEST_F(StringFileTests,
 FileHasCorrectContentUponCreation) {
 	StringFile file("content");
+
 	EXPECT_EQ("content", file.getContent());
 }
 
 TEST_F(StringFileTests,
 GetNameReturnsCorrectNameWhenFileHasName) {
 	StringFile file("content", "file.txt");
+
 	EXPECT_EQ("file.txt", file.getName());
 }
 
 TEST_F(StringFileTests,
 GetNameReturnsEmptyStringWhenFileHasNoName) {
 	StringFile file("content");
+
 	EXPECT_EQ("", file.getName());
 }
 

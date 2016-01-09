@@ -26,7 +26,9 @@ class RealConnectionManagerTests: public Test {};
 TEST_F(RealConnectionManagerTests,
 NewConnectionReturnsRealConnection) {
 	RealConnectionManager cm;
+
 	auto conn = cm.newConnection(Settings());
+
 	EXPECT_TRUE(isa<RealConnection>(conn));
 }
 

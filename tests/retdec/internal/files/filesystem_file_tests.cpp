@@ -30,12 +30,14 @@ GetNameReturnsCorrectValueWhenNoCustomNameIsGiven) {
 #else
 	FilesystemFile file("/path/to/file.txt");
 #endif
+
 	EXPECT_EQ("file.txt", file.getName());
 }
 
 TEST_F(FilesystemFileTests,
 GetNameReturnsCorrectValueWhenCustomNameIsGiven) {
 	FilesystemFile file("/path/to/file.txt", "another_file.txt");
+
 	EXPECT_EQ("another_file.txt", file.getName());
 }
 
@@ -43,6 +45,7 @@ TEST_F(FilesystemFileTests,
 GetContentReturnsCorrectContent) {
 	auto tmpFile = TmpFile::createWithContent("content");
 	FilesystemFile file(tmpFile->getPath());
+
 	EXPECT_EQ("content", file.getContent());
 }
 

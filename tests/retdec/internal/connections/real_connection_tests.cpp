@@ -177,6 +177,7 @@ void RealConnectionTests::stopHttpServer() {
 TEST_F(RealConnectionTests,
 ApiUrlReturnsCorrectUrl) {
 	RealConnection conn(Settings().withApiUrl("http://127.0.0.1:5000/api"));
+
 	EXPECT_EQ("http://127.0.0.1:5000/api", conn.getApiUrl());
 }
 
@@ -184,7 +185,9 @@ TEST_F(RealConnectionTests,
 GetWithoutArgumentsSendsRequestWithCorrectMethodAndDestinationAndHttpVersion) {
 	const auto ApiUrl = HttpServerUrl + "/api";
 	RealConnection conn(Settings().withApiUrl(ApiUrl));
+
 	auto response = conn.sendGetRequest(ApiUrl + "/test");
+
 	EXPECT_CONTAINS(response, "GET /api/test HTTP/1.1");
 }
 
@@ -196,7 +199,9 @@ GetSendsRequestWithUserAgentHeader) {
 			.withApiUrl(ApiUrl)
 			.withUserAgent("my user agent")
 	);
+
 	auto response = conn.sendGetRequest(ApiUrl);
+
 	EXPECT_CONTAINS(response, "User-Agent: my user agent");
 }
 
