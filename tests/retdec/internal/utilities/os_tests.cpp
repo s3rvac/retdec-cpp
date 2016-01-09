@@ -68,10 +68,36 @@ ThrowsFilesystemErrorWhenFileDoesNotExist) {
 ///
 class WriteFileTests: public Test {};
 
+TEST_F(WriteFileTests,
+WritesCorrectContentToFile) {
+	const std::string Content{"content"};
+	auto tmpFile = TmpFile::createWithContent("");
+
+	writeFile(tmpFile->getPath(), Content);
+
+	ASSERT_EQ(Content, readFile(tmpFile->getPath()));
+}
+
+TEST_F(WriteFileTests,
+ThrowsIoErrorWhenFileCannotBeOpenedForWriting) {
+	ASSERT_THROW(writeFile("/", "content"), IoError);
+}
+
 ///
 /// Tests for copyFile().
 ///
 class CopyFileTests: public Test {};
+
+TEST_F(CopyFileTests,
+WritesCorrectContentToFile) {
+	const std::string Content{"content"};
+	auto tmpInFile = TmpFile::createWithContent(Content);
+	auto tmpOutFile = TmpFile::createWithContent("");
+
+	copyFile(tmpInFile->getPath(), tmpOutFile->getPath());
+
+	ASSERT_EQ(Content, readFile(tmpOutFile->getPath()));
+}
 
 TEST_F(CopyFileTests,
 ThrowsFilesystemErrorWhenSourceFileDoesNotExist) {
