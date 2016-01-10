@@ -196,7 +196,8 @@ if(RETDEC_COVERAGE)
 			--legend --title "retdec code coverage"
 			--output-directory "${PROJECT_BINARY_DIR}/coverage"
 			"${PROJECT_BINARY_DIR}/coverage/coverage.info"
-		WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}")
+		WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
+	)
 endif()
 
 ##
