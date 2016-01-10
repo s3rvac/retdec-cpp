@@ -184,17 +184,18 @@ if(RETDEC_COVERAGE)
 	add_custom_target(coverage
 		COMMENT "Running the tests and generating code coverage"
 		COMMAND "${PROJECT_BINARY_DIR}/tests/retdec/retdec_tests"
-		COMMAND mkdir -p coverage
+		COMMAND mkdir -p "${PROJECT_BINARY_DIR}/coverage"
 		COMMAND lcov --capture --no-external
 			--directory include --directory "${PROJECT_BINARY_DIR}/include"
 			--directory src --directory "${PROJECT_BINARY_DIR}/src"
 			# Comment out the next line if you want to omit test code from the
 			# coverage.
 			--directory tests --directory "${PROJECT_BINARY_DIR}/tests"
-			--output-file coverage/coverage.info
+			--output-file "${PROJECT_BINARY_DIR}/coverage/coverage.info"
 		COMMAND genhtml --show-details --num-spaces 4 --demangle-cpp
 			--legend --title "retdec code coverage"
-			coverage/coverage.info --output-directory coverage
+			--output-directory "${PROJECT_BINARY_DIR}/coverage"
+			"${PROJECT_BINARY_DIR}/coverage/coverage.info"
 		WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}")
 endif()
 
