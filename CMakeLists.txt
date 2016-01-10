@@ -193,7 +193,7 @@ if(RETDEC_COVERAGE)
 			--directory tests --directory "${PROJECT_BINARY_DIR}/tests"
 			--output-file "${PROJECT_BINARY_DIR}/coverage/coverage.info"
 		COMMAND genhtml --show-details --num-spaces 4 --demangle-cpp
-			--legend --title "retdec code coverage"
+			--legend --title "retdec-cpp code coverage"
 			--output-directory "${PROJECT_BINARY_DIR}/coverage"
 			"${PROJECT_BINARY_DIR}/coverage/coverage.info"
 		WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
