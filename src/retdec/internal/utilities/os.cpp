@@ -1,6 +1,6 @@
 ///
 /// @file      retdec/internal/utilities/os.cpp
-/// @copyright (c) 2015 by Petr Zemek (s3rvac@gmail.com) and contributors
+/// @copyright (c) 2015-2016 by Petr Zemek (s3rvac@gmail.com) and contributors
 /// @license   MIT, see the @c LICENSE file for more details
 /// @brief     Implementation of the operating-system-related utilities.
 ///
@@ -57,13 +57,6 @@ std::string fileNameFromPath(const std::string &path) {
 }
 
 ///
-/// A base case for joinPaths() that simply returns @a path.
-///
-std::string joinPaths(const std::string &path) {
-	return path;
-}
-
-///
 /// Joins the given two paths.
 ///
 std::string joinPaths(const std::string &path1, const std::string &path2) {
@@ -79,7 +72,8 @@ std::string joinPaths(const std::string &path1, const std::string &path2) {
 ///
 /// @throws FilesystemError When the file cannot be opened or read.
 ///
-/// The file is read in the binary mode, so no conversions are performed.
+/// The file is opened in the binary mode, so no conversions are performed
+/// during the reading.
 ///
 std::string readFile(const std::string &path) {
 	std::ifstream file(path, std::ios::in | std::ios::binary);
@@ -92,8 +86,8 @@ std::string readFile(const std::string &path) {
 	try {
 		// The following method gets the file size, resizes the string holding
 		// the content, and reads the file afterwards. The obtained file size
-		// is reliable because we are reading the file in the binary mode,
-		// so there are no conversions performed.
+		// is reliable because we have opened the file in the binary mode, so
+		// there are no conversions performed.
 		file.seekg(0, std::ios::end);
 		content.resize(file.tellg());
 		file.seekg(0, std::ios::beg);
@@ -109,7 +103,8 @@ std::string readFile(const std::string &path) {
 ///
 /// @throws FilesystemError When the file cannot be opened or written.
 ///
-/// The file is stored in the binary mode, so no conversions are performed.
+/// The file is opened in the binary mode, so no conversions are performed
+/// during writing.
 ///
 void writeFile(const std::string &path, const std::string &content) {
 	std::ofstream file(path, std::ios::out | std::ios::binary);

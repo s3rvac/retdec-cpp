@@ -1,6 +1,6 @@
 ///
 /// @file      retdec/decompilation_tests.cpp
-/// @copyright (c) 2015 by Petr Zemek (s3rvac@gmail.com) and contributors
+/// @copyright (c) 2015-2016 by Petr Zemek (s3rvac@gmail.com) and contributors
 /// @license   MIT, see the @c LICENSE file for more details
 /// @brief     Tests for the decompilation.
 ///
@@ -44,7 +44,7 @@ GetIdReturnsCorrectValue) {
 
 	Decompilation decompilation("123", conn);
 
-	EXPECT_EQ("123", decompilation.getId());
+	ASSERT_EQ("123", decompilation.getId());
 }
 
 TEST_F(DecompilationTests,

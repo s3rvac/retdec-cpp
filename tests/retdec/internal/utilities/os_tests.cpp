@@ -1,6 +1,6 @@
 ///
 /// @file      retdec/internal/utilities/os_tests.cpp
-/// @copyright (c) 2015 by Petr Zemek (s3rvac@gmail.com) and contributors
+/// @copyright (c) 2015-2016 by Petr Zemek (s3rvac@gmail.com) and contributors
 /// @license   MIT, see the @c LICENSE file for more details
 /// @brief     Tests for operating-system-related utilities.
 ///
@@ -26,23 +26,23 @@ class FileNameFromPathTests: public Test {};
 TEST_F(FileNameFromPathTests,
 FileNameFromPathReturnsCorrectNameForPathWithSeparators) {
 #ifdef RETDEC_OS_WINDOWS
-	EXPECT_EQ("file.txt", fileNameFromPath(R"(C:\\path\to\file.txt)"));
+	ASSERT_EQ("file.txt", fileNameFromPath(R"(C:\\path\to\file.txt)"));
 #else
-	EXPECT_EQ("file.txt", fileNameFromPath("/path/to/file.txt"));
+	ASSERT_EQ("file.txt", fileNameFromPath("/path/to/file.txt"));
 #endif
 }
 
 TEST_F(FileNameFromPathTests,
 FileNameFromPathContainingJustFileNameReturnsCorrectFileName) {
-	EXPECT_EQ("file.txt", fileNameFromPath("file.txt"));
+	ASSERT_EQ("file.txt", fileNameFromPath("file.txt"));
 }
 
 TEST_F(FileNameFromPathTests,
 FileNameFromPathContainingNoFileNameReturnsEmptyString) {
 #ifdef RETDEC_OS_WINDOWS
-	EXPECT_EQ("", fileNameFromPath(R"(C:\\path\to\dir\)"));
+	ASSERT_EQ("", fileNameFromPath(R"(C:\\path\to\dir\)"));
 #else
-	EXPECT_EQ("", fileNameFromPath("/path/to/dir/"));
+	ASSERT_EQ("", fileNameFromPath("/path/to/dir/"));
 #endif
 }
 
@@ -54,12 +54,13 @@ class ReadFileTests: public Test {};
 TEST_F(ReadFileTests,
 ReturnsCorrectContentWhenFileExists) {
 	auto tmpFile = TmpFile::createWithContent("content");
-	EXPECT_EQ("content", readFile(tmpFile->getPath()));
+
+	ASSERT_EQ("content", readFile(tmpFile->getPath()));
 }
 
 TEST_F(ReadFileTests,
 ThrowsFilesystemErrorWhenFileDoesNotExist) {
-	EXPECT_THROW(readFile("nonexisting-file"), FilesystemError);
+	ASSERT_THROW(readFile("nonexisting-file"), FilesystemError);
 }
 
 ///
@@ -67,14 +68,40 @@ ThrowsFilesystemErrorWhenFileDoesNotExist) {
 ///
 class WriteFileTests: public Test {};
 
+TEST_F(WriteFileTests,
+WritesCorrectContentToFile) {
+	const std::string Content{"content"};
+	auto tmpFile = TmpFile::createWithContent("");
+
+	writeFile(tmpFile->getPath(), Content);
+
+	ASSERT_EQ(Content, readFile(tmpFile->getPath()));
+}
+
+TEST_F(WriteFileTests,
+ThrowsIoErrorWhenFileCannotBeOpenedForWriting) {
+	ASSERT_THROW(writeFile("/", "content"), IoError);
+}
+
 ///
 /// Tests for copyFile().
 ///
 class CopyFileTests: public Test {};
 
 TEST_F(CopyFileTests,
+WritesCorrectContentToFile) {
+	const std::string Content{"content"};
+	auto tmpInFile = TmpFile::createWithContent(Content);
+	auto tmpOutFile = TmpFile::createWithContent("");
+
+	copyFile(tmpInFile->getPath(), tmpOutFile->getPath());
+
+	ASSERT_EQ(Content, readFile(tmpOutFile->getPath()));
+}
+
+TEST_F(CopyFileTests,
 ThrowsFilesystemErrorWhenSourceFileDoesNotExist) {
-	EXPECT_THROW(copyFile("nonexisting-file", "any-file"), FilesystemError);
+	ASSERT_THROW(copyFile("nonexisting-file", "any-file"), FilesystemError);
 }
 
 } // namespace tests

@@ -1,6 +1,6 @@
 ///
 /// @file      retdec/internal/connections/real_connection_tests.cpp
-/// @copyright (c) 2015 by Petr Zemek (s3rvac@gmail.com) and contributors
+/// @copyright (c) 2015-2016 by Petr Zemek (s3rvac@gmail.com) and contributors
 /// @license   MIT, see the @c LICENSE file for more details
 /// @brief     Tests for the real connection to the API.
 ///
@@ -22,10 +22,10 @@
 #include "retdec/settings.h"
 
 ///
-/// Expects @a response to contain @a text.
+/// Asserts that @a response contains @a text.
 ///
-#define EXPECT_CONTAINS(response, text) \
-	EXPECT_TRUE(contains(response.get(), text)) << response->body();
+#define ASSERT_CONTAINS(response, text) \
+	ASSERT_TRUE(contains(response.get(), text)) << response->body();
 
 using namespace testing;
 
@@ -177,15 +177,18 @@ void RealConnectionTests::stopHttpServer() {
 TEST_F(RealConnectionTests,
 ApiUrlReturnsCorrectUrl) {
 	RealConnection conn(Settings().withApiUrl("http://127.0.0.1:5000/api"));
-	EXPECT_EQ("http://127.0.0.1:5000/api", conn.getApiUrl());
+
+	ASSERT_EQ("http://127.0.0.1:5000/api", conn.getApiUrl());
 }
 
 TEST_F(RealConnectionTests,
 GetWithoutArgumentsSendsRequestWithCorrectMethodAndDestinationAndHttpVersion) {
 	const auto ApiUrl = HttpServerUrl + "/api";
 	RealConnection conn(Settings().withApiUrl(ApiUrl));
+
 	auto response = conn.sendGetRequest(ApiUrl + "/test");
-	EXPECT_CONTAINS(response, "GET /api/test HTTP/1.1");
+
+	ASSERT_CONTAINS(response, "GET /api/test HTTP/1.1");
 }
 
 TEST_F(RealConnectionTests,
@@ -196,8 +199,10 @@ GetSendsRequestWithUserAgentHeader) {
 			.withApiUrl(ApiUrl)
 			.withUserAgent("my user agent")
 	);
+
 	auto response = conn.sendGetRequest(ApiUrl);
-	EXPECT_CONTAINS(response, "User-Agent: my user agent");
+
+	ASSERT_CONTAINS(response, "User-Agent: my user agent");
 }
 
 } // namespace tests

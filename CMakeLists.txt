@@ -1,6 +1,6 @@
 ##
 ## Project:   retdec-cpp
-## Copyright: (c) 2015 by Petr Zemek <s3rvac@gmail.com>
+## Copyright: (c) 2015-2016 by Petr Zemek <s3rvac@gmail.com>
 ## License:   MIT, see the LICENSE file for more details
 ##
 ## The project's main CMake configuration file.
@@ -184,18 +184,20 @@ if(RETDEC_COVERAGE)
 	add_custom_target(coverage
 		COMMENT "Running the tests and generating code coverage"
 		COMMAND "${PROJECT_BINARY_DIR}/tests/retdec/retdec_tests"
-		COMMAND mkdir -p coverage
+		COMMAND mkdir -p "${PROJECT_BINARY_DIR}/coverage"
 		COMMAND lcov --capture --no-external
 			--directory include --directory "${PROJECT_BINARY_DIR}/include"
 			--directory src --directory "${PROJECT_BINARY_DIR}/src"
 			# Comment out the next line if you want to omit test code from the
 			# coverage.
 			--directory tests --directory "${PROJECT_BINARY_DIR}/tests"
-			--output-file coverage/coverage.info
+			--output-file "${PROJECT_BINARY_DIR}/coverage/coverage.info"
 		COMMAND genhtml --show-details --num-spaces 4 --demangle-cpp
-			--legend --title "retdec code coverage"
-			coverage/coverage.info --output-directory coverage
-		WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}")
+			--legend --title "retdec-cpp code coverage"
+			--output-directory "${PROJECT_BINARY_DIR}/coverage"
+			"${PROJECT_BINARY_DIR}/coverage/coverage.info"
+		WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
+	)
 endif()
 
 ##

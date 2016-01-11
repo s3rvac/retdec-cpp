@@ -1,6 +1,6 @@
 ///
 /// @file      retdec/test_utilities/tmp_file.cpp
-/// @copyright (c) 2015 by Petr Zemek (s3rvac@gmail.com) and contributors
+/// @copyright (c) 2015-2016 by Petr Zemek (s3rvac@gmail.com) and contributors
 /// @license   MIT, see the @c LICENSE file for more details
 /// @brief     Implementation of the temporary file utilities.
 ///
@@ -53,6 +53,13 @@ std::string TmpFile::getPath() const {
 ///
 std::unique_ptr<TmpFile> TmpFile::createWithContent(const std::string &content) {
 	return std::unique_ptr<TmpFile>(new TmpFile(content));
+}
+
+RemoveFileOnDestruction::RemoveFileOnDestruction(const std::string &path):
+	path(path) {}
+
+RemoveFileOnDestruction::~RemoveFileOnDestruction() {
+	boost::filesystem::remove(path);
 }
 
 } // namespace tests

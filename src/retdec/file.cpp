@@ -1,8 +1,8 @@
 ///
 /// @file      retdec/file.cpp
-/// @copyright (c) 2015 by Petr Zemek (s3rvac@gmail.com) and contributors
+/// @copyright (c) 2015-2016 by Petr Zemek (s3rvac@gmail.com) and contributors
 /// @license   MIT, see the @c LICENSE file for more details
-/// @brief     Implementation of the base class and factory of files.
+/// @brief     Implementation of the representation and factory for files.
 ///
 
 #include <memory>
@@ -29,7 +29,7 @@ File::~File() = default;
 ///
 /// Returns the name of the file.
 ///
-/// When the file has no name, it returns the empty string.
+/// When the file has no name, the empty string is returned.
 ///
 
 /// @fn File::getContent()

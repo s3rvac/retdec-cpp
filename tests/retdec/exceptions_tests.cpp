@@ -1,6 +1,6 @@
 ///
 /// @file      retdec/exceptions_tests.cpp
-/// @copyright (c) 2015 by Petr Zemek (s3rvac@gmail.com) and contributors
+/// @copyright (c) 2015-2016 by Petr Zemek (s3rvac@gmail.com) and contributors
 /// @license   MIT, see the @c LICENSE file for more details
 /// @brief     Tests for the exceptions.
 ///
@@ -22,8 +22,10 @@ class ErrorTests: public Test {};
 TEST_F(ErrorTests,
 WhatReturnsCorrectMessage) {
 	const std::string RefErrorMessage("error message");
+
 	Error ex(RefErrorMessage);
-	EXPECT_EQ(RefErrorMessage, ex.what());
+
+	ASSERT_EQ(RefErrorMessage, ex.what());
 }
 
 ///
@@ -34,8 +36,10 @@ class IoErrorTests: public Test {};
 TEST_F(IoErrorTests,
 WhatReturnsCorrectMessage) {
 	const std::string RefIoErrorMessage("error message");
+
 	IoError ex(RefIoErrorMessage);
-	EXPECT_EQ(RefIoErrorMessage, ex.what());
+
+	ASSERT_EQ(RefIoErrorMessage, ex.what());
 }
 
 ///
@@ -46,8 +50,10 @@ class FilesystemErrorTests: public Test {};
 TEST_F(FilesystemErrorTests,
 WhatReturnsCorrectMessage) {
 	const std::string RefFilesystemErrorMessage("error message");
+
 	FilesystemError ex(RefFilesystemErrorMessage);
-	EXPECT_EQ(RefFilesystemErrorMessage, ex.what());
+
+	ASSERT_EQ(RefFilesystemErrorMessage, ex.what());
 }
 
 ///
@@ -58,8 +64,10 @@ class ConnectionErrorTests: public Test {};
 TEST_F(ConnectionErrorTests,
 WhatReturnsCorrectMessage) {
 	const std::string RefConnectionErrorMessage("error message");
+
 	ConnectionError ex(RefConnectionErrorMessage);
-	EXPECT_EQ(RefConnectionErrorMessage, ex.what());
+
+	ASSERT_EQ(RefConnectionErrorMessage, ex.what());
 }
 
 ///
@@ -70,16 +78,18 @@ class ApiErrorTests: public Test {};
 TEST_F(ApiErrorTests,
 GettersAndWhatReturnCorrectValuesWhenDescriptionIsGiven) {
 	ApiError ex(404, "Not Found", "The page was not found.");
-	EXPECT_STREQ("404 Not Found", ex.what());
-	EXPECT_EQ(404, ex.getCode());
-	EXPECT_EQ("Not Found", ex.getMessage());
-	EXPECT_EQ("The page was not found.", ex.getDescription());
+
+	ASSERT_STREQ("404 Not Found", ex.what());
+	ASSERT_EQ(404, ex.getCode());
+	ASSERT_EQ("Not Found", ex.getMessage());
+	ASSERT_EQ("The page was not found.", ex.getDescription());
 }
 
 TEST_F(ApiErrorTests,
 GetDescriptionReturnsSameValueAsWhatWhenDescriptionIsNotGiven) {
 	ApiError e(404, "Not Found");
-	EXPECT_EQ(e.what(), e.getDescription());
+
+	ASSERT_EQ(e.what(), e.getDescription());
 }
 
 ///
@@ -90,8 +100,10 @@ class DecompilationErrorTests: public Test {};
 TEST_F(DecompilationErrorTests,
 WhatReturnsCorrectMessage) {
 	const std::string RefDecompilationErrorMessage("error message");
+
 	DecompilationError ex(RefDecompilationErrorMessage);
-	EXPECT_EQ(RefDecompilationErrorMessage, ex.what());
+
+	ASSERT_EQ(RefDecompilationErrorMessage, ex.what());
 }
 
 } // namespace tests

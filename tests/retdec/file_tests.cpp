@@ -1,6 +1,6 @@
 ///
 /// @file      retdec/file_tests.cpp
-/// @copyright (c) 2015 by Petr Zemek (s3rvac@gmail.com) and contributors
+/// @copyright (c) 2015-2016 by Petr Zemek (s3rvac@gmail.com) and contributors
 /// @license   MIT, see the @c LICENSE file for more details
 /// @brief     Tests for the files.
 ///
@@ -23,8 +23,9 @@ class FileTests: public Test {};
 TEST_F(FileTests,
 FromContentWithNameReturnsFileWithCorrectContentAndName) {
 	auto file = File::fromContentWithName("content", "file.txt");
-	EXPECT_EQ("content", file->getContent());
-	EXPECT_EQ("file.txt", file->getName());
+
+	ASSERT_EQ("content", file->getContent());
+	ASSERT_EQ("file.txt", file->getName());
 }
 
 TEST_F(FileTests,
@@ -34,7 +35,8 @@ FromFilesystemReturnsFileWithCorrectName) {
 #else
 	auto file = File::fromFilesystem("/path/to/file.txt");
 #endif
-	EXPECT_EQ("file.txt", file->getName());
+
+	ASSERT_EQ("file.txt", file->getName());
 }
 
 TEST_F(FileTests,
@@ -46,7 +48,8 @@ FromFilesystemWithOtherNameReturnsFileWithCorrectName) {
 	auto file = File::fromFilesystemWithOtherName(
 		"/path/to/file.txt", "other.txt");
 #endif
-	EXPECT_EQ("other.txt", file->getName());
+
+	ASSERT_EQ("other.txt", file->getName());
 }
 
 } // namespace tests

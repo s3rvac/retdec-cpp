@@ -1,6 +1,6 @@
 ///
 /// @file      retdec/internal/utilities/connection_tests.cpp
-/// @copyright (c) 2015 by Petr Zemek (s3rvac@gmail.com) and contributors
+/// @copyright (c) 2015-2016 by Petr Zemek (s3rvac@gmail.com) and contributors
 /// @license   MIT, see the @c LICENSE file for more details
 /// @brief     Tests for connection utilities.
 ///
@@ -31,7 +31,8 @@ ReturnsTrueWhenStatusCodeIs200) {
 	StrictMock<ResponseMock> response;
 	EXPECT_CALL(response, statusCode())
 		.WillOnce(Return(200)); // HTTP 200 OK
-	EXPECT_TRUE(requestSucceeded(response));
+
+	ASSERT_TRUE(requestSucceeded(response));
 }
 
 TEST_F(RequestSucceededTests,
@@ -39,7 +40,8 @@ ReturnsTrueWhenStatusCodeIs201) {
 	StrictMock<ResponseMock> response;
 	EXPECT_CALL(response, statusCode())
 		.WillOnce(Return(201)); // HTTP 201 Created
-	EXPECT_TRUE(requestSucceeded(response));
+
+	ASSERT_TRUE(requestSucceeded(response));
 }
 
 TEST_F(RequestSucceededTests,
@@ -47,7 +49,8 @@ ReturnsTrueWhenStatusCodeIs300) {
 	StrictMock<ResponseMock> response;
 	EXPECT_CALL(response, statusCode())
 		.WillOnce(Return(300)); // HTTP 300 Multiple Choices
-	EXPECT_FALSE(requestSucceeded(response));
+
+	ASSERT_FALSE(requestSucceeded(response));
 }
 
 ///
@@ -78,9 +81,9 @@ ThrowsApiErrorWithCorrectMessageWhenRequestFailedAndResponseHasNotJsonBody) {
 		verifyRequestSucceeded(response);
 		FAIL() << "expected ApiError to be thrown";
 	} catch (const ApiError &ex) {
-		EXPECT_EQ(400, ex.getCode());
-		EXPECT_EQ("Bad Request", ex.getMessage());
-		EXPECT_EQ(ex.what(), ex.getDescription());
+		ASSERT_EQ(400, ex.getCode());
+		ASSERT_EQ("Bad Request", ex.getMessage());
+		ASSERT_EQ(ex.what(), ex.getDescription());
 	}
 }
 
@@ -104,9 +107,9 @@ ThrowsApiErrorWithCorrectMessageWhenRequestFailedAndResponseHasJsonBody) {
 		verifyRequestSucceeded(response);
 		FAIL() << "expected ApiError to be thrown";
 	} catch (const ApiError &ex) {
-		EXPECT_EQ(422, ex.getCode());
-		EXPECT_EQ("Missing Parameter", ex.getMessage());
-		EXPECT_EQ("Parameter 'x' is missing.", ex.getDescription());
+		ASSERT_EQ(422, ex.getCode());
+		ASSERT_EQ("Missing Parameter", ex.getMessage());
+		ASSERT_EQ("Parameter 'x' is missing.", ex.getDescription());
 	}
 }
 
@@ -146,7 +149,7 @@ GetApiUrlReturnsApiUrlFromWrappedConnection) {
 		.WillOnce(Return("https://retdec.com/service/api"));
 	ResponseVerifyingConnection rvconn(conn);
 
-	EXPECT_EQ("https://retdec.com/service/api", rvconn.getApiUrl());
+	ASSERT_EQ("https://retdec.com/service/api", rvconn.getApiUrl());
 }
 
 TEST_F(ResponseVerifyingConnectionTests,
@@ -162,7 +165,7 @@ SendGetRequestWithUrlCallsSendGetRequestOnWrappedConnectionAndReturnsResponseWhe
 
 	auto response = rvconn.sendGetRequest(url);
 
-	EXPECT_EQ(refResponse, response.get());
+	ASSERT_EQ(refResponse, response.get());
 }
 
 TEST_F(ResponseVerifyingConnectionTests,
@@ -174,7 +177,7 @@ SendGetRequestWithUrlCallsSendGetRequestOnWrappedConnectionAndThrowsApiErrorWhen
 		.WillOnce(Return(response.release()));
 	ResponseVerifyingConnection rvconn(conn);
 
-	EXPECT_THROW(rvconn.sendGetRequest(url), ApiError);
+	ASSERT_THROW(rvconn.sendGetRequest(url), ApiError);
 }
 
 TEST_F(ResponseVerifyingConnectionTests,
@@ -191,7 +194,7 @@ SendGetRequestWithUrlAndArgsCallsSendGetRequestOnWrappedConnectionAndReturnsResp
 
 	auto response = rvconn.sendGetRequest(url, args);
 
-	EXPECT_EQ(refResponse, response.get());
+	ASSERT_EQ(refResponse, response.get());
 }
 
 TEST_F(ResponseVerifyingConnectionTests,
@@ -204,7 +207,7 @@ SendGetRequestWithUrlAndArgsCallsSendGetRequestOnWrappedConnectionAndThrowsApiEr
 		.WillOnce(Return(response.release()));
 	ResponseVerifyingConnection rvconn(conn);
 
-	EXPECT_THROW(rvconn.sendGetRequest(url, args), ApiError);
+	ASSERT_THROW(rvconn.sendGetRequest(url, args), ApiError);
 }
 
 TEST_F(ResponseVerifyingConnectionTests,
@@ -222,7 +225,7 @@ SendPostRequestCallsSendPostRequestOnWrappedConnectionAndReturnsResponseWhenSucc
 
 	auto response = rvconn.sendPostRequest(url, args, files);
 
-	EXPECT_EQ(refResponse, response.get());
+	ASSERT_EQ(refResponse, response.get());
 }
 
 TEST_F(ResponseVerifyingConnectionTests,
@@ -236,7 +239,7 @@ SendPostRequestCallsSendGetRequestOnWrappedConnectionAndThrowsApiErrorWhenFailed
 		.WillOnce(Return(response.release()));
 	ResponseVerifyingConnection rvconn(conn);
 
-	EXPECT_THROW(rvconn.sendPostRequest(url, args, files), ApiError);
+	ASSERT_THROW(rvconn.sendPostRequest(url, args, files), ApiError);
 }
 
 } // namespace tests
