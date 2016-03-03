@@ -36,7 +36,7 @@ public:
 	Decompiler(const Settings &settings,
 		const std::shared_ptr<::retdec::internal::ConnectionManager> &connectionManager);
 	/// @endcond
-	~Decompiler();
+	virtual ~Decompiler() override;
 	/// @}
 
 	/// @name Decompilations
