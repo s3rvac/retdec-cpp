@@ -11,6 +11,9 @@ namespace retdec {
 
 namespace {
 
+/// ID for the input file.
+const std::string InputFileId = "input";
+
 /// ID for the mode argument.
 const std::string ModeId = "mode";
 
@@ -19,9 +22,6 @@ const std::string SelDecompRangesId = "sel_decomp_ranges";
 
 /// ID for the decoding argument of selective decompilation.
 const std::string SelDecompDecodingId = "sel_decomp_decoding";
-
-/// ID for the input file.
-const std::string InputFileId = "input";
 
 ///
 /// Has @a map the given key?
@@ -42,35 +42,6 @@ inline typename Map::mapped_type getValue(const Map &map,
 }
 
 } // anonymous namespace
-
-///
-/// Constructs default arguments.
-///
-DecompilationArguments::DecompilationArguments() = default;
-
-///
-/// Copy-constructs arguments from the given arguments.
-///
-DecompilationArguments::DecompilationArguments(
-	const DecompilationArguments &) = default;
-
-///
-/// Move-constructs arguments from the given arguments.
-///
-DecompilationArguments::DecompilationArguments(
-	DecompilationArguments &&) = default;
-
-///
-/// Copy-assigns the given arguments.
-///
-DecompilationArguments &DecompilationArguments::operator=(
-	const DecompilationArguments &) = default;
-
-///
-/// Move-assigns the given arguments.
-///
-DecompilationArguments &DecompilationArguments::operator=(
-	DecompilationArguments &&) = default;
 
 ///
 /// Destructs the arguments.
@@ -225,8 +196,9 @@ std::shared_ptr<File> DecompilationArguments::inputFile() const {
 ///
 DecompilationArguments &DecompilationArguments::argument(
 		const std::string &id, const std::string &value) {
-	arguments[id] = value;
-	return *this;
+	return static_cast<DecompilationArguments &>(
+		ResourceArguments::argument(id, value)
+	);
 }
 
 ///
@@ -240,42 +212,13 @@ DecompilationArguments DecompilationArguments::withArgument(
 }
 
 ///
-/// Is an argument of the given ID present?
-///
-bool DecompilationArguments::hasArgument(const std::string &id) const {
-	return hasKey(arguments, id);
-}
-
-///
-/// Returns the value of the given argument.
-///
-/// If there is no such argument, it returns the empty string.
-///
-std::string DecompilationArguments::argument(const std::string &id) const {
-	return getValue(arguments, id);
-}
-
-///
-/// Returns an iterator to the beginning of arguments.
-///
-DecompilationArguments::ArgumentIterator DecompilationArguments::argumentsBegin() const {
-	return arguments.begin();
-}
-
-///
-/// Returns an iterator past the last argument.
-///
-DecompilationArguments::ArgumentIterator DecompilationArguments::argumentsEnd() const {
-	return arguments.end();
-}
-
-///
 /// Sets the file of the given ID to the given value.
 ///
 DecompilationArguments &DecompilationArguments::file(
 		const std::string &id, const std::shared_ptr<File> &file) {
-	files[id] = file;
-	return *this;
+	return static_cast<DecompilationArguments &>(
+		ResourceArguments::file(id, file)
+	);
 }
 
 ///
@@ -286,36 +229,6 @@ DecompilationArguments DecompilationArguments::withFile(
 	auto copy = *this;
 	copy.file(id, file);
 	return copy;
-}
-
-///
-/// Is a file of the given ID present?
-///
-bool DecompilationArguments::hasFile(const std::string &id) const {
-	return hasKey(files, id);
-}
-
-///
-/// Returns the file of the given ID.
-///
-/// If there is no such file, it returns the null pointer.
-///
-std::shared_ptr<File> DecompilationArguments::file(const std::string &id) const {
-	return getValue(files, id);
-}
-
-///
-/// Returns an iterator to the beginning of arguments.
-///
-DecompilationArguments::FileIterator DecompilationArguments::filesBegin() const {
-	return files.begin();
-}
-
-///
-/// Returns an iterator past the last argument.
-///
-DecompilationArguments::FileIterator DecompilationArguments::filesEnd() const {
-	return files.end();
 }
 
 } // namespace retdec

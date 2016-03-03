@@ -13,6 +13,7 @@ set(PUBLIC_INCLUDES
 	retdec/exceptions.h
 	retdec/file.h
 	retdec/fwd_decls.h
+	retdec/resource_arguments.h
 	retdec/retdec.h
 	retdec/service.h
 	retdec/settings.h

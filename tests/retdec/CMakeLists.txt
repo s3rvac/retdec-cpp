@@ -23,6 +23,7 @@ set(RETDEC_TESTS_SOURCES
 	internal/utilities/os_tests.cpp
 	internal/utilities/smart_ptr_tests.cpp
 	internal/utilities/string_tests.cpp
+	resource_arguments_tests.cpp
 	settings_tests.cpp
 	test_utilities/tmp_file.cpp
 )
