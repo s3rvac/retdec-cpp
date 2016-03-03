@@ -14,6 +14,7 @@ set(PUBLIC_INCLUDES
 	retdec/file.h
 	retdec/fwd_decls.h
 	retdec/retdec.h
+	retdec/service.h
 	retdec/settings.h
 )
 

@@ -22,6 +22,7 @@ set(RETDEC_SOURCES
 	internal/utilities/json.cpp
 	internal/utilities/os.cpp
 	internal/utilities/string.cpp
+	service.cpp
 	settings.cpp
 )
 
