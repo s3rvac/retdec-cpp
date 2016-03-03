@@ -12,6 +12,8 @@
 #include <memory>
 #include <string>
 
+#include "retdec/resource.h"
+
 namespace retdec {
 
 class File;
@@ -25,7 +27,7 @@ class Connection;
 ///
 /// Representation of a decompilation.
 ///
-class Decompilation {
+class Decompilation: public Resource {
 public:
 	/// Type of a callback for waitUntilFinished().
 	using Callback = std::function<void (const Decompilation &decompilation)>;
@@ -44,7 +46,7 @@ public:
 	Decompilation(const std::string &id,
 		const std::shared_ptr<::retdec::internal::Connection> &conn);
 	/// @endcond
-	~Decompilation();
+	virtual ~Decompilation() override;
 
 	/// @name Querying
 	/// @{
@@ -72,14 +74,6 @@ public:
 	/// @{
 	std::shared_ptr<File> getOutputHllFile();
 	std::string getOutputHll();
-	/// @}
-
-	/// @name Disabled
-	/// @{
-	Decompilation(const Decompilation &) = delete;
-	Decompilation(Decompilation &&) = delete;
-	Decompilation &operator=(const Decompilation &) = delete;
-	Decompilation &operator=(Decompilation &&) = delete;
 	/// @}
 
 private:
