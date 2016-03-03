@@ -7,8 +7,8 @@
 ##
 
 set(PUBLIC_INCLUDES
-	retdec/decompilation_arguments.h
 	retdec/decompilation.h
+	retdec/decompilation_arguments.h
 	retdec/decompiler.h
 	retdec/exceptions.h
 	retdec/file.h

@@ -7,8 +7,8 @@
 ##
 
 set(RETDEC_SOURCES
-	decompilation_arguments.cpp
 	decompilation.cpp
+	decompilation_arguments.cpp
 	decompiler.cpp
 	exceptions.cpp
 	file.cpp

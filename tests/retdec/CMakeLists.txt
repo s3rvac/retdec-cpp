@@ -12,10 +12,10 @@ set(RETDEC_TESTS_SOURCES
 	decompiler_tests.cpp
 	exceptions_tests.cpp
 	file_tests.cpp
-	internal/connection_managers/real_connection_manager_tests.cpp
 	internal/connection_manager_tests.cpp
-	internal/connections/real_connection_tests.cpp
+	internal/connection_managers/real_connection_manager_tests.cpp
 	internal/connection_tests.cpp
+	internal/connections/real_connection_tests.cpp
 	internal/files/filesystem_file_tests.cpp
 	internal/files/string_file_tests.cpp
 	internal/utilities/connection_tests.cpp
