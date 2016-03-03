@@ -6,6 +6,9 @@
 ///
 
 #include "retdec/decompilation_arguments.h"
+#include "retdec/internal/utilities/container.h"
+
+using namespace retdec::internal;
 
 namespace retdec {
 
@@ -22,24 +25,6 @@ const std::string SelDecompRangesId = "sel_decomp_ranges";
 
 /// ID for the decoding argument of selective decompilation.
 const std::string SelDecompDecodingId = "sel_decomp_decoding";
-
-///
-/// Has @a map the given key?
-///
-template <typename Map>
-inline bool hasKey(const Map &map, const std::string &key) {
-	return map.find(key) != map.end();
-}
-
-///
-/// Returns the value of the given key in @a map or the default value.
-///
-template <typename Map>
-inline typename Map::mapped_type getValue(const Map &map,
-		const std::string &key) {
-	auto it = map.find(key);
-	return it != map.end() ? it->second : typename Map::mapped_type();
-}
 
 } // anonymous namespace
 

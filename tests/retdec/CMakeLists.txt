@@ -19,6 +19,7 @@ set(RETDEC_TESTS_SOURCES
 	internal/files/filesystem_file_tests.cpp
 	internal/files/string_file_tests.cpp
 	internal/utilities/connection_tests.cpp
+	internal/utilities/container_tests.cpp
 	internal/utilities/json_tests.cpp
 	internal/utilities/os_tests.cpp
 	internal/utilities/smart_ptr_tests.cpp
