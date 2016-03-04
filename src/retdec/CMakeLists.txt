@@ -18,6 +18,7 @@ set(RETDEC_SOURCES
 	internal/connections/real_connection.cpp
 	internal/files/filesystem_file.cpp
 	internal/files/string_file.cpp
+	internal/resource_impl.cpp
 	internal/utilities/connection.cpp
 	internal/utilities/json.cpp
 	internal/utilities/os.cpp

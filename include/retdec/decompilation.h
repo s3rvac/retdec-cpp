@@ -21,6 +21,7 @@ class File;
 namespace internal {
 
 class Connection;
+class DecompilationImpl;
 
 } // namespace internal
 
@@ -50,17 +51,8 @@ public:
 
 	/// @name Querying
 	/// @{
-	std::string getId() const;
-	bool hasFinished();
-	bool hasFinished() const noexcept;
-	bool hasSucceeded();
-	bool hasSucceeded() const noexcept;
-	bool hasFailed();
-	bool hasFailed() const noexcept;
 	int getCompletion();
 	int getCompletion() const noexcept;
-	std::string getError();
-	std::string getError() const;
 	/// @}
 
 	/// @name Waiting For Decompilation To Finish
@@ -70,16 +62,15 @@ public:
 		OnError onError = OnError::Throw);
 	/// @}
 
-	/// @name Getting Outputs
+	/// @name Obtaining Outputs
 	/// @{
 	std::shared_ptr<File> getOutputHllFile();
 	std::string getOutputHll();
 	/// @}
 
 private:
-	struct Impl;
-	/// Private implementation.
-	std::unique_ptr<Impl> impl;
+	internal::DecompilationImpl *impl() noexcept;
+	const internal::DecompilationImpl *impl() const noexcept;
 };
 
 } // namespace retdec
