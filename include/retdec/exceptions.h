@@ -18,7 +18,7 @@ namespace retdec {
 ///
 class Error: public std::runtime_error {
 public:
-	Error(const std::string &what);
+	using std::runtime_error::runtime_error;
 };
 
 ///
@@ -26,7 +26,7 @@ public:
 ///
 class IoError: public Error {
 public:
-	IoError(const std::string &what);
+	using Error::Error;
 };
 
 ///
@@ -34,7 +34,7 @@ public:
 ///
 class FilesystemError: public IoError {
 public:
-	FilesystemError(const std::string &what);
+	using IoError::IoError;
 };
 
 ///
@@ -42,7 +42,7 @@ public:
 ///
 class ConnectionError: public IoError {
 public:
-	ConnectionError(const std::string &what);
+	using IoError::IoError;
 };
 
 ///
@@ -73,7 +73,7 @@ private:
 ///
 class DecompilationError: public Error {
 public:
-	DecompilationError(const std::string &what);
+	using Error::Error;
 };
 
 ///
@@ -81,7 +81,7 @@ public:
 ///
 class AnalysisError: public Error {
 public:
-	AnalysisError(const std::string &what);
+	using Error::Error;
 };
 
 } // namespace retdec
