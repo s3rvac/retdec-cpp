@@ -14,6 +14,7 @@ set(RETDEC_SOURCES
 	decompiler.cpp
 	exceptions.cpp
 	file.cpp
+	fileinfo.cpp
 	internal/connection.cpp
 	internal/connection_manager.cpp
 	internal/connection_managers/real_connection_manager.cpp

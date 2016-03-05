@@ -18,6 +18,7 @@
 #include "retdec/decompiler.h"
 #include "retdec/exceptions.h"
 #include "retdec/file.h"
+#include "retdec/fileinfo.h"
 #include "retdec/settings.h"
 
 #endif

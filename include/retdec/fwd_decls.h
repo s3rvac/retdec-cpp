@@ -20,6 +20,7 @@ class Decompilation;
 class DecompilationArguments;
 class Decompiler;
 class File;
+class Fileinfo;
 class Settings;
 
 } // namespace retdec

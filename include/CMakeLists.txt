@@ -14,6 +14,7 @@ set(PUBLIC_INCLUDES
 	retdec/decompiler.h
 	retdec/exceptions.h
 	retdec/file.h
+	retdec/fileinfo.h
 	retdec/fwd_decls.h
 	retdec/resource.h
 	retdec/resource_arguments.h
