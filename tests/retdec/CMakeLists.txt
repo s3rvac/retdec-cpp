@@ -7,6 +7,7 @@
 ##
 
 set(RETDEC_TESTS_SOURCES
+	analysis_arguments_tests.cpp
 	decompilation_arguments_tests.cpp
 	decompilation_tests.cpp
 	decompiler_tests.cpp
