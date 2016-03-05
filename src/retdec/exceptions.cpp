@@ -76,4 +76,10 @@ std::string ApiError::getDescription() const {
 DecompilationError::DecompilationError(const std::string &what):
 	Error(what) {}
 
+///
+/// Creates an exception.
+///
+AnalysisError::AnalysisError(const std::string &what):
+	Error(what) {}
+
 } // namespace retdec

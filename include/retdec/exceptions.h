@@ -76,6 +76,14 @@ public:
 	DecompilationError(const std::string &what);
 };
 
+///
+/// Exception thrown when an analysis fails.
+///
+class AnalysisError: public Error {
+public:
+	AnalysisError(const std::string &what);
+};
+
 } // namespace retdec
 
 #endif

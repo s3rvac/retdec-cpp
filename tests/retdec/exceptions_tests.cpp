@@ -106,5 +106,19 @@ WhatReturnsCorrectMessage) {
 	ASSERT_EQ(RefDecompilationErrorMessage, ex.what());
 }
 
+///
+/// Tests for AnalysisError.
+///
+class AnalysisErrorTests: public Test {};
+
+TEST_F(AnalysisErrorTests,
+WhatReturnsCorrectMessage) {
+	const std::string RefAnalysisErrorMessage("error message");
+
+	AnalysisError ex(RefAnalysisErrorMessage);
+
+	ASSERT_EQ(RefAnalysisErrorMessage, ex.what());
+}
+
 } // namespace tests
 } // namespace retdec
