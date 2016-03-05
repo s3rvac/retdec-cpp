@@ -7,6 +7,7 @@
 ##
 
 set(PUBLIC_INCLUDES
+	retdec/analysis.h
 	retdec/analysis_arguments.h
 	retdec/decompilation.h
 	retdec/decompilation_arguments.h

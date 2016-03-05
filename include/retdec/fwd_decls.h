@@ -14,6 +14,7 @@
 
 namespace retdec {
 
+class Analysis;
 class AnalysisArguments;
 class Decompilation;
 class DecompilationArguments;

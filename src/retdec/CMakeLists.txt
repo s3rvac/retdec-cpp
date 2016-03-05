@@ -7,6 +7,7 @@
 ##
 
 set(RETDEC_SOURCES
+	analysis.cpp
 	analysis_arguments.cpp
 	decompilation.cpp
 	decompilation_arguments.cpp

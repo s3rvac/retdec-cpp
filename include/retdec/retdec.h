@@ -11,6 +11,7 @@
 #ifndef RETDEC_RETDEC_H
 #define RETDEC_RETDEC_H
 
+#include "retdec/analysis.h"
 #include "retdec/analysis_arguments.h"
 #include "retdec/decompilation.h"
 #include "retdec/decompilation_arguments.h"
