@@ -39,7 +39,7 @@ public:
 	void updateStatus();
 	void updateStatusIfNeeded();
 
-	virtual void updateResourceSpecificStatus(const Json::Value &jsonBody) = 0;
+	virtual void updateResourceSpecificStatus(const Json::Value &jsonBody);
 	/// @}
 
 	/// Identifier.

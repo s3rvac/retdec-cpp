@@ -35,11 +35,6 @@ public:
 	);
 	virtual ~AnalysisImpl() override;
 
-	/// @name Status Update
-	/// @{
-	virtual void updateResourceSpecificStatus(const Json::Value &jsonBody) override;
-	/// @}
-
 	void getAndStoreOutputAsFile();
 
 	/// URL to obtain the output of the analysis.
@@ -70,11 +65,6 @@ AnalysisImpl::AnalysisImpl(
 /// Destructs the private implementation.
 ///
 AnalysisImpl::~AnalysisImpl() = default;
-
-// Override.
-void AnalysisImpl::updateResourceSpecificStatus(const Json::Value &jsonBody) {
-	// There is nothing to do.
-}
 
 ///
 /// Gets and stores the results as an output file.

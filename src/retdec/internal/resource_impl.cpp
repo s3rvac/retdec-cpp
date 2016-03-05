@@ -67,10 +67,12 @@ void ResourceImpl::updateStatusIfNeeded() {
 	}
 }
 
-/// @fn ResourceImpl::updateResourceSpecificStatus()
 ///
 /// Updates resource-specific parts of the status.
 ///
+/// If not overridden, it does nothing.
+///
+void ResourceImpl::updateResourceSpecificStatus(const Json::Value &) {}
 
 } // namespace internal
 } // namespace retdec
