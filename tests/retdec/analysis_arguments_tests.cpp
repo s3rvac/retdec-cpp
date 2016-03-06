@@ -118,5 +118,43 @@ HasInputFileReturnsFalseWhenInputFileIsNotSet) {
 	ASSERT_FALSE(args.hasInputFile());
 }
 
+// Chaining.
+
+TEST_F(AnalysisArgumentsTests,
+InPlaceSettersAllowChainingForLValue) {
+	AnalysisArguments args;
+	auto file = std::make_shared<FileMock>();
+
+	args.verbose(true)
+		.inputFile(file);
+
+	ASSERT_TRUE(args.verbose());
+	ASSERT_EQ(file, args.inputFile());
+}
+
+TEST_F(AnalysisArgumentsTests,
+InPlaceSettersAllowChainingForRValue) {
+	auto file = std::make_shared<FileMock>();
+
+	auto args = AnalysisArguments()
+		.verbose(true)
+		.inputFile(file);
+
+	ASSERT_TRUE(args.verbose());
+	ASSERT_EQ(file, args.inputFile());
+}
+
+TEST_F(AnalysisArgumentsTests,
+NotModifyingSettersAllowChaining) {
+	auto file = std::make_shared<FileMock>();
+
+	auto args = AnalysisArguments()
+		.verbose(true)
+		.withInputFile(file);
+
+	ASSERT_TRUE(args.verbose());
+	ASSERT_EQ(file, args.inputFile());
+}
+
 } // namespace tests
 } // namespace retdec
