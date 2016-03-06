@@ -30,10 +30,10 @@ public:
 
 	/// @name Verbose
 	/// @{
-	AnalysisArguments &verbose(bool verbose);
-	AnalysisArguments withVerbose(bool verbose) const;
+	AnalysisArguments &verbose(const std::string &verbose);
+	AnalysisArguments withVerbose(const std::string &verbose) const;
 	bool hasVerbose() const;
-	bool verbose() const;
+	std::string verbose() const;
 	/// @}
 
 	/// @name Input File

@@ -30,28 +30,28 @@ AnalysisArguments::~AnalysisArguments() = default;
 ///
 /// Sets the verbose mode.
 ///
-/// When @c verbose is @c true, the analysis produces all the supported
-/// information about the input file. Otherwise, the analysis produces only
-/// basic information (the default setting).
+/// When @a verbose is @c "yes", the analysis produces all the supported
+/// information about the input file. Otherwise, when @a verbose is @c "no"
+/// (the default), the analysis produces only basic information.
 ///
-AnalysisArguments &AnalysisArguments::verbose(bool verbose) {
-	return argument(VerboseId, verbose ? "1" : "0");
+AnalysisArguments &AnalysisArguments::verbose(const std::string &verbose) {
+	return argument(VerboseId, verbose);
 }
 
 ///
 /// Returns a copy of the arguments with a verbose mode.
 ///
-/// See the description of <tt>verbose(bool verbose)</tt> for more details.
+/// See the description of <tt>verbose(const std::string &verbose)</tt> for more details.
 ///
-AnalysisArguments AnalysisArguments::withVerbose(bool verbose) const {
-	return withArgument(VerboseId, verbose ? "1" : "0");
+AnalysisArguments AnalysisArguments::withVerbose(const std::string &verbose) const {
+	return withArgument(VerboseId, verbose);
 }
 
 ///
 /// Is the verbose argument set?
 ///
-/// It returns @c true even when @c verbose is set to @c false. It only returns
-/// @c false when the verbose argument was not set.
+/// It returns @c true even when @c verbose was explicitly set to @c "no". It
+/// only returns @c false when the verbose argument was not set.
 ///
 bool AnalysisArguments::hasVerbose() const {
 	return hasArgument(VerboseId);
@@ -60,8 +60,8 @@ bool AnalysisArguments::hasVerbose() const {
 ///
 /// Should the analysis be run in the verbose mode?
 ///
-bool AnalysisArguments::verbose() const {
-	return getValue(arguments, VerboseId) == "1";
+std::string AnalysisArguments::verbose() const {
+	return getValue(arguments, VerboseId);
 }
 
 ///

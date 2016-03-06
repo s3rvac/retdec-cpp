@@ -24,52 +24,52 @@ class AnalysisArgumentsTests: public Test {};
 // Verbose.
 
 TEST_F(AnalysisArgumentsTests,
-VerboseIsFalseByDefault) {
+VerboseYesSetsVerboseToYesInPlace) {
 	AnalysisArguments args;
 
-	ASSERT_FALSE(args.verbose());
+	args.verbose("yes");
+
+	ASSERT_EQ("yes", args.verbose());
 }
 
 TEST_F(AnalysisArgumentsTests,
-VerboseTrueSetsNewVerboseToTrueInPlace) {
+VerboseNoSetsVerboseToNoInPlace) {
 	AnalysisArguments args;
 
-	args.verbose(true);
+	args.verbose("no");
 
-	ASSERT_TRUE(args.verbose());
+	ASSERT_EQ("no", args.verbose());
 }
 
 TEST_F(AnalysisArgumentsTests,
-VerboseFalseSetsNewVerboseToFalseInPlace) {
+WithVerboseYesReturnsNewArgumentsWithVerboseSetToYes) {
 	AnalysisArguments args;
 
-	args.verbose(false);
+	auto newArgs = args.withVerbose("yes");
 
-	ASSERT_FALSE(args.verbose());
+	ASSERT_EQ("yes", newArgs.verbose());
+	ASSERT_FALSE(args.hasVerbose());
 }
 
 TEST_F(AnalysisArgumentsTests,
-WithVerboseTrueReturnsNewArgumentsWithVerboseSetToTrue) {
+HasVerboseReturnsFalseByDefault) {
 	AnalysisArguments args;
 
-	auto newArgs = args.withVerbose(true);
-
-	ASSERT_TRUE(newArgs.verbose());
-	ASSERT_FALSE(args.verbose());
+	ASSERT_FALSE(args.hasVerbose());
 }
 
 TEST_F(AnalysisArgumentsTests,
-HasVerboseReturnsTrueWhenVerboseIsSetToTrue) {
+HasVerboseReturnsTrueWhenVerboseIsSetToYes) {
 	auto args = AnalysisArguments()
-		.withVerbose(true);
+		.withVerbose("yes");
 
 	ASSERT_TRUE(args.hasVerbose());
 }
 
 TEST_F(AnalysisArgumentsTests,
-HasVerboseReturnsTrueWhenVerboseIsSetToFalse) {
+HasVerboseReturnsTrueWhenVerboseIsSetToNo) {
 	auto args = AnalysisArguments()
-		.withVerbose(false);
+		.withVerbose("no");
 
 	ASSERT_TRUE(args.hasVerbose());
 }
@@ -125,10 +125,10 @@ InPlaceSettersAllowChainingForLValue) {
 	AnalysisArguments args;
 	auto file = std::make_shared<FileMock>();
 
-	args.verbose(true)
+	args.verbose("yes")
 		.inputFile(file);
 
-	ASSERT_TRUE(args.verbose());
+	ASSERT_EQ("yes", args.verbose());
 	ASSERT_EQ(file, args.inputFile());
 }
 
@@ -137,10 +137,10 @@ InPlaceSettersAllowChainingForRValue) {
 	auto file = std::make_shared<FileMock>();
 
 	auto args = AnalysisArguments()
-		.verbose(true)
+		.verbose("yes")
 		.inputFile(file);
 
-	ASSERT_TRUE(args.verbose());
+	ASSERT_EQ("yes", args.verbose());
 	ASSERT_EQ(file, args.inputFile());
 }
 
@@ -149,10 +149,10 @@ NotModifyingSettersAllowChaining) {
 	auto file = std::make_shared<FileMock>();
 
 	auto args = AnalysisArguments()
-		.verbose(true)
+		.verbose("yes")
 		.withInputFile(file);
 
-	ASSERT_TRUE(args.verbose());
+	ASSERT_EQ("yes", args.verbose());
 	ASSERT_EQ(file, args.inputFile());
 }
 
