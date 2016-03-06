@@ -81,7 +81,7 @@ HasVerboseReturnsFalseWhenVerboseIsNotSet) {
 	ASSERT_FALSE(args.hasVerbose());
 }
 
-// Files: input.
+// Input file.
 
 TEST_F(AnalysisArgumentsTests,
 InputFileSetsNewInputFileInPlace) {

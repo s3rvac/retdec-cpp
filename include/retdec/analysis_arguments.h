@@ -36,7 +36,7 @@ public:
 	bool verbose() const;
 	/// @}
 
-	/// @name Files: Input
+	/// @name Input File
 	/// @{
 	AnalysisArguments &inputFile(const std::shared_ptr<File> &file);
 	AnalysisArguments withInputFile(const std::shared_ptr<File> &file) const;
