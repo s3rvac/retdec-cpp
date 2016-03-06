@@ -14,6 +14,9 @@ namespace retdec {
 
 namespace {
 
+/// ID for the verbose argument.
+const std::string VerboseId = "verbose";
+
 /// ID for the input file.
 const std::string InputFileId = "input";
 
@@ -23,6 +26,43 @@ const std::string InputFileId = "input";
 /// Destructs the arguments.
 ///
 AnalysisArguments::~AnalysisArguments() = default;
+
+///
+/// Sets the verbose mode.
+///
+/// When @c verbose is @c true, the analysis produces all the supported
+/// information about the input file. Otherwise, the analysis produces only
+/// basic information (the default setting).
+///
+AnalysisArguments &AnalysisArguments::verbose(bool verbose) {
+	return argument(VerboseId, verbose ? "1" : "0");
+}
+
+///
+/// Returns a copy of the arguments with a verbose mode.
+///
+/// See the description of <tt>verbose(bool verbose)</tt> for more details.
+///
+AnalysisArguments AnalysisArguments::withVerbose(bool verbose) const {
+	return withArgument(VerboseId, verbose ? "1" : "0");
+}
+
+///
+/// Is the verbose argument set?
+///
+/// It returns @c true even when @c verbose is set to @c false. It only returns
+/// @c false when the verbose argument was not set.
+///
+bool AnalysisArguments::hasVerbose() const {
+	return hasArgument(VerboseId);
+}
+
+///
+/// Should the analysis be run in the verbose mode?
+///
+bool AnalysisArguments::verbose() const {
+	return getValue(arguments, VerboseId) == "1";
+}
 
 ///
 /// Sets the input file.

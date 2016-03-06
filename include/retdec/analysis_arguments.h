@@ -28,6 +28,14 @@ public:
 	~AnalysisArguments();
 	/// @}
 
+	/// @name Verbose
+	/// @{
+	AnalysisArguments &verbose(bool verbose);
+	AnalysisArguments withVerbose(bool verbose) const;
+	bool hasVerbose() const;
+	bool verbose() const;
+	/// @}
+
 	/// @name Files: Input
 	/// @{
 	AnalysisArguments &inputFile(const std::shared_ptr<File> &file);

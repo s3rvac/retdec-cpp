@@ -21,6 +21,66 @@ namespace tests {
 ///
 class AnalysisArgumentsTests: public Test {};
 
+// Verbose.
+
+TEST_F(AnalysisArgumentsTests,
+VerboseIsFalseByDefault) {
+	AnalysisArguments args;
+
+	ASSERT_FALSE(args.verbose());
+}
+
+TEST_F(AnalysisArgumentsTests,
+VerboseTrueSetsNewVerboseToTrueInPlace) {
+	AnalysisArguments args;
+
+	args.verbose(true);
+
+	ASSERT_TRUE(args.verbose());
+}
+
+TEST_F(AnalysisArgumentsTests,
+VerboseFalseSetsNewVerboseToFalseInPlace) {
+	AnalysisArguments args;
+
+	args.verbose(false);
+
+	ASSERT_FALSE(args.verbose());
+}
+
+TEST_F(AnalysisArgumentsTests,
+WithVerboseTrueReturnsNewArgumentsWithVerboseSetToTrue) {
+	AnalysisArguments args;
+
+	auto newArgs = args.withVerbose(true);
+
+	ASSERT_TRUE(newArgs.verbose());
+	ASSERT_FALSE(args.verbose());
+}
+
+TEST_F(AnalysisArgumentsTests,
+HasVerboseReturnsTrueWhenVerboseIsSetToTrue) {
+	auto args = AnalysisArguments()
+		.withVerbose(true);
+
+	ASSERT_TRUE(args.hasVerbose());
+}
+
+TEST_F(AnalysisArgumentsTests,
+HasVerboseReturnsTrueWhenVerboseIsSetToFalse) {
+	auto args = AnalysisArguments()
+		.withVerbose(false);
+
+	ASSERT_TRUE(args.hasVerbose());
+}
+
+TEST_F(AnalysisArgumentsTests,
+HasVerboseReturnsFalseWhenVerboseIsNotSet) {
+	AnalysisArguments args;
+
+	ASSERT_FALSE(args.hasVerbose());
+}
+
 // Files: input.
 
 TEST_F(AnalysisArgumentsTests,
