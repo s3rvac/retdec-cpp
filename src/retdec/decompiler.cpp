@@ -21,36 +21,6 @@
 using namespace retdec::internal;
 
 namespace retdec {
-
-namespace {
-
-///
-/// Constructs Connection::RequestArguments from the given decompilation
-/// arguments.
-///
-Connection::RequestArguments createRequestArguments(
-		const DecompilationArguments &args) {
-	Connection::RequestArguments requestArgs;
-	for (auto i = args.argumentsBegin(), e = args.argumentsEnd(); i != e; ++i) {
-		requestArgs.emplace_back(i->first, i->second);
-	}
-	return requestArgs;
-}
-
-///
-/// Constructs Connection::RequestFiles from the given decompilation arguments.
-///
-Connection::RequestFiles createRequestFiles(
-		const DecompilationArguments &args) {
-	Connection::RequestFiles requestFiles;
-	for (auto i = args.filesBegin(), e = args.filesEnd(); i != e; ++i) {
-		requestFiles.emplace(i->first, i->second);
-	}
-	return requestFiles;
-}
-
-} // anonymous namespace
-
 namespace internal {
 
 ///
@@ -111,8 +81,8 @@ std::unique_ptr<Decompilation> Decompiler::runDecompilation(
 	auto conn = impl()->connectionManager->newConnection(impl()->settings);
 	auto response = conn->sendPostRequest(
 		impl()->baseUrl + "/decompilations",
-		createRequestArguments(args),
-		createRequestFiles(args)
+		impl()->createRequestArguments(args),
+		impl()->createRequestFiles(args)
 	);
 	verifyRequestSucceeded(*response);
 	auto jsonBody = response->bodyAsJson();

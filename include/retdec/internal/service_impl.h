@@ -10,9 +10,13 @@
 
 #include <string>
 
+#include "retdec/internal/utilities/connection.h"
 #include "retdec/settings.h"
 
 namespace retdec {
+
+class ResourceArguments;
+
 namespace internal {
 
 class ConnectionManager;
@@ -26,6 +30,14 @@ public:
 		const std::shared_ptr<ConnectionManager> &connectionManager,
 		const std::string &serviceName);
 	virtual ~ServiceImpl();
+
+	/// @name Request Arguments Creation
+	/// @{
+	Connection::RequestArguments createRequestArguments(
+		const ResourceArguments &args) const;
+	Connection::RequestFiles createRequestFiles(
+		const ResourceArguments &args) const;
+	/// @}
 
 	/// Settings.
 	const Settings settings;

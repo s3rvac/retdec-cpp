@@ -7,7 +7,7 @@
 ///
 
 #include "retdec/internal/service_impl.h"
-#include "retdec/internal/utilities/connection.h"
+#include "retdec/resource_arguments.h"
 
 namespace retdec {
 namespace internal {
@@ -30,6 +30,31 @@ ServiceImpl::ServiceImpl(const Settings &settings,
 /// Destructs the private implementation.
 ///
 ServiceImpl::~ServiceImpl() = default;
+
+///
+/// Constructs Connection::RequestArguments from the given decompilation
+/// arguments.
+///
+Connection::RequestArguments ServiceImpl::createRequestArguments(
+		const ResourceArguments &args) const {
+	Connection::RequestArguments requestArgs;
+	for (auto i = args.argumentsBegin(), e = args.argumentsEnd(); i != e; ++i) {
+		requestArgs.emplace_back(i->first, i->second);
+	}
+	return requestArgs;
+}
+
+///
+/// Constructs Connection::RequestFiles from the given decompilation arguments.
+///
+Connection::RequestFiles ServiceImpl::createRequestFiles(
+		const ResourceArguments &args) const {
+	Connection::RequestFiles requestFiles;
+	for (auto i = args.filesBegin(), e = args.filesEnd(); i != e; ++i) {
+		requestFiles.emplace(i->first, i->second);
+	}
+	return requestFiles;
+}
 
 } // namespace internal
 } // namespace retdec
