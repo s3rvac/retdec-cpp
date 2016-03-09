@@ -5,14 +5,16 @@
 /// @brief     Implementation of the base class of all services.
 ///
 
+#include "retdec/internal/service_impl.h"
 #include "retdec/service.h"
 
 namespace retdec {
 
 ///
-/// Constructs the service.
+/// Constructs a service.
 ///
-Service::Service() = default;
+Service::Service(std::unique_ptr<internal::ServiceImpl> impl):
+	pimpl(std::move(impl)) {}
 
 ///
 /// Destructs the service.

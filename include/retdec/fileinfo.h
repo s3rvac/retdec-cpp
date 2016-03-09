@@ -21,6 +21,7 @@ class Settings;
 namespace internal {
 
 class ConnectionManager;
+class FileinfoImpl;
 
 } // namespace internal
 
@@ -45,9 +46,8 @@ public:
 	/// @}
 
 private:
-	struct Impl;
-	/// Private implementation.
-	std::unique_ptr<Impl> impl;
+	internal::FileinfoImpl *impl() noexcept;
+	const internal::FileinfoImpl *impl() const noexcept;
 };
 
 } // namespace retdec

@@ -14,6 +14,7 @@
 #include "retdec/decompiler.h"
 #include "retdec/internal/connection_managers/real_connection_manager.h"
 #include "retdec/internal/connections/real_connection.h"
+#include "retdec/internal/service_impl.h"
 #include "retdec/internal/utilities/connection.h"
 #include "retdec/settings.h"
 
@@ -50,30 +51,43 @@ Connection::RequestFiles createRequestFiles(
 
 } // anonymous namespace
 
+namespace internal {
+
 ///
 /// Private implementation of Decompiler.
 ///
-struct Decompiler::Impl {
-	Impl(const Settings &settings,
-		const std::shared_ptr<ConnectionManager> &connectionManager):
-			settings(settings), connectionManager(connectionManager),
-			baseUrl(settings.apiUrl() + "/decompiler") {}
-
-	/// Settings.
-	const Settings settings;
-
-	/// Connection manager.
-	const std::shared_ptr<ConnectionManager> connectionManager;
-
-	/// Base URL.
-	const std::string baseUrl;
+class DecompilerImpl: public ServiceImpl {
+public:
+	DecompilerImpl(const Settings &settings,
+		const std::shared_ptr<ConnectionManager> &connectionManager);
+	virtual ~DecompilerImpl() override;
 };
+
+///
+/// Constructs a private implementation.
+///
+/// @param[in] settings Settings for the service.
+/// @param[in] connectionManager Manager of connections.
+///
+DecompilerImpl::DecompilerImpl(const Settings &settings,
+		const std::shared_ptr<ConnectionManager> &connectionManager):
+	ServiceImpl(settings, connectionManager, "decompiler") {}
+
+// Override.
+DecompilerImpl::~DecompilerImpl() {}
+
+} // namespace internal
 
 ///
 /// Constructs a decompiler with the given settings.
 ///
 Decompiler::Decompiler(const Settings &settings):
-	impl(std::make_unique<Impl>(settings, std::make_shared<RealConnectionManager>())) {}
+	Service(
+		std::make_unique<DecompilerImpl>(
+			settings,
+			std::make_shared<RealConnectionManager>()
+		)
+	) {}
 
 ///
 /// Constructs a decompiler with the given settings and connection manager.
@@ -82,7 +96,7 @@ Decompiler::Decompiler(const Settings &settings,
 		// The qualification in ::ConnectionManager below has to be be used due
 		// to doxygen limitations.
 		const std::shared_ptr<::ConnectionManager> &connectionManager):
-	impl(std::make_unique<Impl>(settings, connectionManager)) {}
+	Service(std::make_unique<DecompilerImpl>(settings, connectionManager)) {}
 
 ///
 /// Destructs the decompiler.
@@ -94,9 +108,9 @@ Decompiler::~Decompiler() = default;
 ///
 std::unique_ptr<Decompilation> Decompiler::runDecompilation(
 		const DecompilationArguments &args) {
-	auto conn = impl->connectionManager->newConnection(impl->settings);
+	auto conn = impl()->connectionManager->newConnection(impl()->settings);
 	auto response = conn->sendPostRequest(
-		impl->baseUrl + "/decompilations",
+		impl()->baseUrl + "/decompilations",
 		createRequestArguments(args),
 		createRequestFiles(args)
 	);
@@ -104,6 +118,20 @@ std::unique_ptr<Decompilation> Decompiler::runDecompilation(
 	auto jsonBody = response->bodyAsJson();
 	auto id = jsonBody.get("id", "?").asString();
 	return std::make_unique<Decompilation>(id, conn);
+}
+
+///
+/// Returns a properly cast private implementation.
+///
+DecompilerImpl *Decompiler::impl() noexcept {
+	return static_cast<DecompilerImpl *>(pimpl.get());
+}
+
+///
+/// Constant overload of impl().
+///
+const DecompilerImpl *Decompiler::impl() const noexcept {
+	return static_cast<const DecompilerImpl *>(pimpl.get());
 }
 
 } // namespace retdec

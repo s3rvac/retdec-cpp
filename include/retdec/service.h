@@ -10,16 +10,21 @@
 
 namespace retdec {
 
+namespace internal {
+
+class ServiceImpl;
+
+} // namespace internal
+
 ///
 /// Base class of all services.
 ///
 class Service {
 public:
-	/// @name Construction and Destruction
-	/// @{
-	Service();
+	/// @cond internal
+	Service(std::unique_ptr<internal::ServiceImpl> impl);
+	/// @endcond
 	virtual ~Service() = 0;
-	/// @}
 
 	/// @name Disabled
 	/// @{
@@ -28,6 +33,10 @@ public:
 	Service &operator=(const Service &) = delete;
 	Service &operator=(Service &&) = delete;
 	/// @}
+
+protected:
+	/// Private implementation.
+	std::unique_ptr<internal::ServiceImpl> pimpl;
 };
 
 } // namespace retdec

@@ -20,6 +20,7 @@ class Settings;
 
 namespace internal {
 
+class DecompilerImpl;
 class ConnectionManager;
 
 } // namespace internal
@@ -46,9 +47,8 @@ public:
 	/// @}
 
 private:
-	struct Impl;
-	/// Private implementation.
-	std::unique_ptr<Impl> impl;
+	internal::DecompilerImpl *impl() noexcept;
+	const internal::DecompilerImpl *impl() const noexcept;
 };
 
 } // namespace retdec

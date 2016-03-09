@@ -14,6 +14,7 @@
 #include "retdec/fileinfo.h"
 #include "retdec/internal/connection_managers/real_connection_manager.h"
 #include "retdec/internal/connections/real_connection.h"
+#include "retdec/internal/service_impl.h"
 #include "retdec/internal/utilities/connection.h"
 #include "retdec/settings.h"
 
@@ -50,30 +51,43 @@ Connection::RequestFiles createRequestFiles(
 
 } // anonymous namespace
 
+namespace internal {
+
 ///
 /// Private implementation of Fileinfo.
 ///
-struct Fileinfo::Impl {
-	Impl(const Settings &settings,
-		const std::shared_ptr<ConnectionManager> &connectionManager):
-			settings(settings), connectionManager(connectionManager),
-			baseUrl(settings.apiUrl() + "/fileinfo") {}
-
-	/// Settings.
-	const Settings settings;
-
-	/// Connection manager.
-	const std::shared_ptr<ConnectionManager> connectionManager;
-
-	/// Base URL.
-	const std::string baseUrl;
+class FileinfoImpl: public ServiceImpl {
+public:
+	FileinfoImpl(const Settings &settings,
+		const std::shared_ptr<ConnectionManager> &connectionManager);
+	virtual ~FileinfoImpl() override;
 };
+
+///
+/// Constructs a private implementation.
+///
+/// @param[in] settings Settings for the service.
+/// @param[in] connectionManager Manager of connections.
+///
+FileinfoImpl::FileinfoImpl(const Settings &settings,
+		const std::shared_ptr<ConnectionManager> &connectionManager):
+	ServiceImpl(settings, connectionManager, "fileinfo") {}
+
+// Override.
+FileinfoImpl::~FileinfoImpl() {}
+
+} // namespace internal
 
 ///
 /// Constructs a fileinfo with the given settings.
 ///
 Fileinfo::Fileinfo(const Settings &settings):
-	impl(std::make_unique<Impl>(settings, std::make_shared<RealConnectionManager>())) {}
+	Service(
+		std::make_unique<FileinfoImpl>(
+			settings,
+			std::make_shared<RealConnectionManager>()
+		)
+	) {}
 
 ///
 /// Constructs a fileinfo with the given settings and connection manager.
@@ -82,7 +96,7 @@ Fileinfo::Fileinfo(const Settings &settings,
 		// The qualification in ::ConnectionManager below has to be be used due
 		// to doxygen limitations.
 		const std::shared_ptr<::ConnectionManager> &connectionManager):
-	impl(std::make_unique<Impl>(settings, connectionManager)) {}
+	Service(std::make_unique<FileinfoImpl>(settings, connectionManager)) {}
 
 ///
 /// Destructs the fileinfo.
@@ -93,9 +107,9 @@ Fileinfo::~Fileinfo() = default;
 /// Runs a new analysis with the given arguments.
 ///
 std::unique_ptr<Analysis> Fileinfo::runAnalysis(const AnalysisArguments &args) {
-	auto conn = impl->connectionManager->newConnection(impl->settings);
+	auto conn = impl()->connectionManager->newConnection(impl()->settings);
 	auto response = conn->sendPostRequest(
-		impl->baseUrl + "/analyses",
+		impl()->baseUrl + "/analyses",
 		createRequestArguments(args),
 		createRequestFiles(args)
 	);
@@ -103,6 +117,20 @@ std::unique_ptr<Analysis> Fileinfo::runAnalysis(const AnalysisArguments &args) {
 	auto jsonBody = response->bodyAsJson();
 	auto id = jsonBody.get("id", "?").asString();
 	return std::make_unique<Analysis>(id, conn);
+}
+
+///
+/// Returns a properly cast private implementation.
+///
+FileinfoImpl *Fileinfo::impl() noexcept {
+	return static_cast<FileinfoImpl *>(pimpl.get());
+}
+
+///
+/// Constant overload of impl().
+///
+const FileinfoImpl *Fileinfo::impl() const noexcept {
+	return static_cast<const FileinfoImpl *>(pimpl.get());
 }
 
 } // namespace retdec
