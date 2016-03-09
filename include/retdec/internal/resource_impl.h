@@ -54,9 +54,6 @@ public:
 	/// URL to obtain the status of the resource.
 	const Connection::Url statusUrl;
 
-	/// URL to obtain the outputs of the resource.
-	const Connection::Url outputsUrl;
-
 	/// Has the resource finished?
 	bool finished = false;
 

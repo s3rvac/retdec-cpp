@@ -35,7 +35,12 @@ namespace internal {
 ///
 class DecompilationImpl: public ResourceImpl {
 public:
-	using ResourceImpl::ResourceImpl;
+	DecompilationImpl(
+		const std::string &id,
+		const std::shared_ptr<Connection> &conn,
+		const std::string &serviceName,
+		const std::string &resourcesName
+	);
 	virtual ~DecompilationImpl() override;
 
 	/// @name Status Update
@@ -45,12 +50,32 @@ public:
 
 	void getAndStoreOutputHllFile();
 
+	/// URL to obtain the outputs of the resource.
+	const Connection::Url outputsUrl;
+
 	/// Completion (in percentages, 0-100).
 	int completion = 0;
 
 	/// Output HLL file.
 	std::shared_ptr<File> outputHllFile;
 };
+
+///
+/// Constructs a private implementation.
+///
+/// @param[in] id Identifier of the resource.
+/// @param[in] conn Connection to be used to communicate with the API.
+/// @param[in] serviceName Name of the service.
+/// @param[in] resourcesName Name of the resources (plural).
+///
+DecompilationImpl::DecompilationImpl(
+		const std::string &id,
+		const std::shared_ptr<Connection> &conn,
+		const std::string &serviceName,
+		const std::string &resourcesName
+	): ResourceImpl(id, conn, serviceName, resourcesName),
+	outputsUrl(baseUrl + "/outputs")
+	{}
 
 ///
 /// Destructs the private implementation.

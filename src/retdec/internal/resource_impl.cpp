@@ -29,8 +29,7 @@ ResourceImpl::ResourceImpl(
 	id(id),
 	conn(std::make_shared<ResponseVerifyingConnection>(conn)),
 	baseUrl(conn->getApiUrl() + "/" + serviceName + "/" + resourcesName + "/" + id),
-	statusUrl(baseUrl + "/status"),
-	outputsUrl(baseUrl + "/outputs")
+	statusUrl(baseUrl + "/status")
 	{}
 
 ///
