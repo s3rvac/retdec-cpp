@@ -46,12 +46,7 @@ FileinfoImpl::~FileinfoImpl() {}
 /// Constructs a fileinfo with the given settings.
 ///
 Fileinfo::Fileinfo(const Settings &settings):
-	Service(
-		std::make_unique<FileinfoImpl>(
-			settings,
-			std::make_shared<RealConnectionManager>()
-		)
-	) {}
+	Fileinfo(settings, std::make_shared<RealConnectionManager>()) {}
 
 ///
 /// Constructs a fileinfo with the given settings and connection manager.

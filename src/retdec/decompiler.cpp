@@ -46,12 +46,7 @@ DecompilerImpl::~DecompilerImpl() {}
 /// Constructs a decompiler with the given settings.
 ///
 Decompiler::Decompiler(const Settings &settings):
-	Service(
-		std::make_unique<DecompilerImpl>(
-			settings,
-			std::make_shared<RealConnectionManager>()
-		)
-	) {}
+	Decompiler(settings, std::make_shared<RealConnectionManager>()) {}
 
 ///
 /// Constructs a decompiler with the given settings and connection manager.
