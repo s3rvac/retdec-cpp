@@ -41,7 +41,7 @@ public:
 ///
 FileinfoImpl::FileinfoImpl(const Settings &settings,
 		const std::shared_ptr<ConnectionManager> &connectionManager):
-	ServiceImpl(settings, connectionManager, "fileinfo") {}
+	ServiceImpl(settings, connectionManager, "fileinfo", "analyses") {}
 
 // Override.
 FileinfoImpl::~FileinfoImpl() {}
@@ -79,7 +79,7 @@ Fileinfo::~Fileinfo() = default;
 std::unique_ptr<Analysis> Fileinfo::runAnalysis(const AnalysisArguments &args) {
 	auto conn = impl()->connectionManager->newConnection(impl()->settings);
 	auto response = conn->sendPostRequest(
-		impl()->baseUrl + "/analyses",
+		impl()->resourcesUrl,
 		impl()->createRequestArguments(args),
 		impl()->createRequestFiles(args)
 	);

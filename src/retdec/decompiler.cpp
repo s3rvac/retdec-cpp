@@ -41,7 +41,7 @@ public:
 ///
 DecompilerImpl::DecompilerImpl(const Settings &settings,
 		const std::shared_ptr<ConnectionManager> &connectionManager):
-	ServiceImpl(settings, connectionManager, "decompiler") {}
+	ServiceImpl(settings, connectionManager, "decompiler", "decompilations") {}
 
 // Override.
 DecompilerImpl::~DecompilerImpl() {}
@@ -80,7 +80,7 @@ std::unique_ptr<Decompilation> Decompiler::runDecompilation(
 		const DecompilationArguments &args) {
 	auto conn = impl()->connectionManager->newConnection(impl()->settings);
 	auto response = conn->sendPostRequest(
-		impl()->baseUrl + "/decompilations",
+		impl()->resourcesUrl,
 		impl()->createRequestArguments(args),
 		impl()->createRequestFiles(args)
 	);

@@ -28,7 +28,8 @@ class ServiceImpl {
 public:
 	ServiceImpl(const Settings &settings,
 		const std::shared_ptr<ConnectionManager> &connectionManager,
-		const std::string &serviceName);
+		const std::string &serviceName,
+		const std::string &resourcesName);
 	virtual ~ServiceImpl();
 
 	/// @name Request Arguments Creation
@@ -47,6 +48,9 @@ public:
 
 	/// Base URL.
 	const std::string baseUrl;
+
+	/// URL to resources.
+	const std::string resourcesUrl;
 };
 
 } // namespace internal

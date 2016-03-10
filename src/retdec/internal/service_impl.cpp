@@ -18,13 +18,16 @@ namespace internal {
 /// @param[in] settings Settings for the service.
 /// @param[in] connectionManager Manager of connections.
 /// @param[in] serviceName Name of the service.
+/// @param[in] resourcesName Name of the resources (plural).
 ///
 ServiceImpl::ServiceImpl(const Settings &settings,
 		const std::shared_ptr<ConnectionManager> &connectionManager,
-		const std::string &serviceName):
+		const std::string &serviceName,
+		const std::string &resourcesName):
 	settings(settings),
 	connectionManager(connectionManager),
-	baseUrl(settings.apiUrl() + "/" + serviceName) {}
+	baseUrl(settings.apiUrl() + "/" + serviceName),
+	resourcesUrl(baseUrl + "/" + resourcesName) {}
 
 ///
 /// Destructs the private implementation.
