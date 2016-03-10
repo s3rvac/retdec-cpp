@@ -107,7 +107,7 @@ decompilation->waitUntilFinished();
 @endcode
 It will return once the decompilation finishes. You can also pass a callback that will be called whenever a change in the decompilation status is detected:
 @code
-decompilation->waitUntilFinished([] (const Decompilation &d) {
+decompilation->waitUntilFinished([](const Decompilation &d) {
 	std::cout << "Currently completed: " << d.getCompletion() << "%\n";
 });
 @endcode

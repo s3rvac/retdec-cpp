@@ -24,7 +24,7 @@ namespace retdec {
 namespace {
 
 /// Callback doing nothing.
-const Decompilation::Callback CallbackDoingNothing = [] (const Decompilation &) {};
+const Decompilation::Callback CallbackDoingNothing = [](const Decompilation &) {};
 
 } // anonymous namespace
 
