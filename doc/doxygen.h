@@ -45,18 +45,32 @@ All the classes, functions, and constants the library provides are in the <code>
 
 For simplicity, in this API documentation, this namespace is omitted, e.g. it uses <code>Decompilation</code> instead of <code>retdec::Decompilation</code>.
 
-@section SectionCreatingDecompiler Creating a Decompiler
+@section SectionAvailableServices Available Services
 
-At the very beginning, you need to create settings for the library. They are represented by an instance of class <code>Settings</code>. You should provide your API key:
+The library currently provides basic support for the <a href="https://retdec.com/api/docs/fileinfo.html" title="File-analyzing service API">file-analyzing</a> and <a href="https://retdec.com/api/docs/decompiler.html" title="Decompilation service API">decompilation</a> services. For simplicity, in the rest of this page, we will solely focus on decompilations. The use of the file-analyzing service through <code>Fileinfo</code> is analogical.
+
+@section SectionCreatingSettings Creating Library Settings
+
+At the very beginning, you need to create settings for the library. They are represented by an instance of class <code>Settings</code>. You have to provide at least your API key:
 @code
 Settings settings;
 settings.apiKey("YOUR-SECRET-API-KEY");
 @endcode
+The class provides also a fluent interface, which allows you to chain the setting of multiple options:
+@code
+auto settings = Settings()
+	.apiKey("YOUR-SECRET-API-KEY")
+@endcode
+
+See the description of <code>Settings</code> for a list of all the available options.
+
+@section SectionCreatingDecompiler Creating a Decompiler
+
 To create a decompiler, instantiate class <code>Decompiler</code> and provide the settings constructed in the previous step:
 @code
 Decompiler decompiler(settings);
 @endcode
-It is also possible to build the settings inline by using its fluent interface:
+It is of course possible to build the settings inline:
 @code
 Decompiler decompiler(
 	Settings()
@@ -64,8 +78,6 @@ Decompiler decompiler(
 );
 @endcode
 This is handy if you want to use the settings only in a single place.
-
-See the description of <code>Settings</code> for all the available options.
 
 @section SectionStartingDecompilations Starting Decompilations
 
@@ -117,7 +129,7 @@ The copied file is given a proper name based on the name of the input file to th
 
 @section SectionErrorHandling Error Handling
 
-The library usually uses exceptions to report errors. The base class for all custom exceptions thrown by the library is <code>Error</code>, which itself inherits from <code>std::runtime_error</code>. If you simply want to catch all the custom exceptions thrown by the library, catch this base class:
+Errors are reported via exceptions. The base class for all custom exceptions thrown by the library is <code>Error</code>, which itself inherits from <code>std::runtime_error</code>. If you simply want to catch all the custom exceptions thrown by the library, catch this base class:
 @code
 try {
 	// Use the library.
@@ -133,11 +145,16 @@ Its subclasses include:
 			<li><code>ConnectionError</code> - Thrown when there is a connection error, e.g. the server providing the API is not available.</li>
 		</ul>
 	<li><code>ApiError</code> - Thrown when the API is used incorrectly, e.g. the supplied decompilation arguments are invalid.</li>
-	<li><code>DecompilationError</code> - Thrown when a decompilation fails.</li>
+	<li><code>ResourceError</code> - Thrown when a resource fails. Its subclasses are:</li>
+		<ul>
+			<li><code>AnalysisError</code> - Thrown when a file analysis fails.</li>
+			<li><code>DecompilationError</code> - Thrown when a decompilation fails.</li>
+		</ul>
+	</li>
 </ul>
 For a complete list, see the inheritance diagram for <code>Error</code>. Catch these subclasses if you want to handle different types of errors separately.
 
-%Decompilation errors are special. The waiting functions (e.g. <code>Decompilation::waitUntilFinished()</code>) take an optional parameter <code>onError</code> that specifies whether <code>DecompilationError</code> should be thrown when the decompilation fails. By default, they throw an exception.
+%Resource errors are special. The waiting functions (e.g. <code>Decompilation::waitUntilFinished()</code>) take an optional parameter <code>onError</code> that specifies whether e.g. <code>DecompilationError</code> should be thrown when a decompilation fails. By default, they throw an exception.
 
 @section SectionCompleteExample A Complete Example
 
