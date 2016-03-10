@@ -5,17 +5,11 @@
 /// @brief     Implementation of the fileinfo.
 ///
 
-#include <memory>
-
-#include <json/json.h>
-
 #include "retdec/analysis.h"
 #include "retdec/analysis_arguments.h"
 #include "retdec/fileinfo.h"
 #include "retdec/internal/connection_managers/real_connection_manager.h"
-#include "retdec/internal/connections/real_connection.h"
 #include "retdec/internal/service_impl.h"
-#include "retdec/internal/utilities/connection.h"
 #include "retdec/settings.h"
 
 using namespace retdec::internal;
@@ -77,16 +71,7 @@ Fileinfo::~Fileinfo() = default;
 /// Runs a new analysis with the given arguments.
 ///
 std::unique_ptr<Analysis> Fileinfo::runAnalysis(const AnalysisArguments &args) {
-	auto conn = impl()->connectionManager->newConnection(impl()->settings);
-	auto response = conn->sendPostRequest(
-		impl()->resourcesUrl,
-		impl()->createRequestArguments(args),
-		impl()->createRequestFiles(args)
-	);
-	verifyRequestSucceeded(*response);
-	auto jsonBody = response->bodyAsJson();
-	auto id = jsonBody.get("id", "?").asString();
-	return std::make_unique<Analysis>(id, conn);
+	return impl()->runResource<Analysis>(args);
 }
 
 ///

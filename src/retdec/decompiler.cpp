@@ -5,17 +5,11 @@
 /// @brief     Implementation of the decompiler.
 ///
 
-#include <memory>
-
-#include <json/json.h>
-
 #include "retdec/decompilation.h"
 #include "retdec/decompilation_arguments.h"
 #include "retdec/decompiler.h"
 #include "retdec/internal/connection_managers/real_connection_manager.h"
-#include "retdec/internal/connections/real_connection.h"
 #include "retdec/internal/service_impl.h"
-#include "retdec/internal/utilities/connection.h"
 #include "retdec/settings.h"
 
 using namespace retdec::internal;
@@ -78,16 +72,7 @@ Decompiler::~Decompiler() = default;
 ///
 std::unique_ptr<Decompilation> Decompiler::runDecompilation(
 		const DecompilationArguments &args) {
-	auto conn = impl()->connectionManager->newConnection(impl()->settings);
-	auto response = conn->sendPostRequest(
-		impl()->resourcesUrl,
-		impl()->createRequestArguments(args),
-		impl()->createRequestFiles(args)
-	);
-	verifyRequestSucceeded(*response);
-	auto jsonBody = response->bodyAsJson();
-	auto id = jsonBody.get("id", "?").asString();
-	return std::make_unique<Decompilation>(id, conn);
+	return impl()->runResource<Decompilation>(args);
 }
 
 ///

@@ -8,8 +8,12 @@
 #ifndef RETDEC_INTERNAL_SERVICE_IMPL_H
 #define RETDEC_INTERNAL_SERVICE_IMPL_H
 
+#include <memory>
 #include <string>
 
+#include <json/json.h>
+
+#include "retdec/internal/connection_manager.h"
 #include "retdec/internal/utilities/connection.h"
 #include "retdec/settings.h"
 
@@ -39,6 +43,23 @@ public:
 	Connection::RequestFiles createRequestFiles(
 		const ResourceArguments &args) const;
 	/// @}
+
+	///
+	/// Runs a new resource with the given arguments.
+	///
+	template <typename ResourceType>
+	std::unique_ptr<ResourceType> runResource(const ResourceArguments &args) {
+		auto conn = connectionManager->newConnection(settings);
+		auto response = conn->sendPostRequest(
+			resourcesUrl,
+			createRequestArguments(args),
+			createRequestFiles(args)
+		);
+		verifyRequestSucceeded(*response);
+		auto jsonBody = response->bodyAsJson();
+		auto id = jsonBody.get("id", "?").asString();
+		return std::make_unique<ResourceType>(id, conn);
+	}
 
 	/// Settings.
 	const Settings settings;
