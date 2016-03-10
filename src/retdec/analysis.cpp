@@ -61,9 +61,7 @@ AnalysisImpl::AnalysisImpl(
 	outputUrl(baseUrl + "/output")
 	{}
 
-///
-/// Destructs the private implementation.
-///
+// Override.
 AnalysisImpl::~AnalysisImpl() = default;
 
 ///
@@ -90,9 +88,7 @@ Analysis::Analysis(const std::string &id,
 		"analyses"
 	)) {}
 
-///
-/// Destructs the analysis.
-///
+// Override.
 Analysis::~Analysis() = default;
 
 ///

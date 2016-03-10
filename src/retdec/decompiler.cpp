@@ -57,9 +57,7 @@ Decompiler::Decompiler(const Settings &settings,
 		const std::shared_ptr<::ConnectionManager> &connectionManager):
 	Service(std::make_unique<DecompilerImpl>(settings, connectionManager)) {}
 
-///
-/// Destructs the decompiler.
-///
+// Override.
 Decompiler::~Decompiler() = default;
 
 ///

@@ -77,9 +77,7 @@ DecompilationImpl::DecompilationImpl(
 	outputsUrl(baseUrl + "/outputs")
 	{}
 
-///
-/// Destructs the private implementation.
-///
+// Override.
 DecompilationImpl::~DecompilationImpl() = default;
 
 // Override.
@@ -111,9 +109,7 @@ Decompilation::Decompilation(const std::string &id,
 		"decompilations"
 	)) {}
 
-///
-/// Destructs the decompilation.
-///
+// Override.
 Decompilation::~Decompilation() = default;
 
 ///

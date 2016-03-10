@@ -57,9 +57,7 @@ Fileinfo::Fileinfo(const Settings &settings,
 		const std::shared_ptr<::ConnectionManager> &connectionManager):
 	Service(std::make_unique<FileinfoImpl>(settings, connectionManager)) {}
 
-///
-/// Destructs the fileinfo.
-///
+// Override.
 Fileinfo::~Fileinfo() = default;
 
 ///
