@@ -32,8 +32,7 @@ ServiceImpl::ServiceImpl(const Settings &settings,
 ServiceImpl::~ServiceImpl() = default;
 
 ///
-/// Constructs Connection::RequestArguments from the given decompilation
-/// arguments.
+/// Constructs Connection::RequestArguments from the given resource arguments.
 ///
 Connection::RequestArguments ServiceImpl::createRequestArguments(
 		const ResourceArguments &args) const {
@@ -43,7 +42,7 @@ Connection::RequestArguments ServiceImpl::createRequestArguments(
 }
 
 ///
-/// Constructs Connection::RequestFiles from the given decompilation arguments.
+/// Constructs Connection::RequestFiles from the given resource arguments.
 ///
 Connection::RequestFiles ServiceImpl::createRequestFiles(
 		const ResourceArguments &args) const {
