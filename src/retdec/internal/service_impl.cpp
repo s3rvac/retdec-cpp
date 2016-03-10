@@ -37,11 +37,9 @@ ServiceImpl::~ServiceImpl() = default;
 ///
 Connection::RequestArguments ServiceImpl::createRequestArguments(
 		const ResourceArguments &args) const {
-	Connection::RequestArguments requestArgs;
-	for (auto i = args.argumentsBegin(), e = args.argumentsEnd(); i != e; ++i) {
-		requestArgs.emplace_back(i->first, i->second);
-	}
-	return requestArgs;
+	return Connection::RequestArguments(
+		args.argumentsBegin(), args.argumentsEnd()
+	);
 }
 
 ///
@@ -49,11 +47,9 @@ Connection::RequestArguments ServiceImpl::createRequestArguments(
 ///
 Connection::RequestFiles ServiceImpl::createRequestFiles(
 		const ResourceArguments &args) const {
-	Connection::RequestFiles requestFiles;
-	for (auto i = args.filesBegin(), e = args.filesEnd(); i != e; ++i) {
-		requestFiles.emplace(i->first, i->second);
-	}
-	return requestFiles;
+	return Connection::RequestFiles(
+		args.filesBegin(), args.filesEnd()
+	);
 }
 
 } // namespace internal
