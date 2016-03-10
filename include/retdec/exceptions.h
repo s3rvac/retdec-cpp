@@ -69,19 +69,27 @@ private:
 };
 
 ///
-/// Exception thrown when a decompilation fails.
+/// Base class of resource exceptions.
 ///
-class DecompilationError: public Error {
+class ResourceError: public Error {
 public:
 	using Error::Error;
 };
 
 ///
+/// Exception thrown when a decompilation fails.
+///
+class DecompilationError: public ResourceError {
+public:
+	using ResourceError::ResourceError;
+};
+
+///
 /// Exception thrown when an analysis fails.
 ///
-class AnalysisError: public Error {
+class AnalysisError: public ResourceError {
 public:
-	using Error::Error;
+	using ResourceError::ResourceError;
 };
 
 } // namespace retdec
