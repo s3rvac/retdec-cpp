@@ -29,6 +29,35 @@ const std::string SelDecompDecodingId = "sel_decomp_decoding";
 } // anonymous namespace
 
 ///
+/// Constructs default arguments.
+///
+DecompilationArguments::DecompilationArguments() = default;
+
+///
+/// Copy-constructs arguments from the given arguments.
+///
+DecompilationArguments::DecompilationArguments(
+	const DecompilationArguments &) = default;
+
+///
+/// Move-constructs arguments from the given arguments.
+///
+DecompilationArguments::DecompilationArguments(
+	DecompilationArguments &&) = default;
+
+///
+/// Copy-assigns the given arguments.
+///
+DecompilationArguments &DecompilationArguments::operator=(
+	const DecompilationArguments &) = default;
+
+///
+/// Move-assigns the given arguments.
+///
+DecompilationArguments &DecompilationArguments::operator=(
+	DecompilationArguments &&) = default;
+
+///
 /// Destructs the arguments.
 ///
 DecompilationArguments::~DecompilationArguments() = default;

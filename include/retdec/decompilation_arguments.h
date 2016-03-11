@@ -23,8 +23,11 @@ class DecompilationArguments: public ResourceArguments {
 public:
 	/// @name Construction, Assignment, and Destruction
 	/// @{
-	using ResourceArguments::ResourceArguments;
-	using ResourceArguments::operator=;
+	DecompilationArguments();
+	DecompilationArguments(const DecompilationArguments &other);
+	DecompilationArguments(DecompilationArguments &&other);
+	DecompilationArguments &operator=(const DecompilationArguments &other);
+	DecompilationArguments &operator=(DecompilationArguments &&other);
 	~DecompilationArguments();
 	/// @}
 

@@ -23,6 +23,35 @@ const std::string InputFileId = "input";
 } // anonymous namespace
 
 ///
+/// Constructs default arguments.
+///
+AnalysisArguments::AnalysisArguments() = default;
+
+///
+/// Copy-constructs arguments from the given arguments.
+///
+AnalysisArguments::AnalysisArguments(
+	const AnalysisArguments &) = default;
+
+///
+/// Move-constructs arguments from the given arguments.
+///
+AnalysisArguments::AnalysisArguments(
+	AnalysisArguments &&) = default;
+
+///
+/// Copy-assigns the given arguments.
+///
+AnalysisArguments &AnalysisArguments::operator=(
+	const AnalysisArguments &) = default;
+
+///
+/// Move-assigns the given arguments.
+///
+AnalysisArguments &AnalysisArguments::operator=(
+	AnalysisArguments &&) = default;
+
+///
 /// Destructs the arguments.
 ///
 AnalysisArguments::~AnalysisArguments() = default;

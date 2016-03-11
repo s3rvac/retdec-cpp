@@ -23,8 +23,11 @@ class AnalysisArguments: public ResourceArguments {
 public:
 	/// @name Construction, Assignment, and Destruction
 	/// @{
-	using ResourceArguments::ResourceArguments;
-	using ResourceArguments::operator=;
+	AnalysisArguments();
+	AnalysisArguments(const AnalysisArguments &other);
+	AnalysisArguments(AnalysisArguments &&other);
+	AnalysisArguments &operator=(const AnalysisArguments &other);
+	AnalysisArguments &operator=(AnalysisArguments &&other);
 	~AnalysisArguments();
 	/// @}
 
