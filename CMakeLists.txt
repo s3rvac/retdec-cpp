@@ -62,6 +62,10 @@ find_package(Threads REQUIRED)
 # Boost
 find_package(Boost 1.55 COMPONENTS "filesystem" "system" "thread" REQUIRED)
 include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
+# A workaround to link error "undefined reference to
+# `boost::filesystem::detail::copy_file()" when using Boost < 1.57
+# (https://www.robertnitsch.de/notes/cpp/cpp11_boost_filesystem_undefined_reference_copy_file).
+add_definitions(-DBOOST_NO_CXX11_SCOPED_ENUMS)
 
 # OpenSSL
 find_package(OpenSSL REQUIRED)
