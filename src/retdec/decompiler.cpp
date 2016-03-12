@@ -53,7 +53,7 @@ Decompiler::Decompiler(const Settings &settings):
 ///
 Decompiler::Decompiler(const Settings &settings,
 		// The qualification in ::ConnectionManager below has to be be used due
-		// to doxygen limitations.
+		// to Doxygen limitations.
 		const std::shared_ptr<::ConnectionManager> &connectionManager):
 	Service(std::make_unique<DecompilerImpl>(settings, connectionManager)) {}
 
