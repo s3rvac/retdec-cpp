@@ -5,13 +5,6 @@ A C++ library and tools providing easy access to the
 [retdec.com](https://retdec.com) decompilation service through their public
 [REST API](https://retdec.com/api/).
 
-Status
-------
-
-The library currently provides basic support of the
-[decompilation](https://retdec.com/api/docs/decompiler.html) and
-[file-analyzing](https://retdec.com/api/docs/fileinfo.html) services.
-
 Usage Example
 -------------
 
@@ -49,6 +42,13 @@ int main(int argc, char **argv) {
     }
 }
 ```
+
+Status
+------
+
+The library currently provides basic support of the
+[decompilation](https://retdec.com/api/docs/decompiler.html) and
+[file-analyzing](https://retdec.com/api/docs/fileinfo.html) services.
 
 Requirements
 ------------
