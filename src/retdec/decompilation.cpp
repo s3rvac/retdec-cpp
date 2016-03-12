@@ -99,9 +99,7 @@ void DecompilationImpl::getAndStoreOutputHllFile() {
 /// Constructs a decompilation.
 ///
 Decompilation::Decompilation(const std::string &id,
-		// The qualification in ::Connection below has to be be used due to
-		// doxygen limitations.
-		const std::shared_ptr<::Connection> &conn):
+		const std::shared_ptr<Connection> &conn):
 	Resource(std::make_unique<DecompilationImpl>(
 		id,
 		conn,

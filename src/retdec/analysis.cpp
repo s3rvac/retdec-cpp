@@ -77,10 +77,7 @@ void AnalysisImpl::getAndStoreOutputAsFile() {
 ///
 /// Constructs an analysis.
 ///
-Analysis::Analysis(const std::string &id,
-		// The qualification in ::Connection below has to be be used due to
-		// doxygen limitations.
-		const std::shared_ptr<::Connection> &conn):
+Analysis::Analysis(const std::string &id,const std::shared_ptr<Connection> &conn):
 	Resource(std::make_unique<AnalysisImpl>(
 		id,
 		conn,
