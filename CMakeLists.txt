@@ -109,6 +109,7 @@ if(NOT JsonCpp_FOUND)
 		URL https://github.com/open-source-parsers/jsoncpp/archive/1.6.5.zip
 		CMAKE_ARGS
 			-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+			-DJSONCPP_WITH_TESTS:BOOL=OFF
 		# Disable the install step.
 		INSTALL_COMMAND ""
 		# Wrap the download, configure and build steps in a script to log the
