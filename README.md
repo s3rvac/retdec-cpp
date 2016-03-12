@@ -56,7 +56,7 @@ Requirements
 To build the library and tools, you need:
 * A compiler supporting C++14. Supported compilers are:
   * [GCC](https://gcc.gnu.org/) (version >= 4.9)
-  * [Clang](http://clang.llvm.org/) (version >= 3.4)
+  * [Clang](http://clang.llvm.org/) (version >= 3.5)
   * [MS Visual Studio](https://www.visualstudio.com/) (version 2015)
 * [CMake](https://cmake.org/) (version >= 2.8)
 * [Boost](http://www.boost.org/) (version >= 1.55)
