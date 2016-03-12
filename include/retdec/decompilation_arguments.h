@@ -12,28 +12,14 @@
 #include <memory>
 #include <string>
 
-namespace retdec {
+#include "retdec/resource_arguments.h"
 
-class File;
+namespace retdec {
 
 ///
 /// Arguments for decompilations.
 ///
-class DecompilationArguments {
-private:
-	/// Container to store arguments.
-	using Arguments = std::map<std::string, std::string>;
-
-	/// Container to store files.
-	using Files = std::map<std::string, std::shared_ptr<File>>;
-
-public:
-	/// Iterator for arguments.
-	using ArgumentIterator = Arguments::const_iterator;
-
-	/// Iterator for files.
-	using FileIterator = Files::const_iterator;
-
+class DecompilationArguments: public ResourceArguments {
 public:
 	/// @name Construction, Assignment, and Destruction
 	/// @{
@@ -79,34 +65,21 @@ public:
 
 	/// @name Generic Access To Arguments
 	/// @{
+	using ResourceArguments::argument;
 	DecompilationArguments &argument(const std::string &id,
 		const std::string &value);
 	DecompilationArguments withArgument(const std::string &id,
 		const std::string &value) const;
-	bool hasArgument(const std::string &id) const;
-	std::string argument(const std::string &id) const;
-	ArgumentIterator argumentsBegin() const;
-	ArgumentIterator argumentsEnd() const;
 	/// @}
 
 	/// @name Generic Access To Files
 	/// @{
+	using ResourceArguments::file;
 	DecompilationArguments &file(const std::string &id,
 		const std::shared_ptr<File> &file);
 	DecompilationArguments withFile(const std::string &id,
 		const std::shared_ptr<File> &file) const;
-	bool hasFile(const std::string &id) const;
-	std::shared_ptr<File> file(const std::string &id) const;
-	FileIterator filesBegin() const;
-	FileIterator filesEnd() const;
 	/// @}
-
-private:
-	/// Arguments.
-	Arguments arguments;
-
-	/// Files.
-	Files files;
 };
 
 } // namespace retdec

@@ -7,21 +7,29 @@
 ##
 
 set(RETDEC_SOURCES
+	analysis.cpp
+	analysis_arguments.cpp
 	decompilation.cpp
 	decompilation_arguments.cpp
 	decompiler.cpp
 	exceptions.cpp
 	file.cpp
+	fileinfo.cpp
 	internal/connection.cpp
 	internal/connection_manager.cpp
 	internal/connection_managers/real_connection_manager.cpp
 	internal/connections/real_connection.cpp
 	internal/files/filesystem_file.cpp
 	internal/files/string_file.cpp
+	internal/resource_impl.cpp
+	internal/service_impl.cpp
 	internal/utilities/connection.cpp
 	internal/utilities/json.cpp
 	internal/utilities/os.cpp
 	internal/utilities/string.cpp
+	resource.cpp
+	resource_arguments.cpp
+	service.cpp
 	settings.cpp
 )
 

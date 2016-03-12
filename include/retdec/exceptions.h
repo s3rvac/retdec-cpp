@@ -14,11 +14,11 @@
 namespace retdec {
 
 ///
-/// Base class for custom exceptions thrown by the library.
+/// Base class of custom exceptions thrown by the library.
 ///
 class Error: public std::runtime_error {
 public:
-	Error(const std::string &what);
+	using std::runtime_error::runtime_error;
 };
 
 ///
@@ -26,7 +26,7 @@ public:
 ///
 class IoError: public Error {
 public:
-	IoError(const std::string &what);
+	using Error::Error;
 };
 
 ///
@@ -34,7 +34,7 @@ public:
 ///
 class FilesystemError: public IoError {
 public:
-	FilesystemError(const std::string &what);
+	using IoError::IoError;
 };
 
 ///
@@ -42,7 +42,7 @@ public:
 ///
 class ConnectionError: public IoError {
 public:
-	ConnectionError(const std::string &what);
+	using IoError::IoError;
 };
 
 ///
@@ -69,11 +69,27 @@ private:
 };
 
 ///
+/// Base class of resource exceptions.
+///
+class ResourceError: public Error {
+public:
+	using Error::Error;
+};
+
+///
 /// Exception thrown when a decompilation fails.
 ///
-class DecompilationError: public Error {
+class DecompilationError: public ResourceError {
 public:
-	DecompilationError(const std::string &what);
+	using ResourceError::ResourceError;
+};
+
+///
+/// Exception thrown when an analysis fails.
+///
+class AnalysisError: public ResourceError {
+public:
+	using ResourceError::ResourceError;
 };
 
 } // namespace retdec

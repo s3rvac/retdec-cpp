@@ -10,6 +10,8 @@
 
 #include <memory>
 
+#include "retdec/service.h"
+
 namespace retdec {
 
 class Decompilation;
@@ -18,6 +20,7 @@ class Settings;
 
 namespace internal {
 
+class DecompilerImpl;
 class ConnectionManager;
 
 } // namespace internal
@@ -25,7 +28,7 @@ class ConnectionManager;
 ///
 /// Runner of decompilations.
 ///
-class Decompiler {
+class Decompiler: public Service {
 public:
 	/// @name Construction and Destruction
 	/// @{
@@ -34,7 +37,7 @@ public:
 	Decompiler(const Settings &settings,
 		const std::shared_ptr<::retdec::internal::ConnectionManager> &connectionManager);
 	/// @endcond
-	~Decompiler();
+	virtual ~Decompiler() override;
 	/// @}
 
 	/// @name Decompilations
@@ -43,18 +46,9 @@ public:
 		const DecompilationArguments &args);
 	/// @}
 
-	/// @name Disabled
-	/// @{
-	Decompiler(const Decompiler &) = delete;
-	Decompiler(Decompiler &&) = delete;
-	Decompiler &operator=(const Decompiler &) = delete;
-	Decompiler &operator=(Decompiler &&) = delete;
-	/// @}
-
 private:
-	struct Impl;
-	/// Private implementation.
-	std::unique_ptr<Impl> impl;
+	internal::DecompilerImpl *impl() noexcept;
+	const internal::DecompilerImpl *impl() const noexcept;
 };
 
 } // namespace retdec

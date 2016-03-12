@@ -11,11 +11,14 @@
 #ifndef RETDEC_RETDEC_H
 #define RETDEC_RETDEC_H
 
+#include "retdec/analysis.h"
+#include "retdec/analysis_arguments.h"
 #include "retdec/decompilation.h"
 #include "retdec/decompilation_arguments.h"
 #include "retdec/decompiler.h"
 #include "retdec/exceptions.h"
 #include "retdec/file.h"
+#include "retdec/fileinfo.h"
 #include "retdec/settings.h"
 
 #endif

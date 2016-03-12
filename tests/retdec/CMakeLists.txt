@@ -7,11 +7,14 @@
 ##
 
 set(RETDEC_TESTS_SOURCES
+	analysis_arguments_tests.cpp
+	analysis_tests.cpp
 	decompilation_arguments_tests.cpp
 	decompilation_tests.cpp
 	decompiler_tests.cpp
 	exceptions_tests.cpp
 	file_tests.cpp
+	fileinfo_tests.cpp
 	internal/connection_manager_tests.cpp
 	internal/connection_managers/real_connection_manager_tests.cpp
 	internal/connection_tests.cpp
@@ -19,10 +22,12 @@ set(RETDEC_TESTS_SOURCES
 	internal/files/filesystem_file_tests.cpp
 	internal/files/string_file_tests.cpp
 	internal/utilities/connection_tests.cpp
+	internal/utilities/container_tests.cpp
 	internal/utilities/json_tests.cpp
 	internal/utilities/os_tests.cpp
 	internal/utilities/smart_ptr_tests.cpp
 	internal/utilities/string_tests.cpp
+	resource_arguments_tests.cpp
 	settings_tests.cpp
 	test_utilities/tmp_file.cpp
 )

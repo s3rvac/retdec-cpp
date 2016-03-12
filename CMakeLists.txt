@@ -62,6 +62,10 @@ find_package(Threads REQUIRED)
 # Boost
 find_package(Boost 1.55 COMPONENTS "filesystem" "system" "thread" REQUIRED)
 include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
+# A workaround to link error "undefined reference to
+# `boost::filesystem::detail::copy_file()" when using Boost < 1.57
+# (https://www.robertnitsch.de/notes/cpp/cpp11_boost_filesystem_undefined_reference_copy_file).
+add_definitions(-DBOOST_NO_CXX11_SCOPED_ENUMS)
 
 # OpenSSL
 find_package(OpenSSL REQUIRED)
@@ -105,6 +109,7 @@ if(NOT JsonCpp_FOUND)
 		URL https://github.com/open-source-parsers/jsoncpp/archive/1.6.5.zip
 		CMAKE_ARGS
 			-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+			-DJSONCPP_WITH_TESTS:BOOL=OFF
 		# Disable the install step.
 		INSTALL_COMMAND ""
 		# Wrap the download, configure and build steps in a script to log the
@@ -116,7 +121,7 @@ if(NOT JsonCpp_FOUND)
 	ExternalProject_Get_Property(json-cpp source_dir)
 	ExternalProject_Get_Property(json-cpp binary_dir)
 	set(JsonCpp_INCLUDE_DIR "${source_dir}/include")
-	set(JsonCpp_LIBRARY_DIR "${binary_dir}/lib")
+	set(JsonCpp_LIBRARY_DIR "${binary_dir}/src/json_lib")
 	set(JsonCpp_LIBRARY "jsoncpp")
 	link_directories(${JsonCpp_LIBRARY_DIR})
 endif()

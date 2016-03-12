@@ -12,30 +12,6 @@ namespace retdec {
 ///
 /// Creates an exception.
 ///
-Error::Error(const std::string &what):
-	std::runtime_error(what) {}
-
-///
-/// Creates an exception.
-///
-IoError::IoError(const std::string &what):
-	Error(what) {}
-
-///
-/// Creates an exception.
-///
-FilesystemError::FilesystemError(const std::string &what):
-	IoError(what) {}
-
-///
-/// Creates an exception.
-///
-ConnectionError::ConnectionError(const std::string &what):
-	IoError(what) {}
-
-///
-/// Creates an exception.
-///
 /// @param[in] code Error code.
 /// @param[in] message Short message describing the error.
 /// @param[in] description Full description of the error.
@@ -69,11 +45,5 @@ std::string ApiError::getMessage() const {
 std::string ApiError::getDescription() const {
 	return !description.empty() ? description : what();
 }
-
-///
-/// Creates an exception.
-///
-DecompilationError::DecompilationError(const std::string &what):
-	Error(what) {}
 
 } // namespace retdec

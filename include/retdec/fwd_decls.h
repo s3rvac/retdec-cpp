@@ -14,10 +14,22 @@
 
 namespace retdec {
 
+class Analysis;
+class AnalysisArguments;
+class AnalysisError;
+class ApiError;
 class Decompilation;
 class DecompilationArguments;
+class DecompilationError;
 class Decompiler;
+class Error;
 class File;
+class Fileinfo;
+class FilesystemError;
+class IoError;
+class Resource;
+class ResourceArguments;
+class Service;
 class Settings;
 
 } // namespace retdec

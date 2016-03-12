@@ -5,11 +5,6 @@ A C++ library and tools providing easy access to the
 [retdec.com](https://retdec.com) decompilation service through their public
 [REST API](https://retdec.com/api/).
 
-Development Status
-------------------
-
-The library is in an **early stage of development.**
-
 Usage Example
 -------------
 
@@ -48,13 +43,20 @@ int main(int argc, char **argv) {
 }
 ```
 
+Status
+------
+
+The library currently provides basic support of the
+[decompilation](https://retdec.com/api/docs/decompiler.html) and
+[file-analyzing](https://retdec.com/api/docs/fileinfo.html) services.
+
 Requirements
 ------------
 
 To build the library and tools, you need:
 * A compiler supporting C++14. Supported compilers are:
   * [GCC](https://gcc.gnu.org/) (version >= 4.9)
-  * [Clang](http://clang.llvm.org/) (version >= 3.4)
+  * [Clang](http://clang.llvm.org/) (version >= 3.5)
   * [MS Visual Studio](https://www.visualstudio.com/) (version 2015)
 * [CMake](https://cmake.org/) (version >= 2.8)
 * [Boost](http://www.boost.org/) (version >= 1.55)
