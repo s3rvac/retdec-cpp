@@ -14,7 +14,7 @@
 namespace retdec {
 
 ///
-/// Base class for custom exceptions thrown by the library.
+/// Base class of custom exceptions thrown by the library.
 ///
 class Error: public std::runtime_error {
 public:

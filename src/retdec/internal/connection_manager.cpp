@@ -2,8 +2,7 @@
 /// @file      retdec/internal/connection_manager.cpp
 /// @copyright (c) 2015-2016 by Petr Zemek (s3rvac@gmail.com) and contributors
 /// @license   MIT, see the @c LICENSE file for more details
-/// @brief     Implementation of the base class for managers of connections to
-///            the API.
+/// @brief     Implementation of the base class of connection managers.
 ///
 
 #include "retdec/internal/connection_manager.h"

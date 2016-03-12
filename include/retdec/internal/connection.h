@@ -2,7 +2,7 @@
 /// @file      retdec/internal/connection.h
 /// @copyright (c) 2015-2016 by Petr Zemek (s3rvac@gmail.com) and contributors
 /// @license   MIT, see the @c LICENSE file for more details
-/// @brief     Base class for connections to the API.
+/// @brief     Base class of connections to the API.
 ///
 
 #ifndef RETDEC_INTERNAL_CONNECTION_H
@@ -27,12 +27,12 @@ class File;
 namespace internal {
 
 ///
-/// Base class for connections to the API.
+/// Base class of connections to the API.
 ///
 class Connection {
 public:
 	///
-	/// Base class for responses returned from requests.
+	/// Base class of responses returned from requests.
 	///
 	class Response {
 	public:

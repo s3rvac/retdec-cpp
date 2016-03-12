@@ -2,7 +2,7 @@
 /// @file      retdec/internal/resource_impl.h
 /// @copyright (c) 2015-2016 by Petr Zemek (s3rvac@gmail.com) and contributors
 /// @license   MIT, see the @c LICENSE file for more details
-/// @brief     Base class for private implementation of resources.
+/// @brief     Base class of private implementation of resources.
 ///
 
 #ifndef RETDEC_INTERNAL_RESOURCE_IMPL_H
@@ -21,7 +21,7 @@ namespace internal {
 class ResponseVerifyingConnection;
 
 ///
-/// Base class for private implementation of resources.
+/// Base class of private implementation of resources.
 ///
 class ResourceImpl {
 public:

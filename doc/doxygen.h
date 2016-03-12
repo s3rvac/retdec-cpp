@@ -129,7 +129,7 @@ The copied file is given a proper name based on the name of the input file to th
 
 @section SectionErrorHandling Error Handling
 
-Errors are reported via exceptions. The base class for all custom exceptions thrown by the library is <code>Error</code>, which itself inherits from <code>std::runtime_error</code>. If you simply want to catch all the custom exceptions thrown by the library, catch this base class:
+Errors are reported via exceptions. The base class of all custom exceptions thrown by the library is <code>Error</code>, which itself inherits from <code>std::runtime_error</code>. If you simply want to catch all the custom exceptions thrown by the library, catch this base class:
 @code
 try {
 	// Use the library.

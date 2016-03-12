@@ -2,8 +2,7 @@
 /// @file      retdec/internal/connection_manager_tests.cpp
 /// @copyright (c) 2015-2016 by Petr Zemek (s3rvac@gmail.com) and contributors
 /// @license   MIT, see the @c LICENSE file for more details
-/// @brief     Tests for the base class for managers of the connections to the
-///            API.
+/// @brief     Tests for the base class of connection managers.
 ///
 
 #include <gtest/gtest.h>
