@@ -5,6 +5,8 @@
 /// @brief     Implementation of the testing service.
 ///
 
+#include <string>
+
 #include "retdec/internal/connection_managers/real_connection_manager.h"
 #include "retdec/internal/service_impl.h"
 #include "retdec/settings.h"
