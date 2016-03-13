@@ -2,7 +2,7 @@
 /// @file      retdec/fileinfo_tests.cpp
 /// @copyright (c) 2015-2016 by Petr Zemek (s3rvac@gmail.com) and contributors
 /// @license   MIT, see the @c LICENSE file for more details
-/// @brief     Tests for the fileinfo.
+/// @brief     Tests for the fileinfo service.
 ///
 
 #include <gtest/gtest.h>
