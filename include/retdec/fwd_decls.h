@@ -18,6 +18,7 @@ class Analysis;
 class AnalysisArguments;
 class AnalysisError;
 class ApiError;
+class AuthError;
 class Decompilation;
 class DecompilationArguments;
 class DecompilationError;

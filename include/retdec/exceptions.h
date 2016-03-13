@@ -69,6 +69,14 @@ private:
 };
 
 ///
+/// Exception thrown when there is an authentication or authorization error.
+///
+class AuthError: public ApiError {
+public:
+	using ApiError::ApiError;
+};
+
+///
 /// Base class of resource exceptions.
 ///
 class ResourceError: public Error {
