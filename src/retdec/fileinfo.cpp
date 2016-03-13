@@ -38,7 +38,7 @@ FileinfoImpl::FileinfoImpl(const Settings &settings,
 	ServiceImpl(settings, connectionManager, "fileinfo", "analyses") {}
 
 // Override.
-FileinfoImpl::~FileinfoImpl() {}
+FileinfoImpl::~FileinfoImpl() = default;
 
 } // namespace internal
 

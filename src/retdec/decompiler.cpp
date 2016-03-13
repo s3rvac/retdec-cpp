@@ -38,7 +38,7 @@ DecompilerImpl::DecompilerImpl(const Settings &settings,
 	ServiceImpl(settings, connectionManager, "decompiler", "decompilations") {}
 
 // Override.
-DecompilerImpl::~DecompilerImpl() {}
+DecompilerImpl::~DecompilerImpl() = default;
 
 } // namespace internal
 

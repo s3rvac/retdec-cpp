@@ -38,7 +38,7 @@ TestImpl::TestImpl(const Settings &settings,
 	ServiceImpl(settings, connectionManager, "test", "echo") {}
 
 // Override.
-TestImpl::~TestImpl() {}
+TestImpl::~TestImpl() = default;
 
 } // namespace internal
 
