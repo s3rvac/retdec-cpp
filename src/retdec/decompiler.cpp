@@ -9,7 +9,7 @@
 #include "retdec/decompilation_arguments.h"
 #include "retdec/decompiler.h"
 #include "retdec/internal/connection_managers/real_connection_manager.h"
-#include "retdec/internal/service_impl.h"
+#include "retdec/internal/service_with_resources_impl.h"
 #include "retdec/settings.h"
 
 using namespace retdec::internal;
@@ -20,7 +20,7 @@ namespace internal {
 ///
 /// Private implementation of Decompiler.
 ///
-class DecompilerImpl: public ServiceImpl {
+class DecompilerImpl: public ServiceWithResourcesImpl {
 public:
 	DecompilerImpl(const Settings &settings,
 		const std::shared_ptr<ConnectionManager> &connectionManager);
@@ -35,7 +35,12 @@ public:
 ///
 DecompilerImpl::DecompilerImpl(const Settings &settings,
 		const std::shared_ptr<ConnectionManager> &connectionManager):
-	ServiceImpl(settings, connectionManager, "decompiler", "decompilations") {}
+	ServiceWithResourcesImpl(
+		settings,
+		connectionManager,
+		"decompiler",
+		"decompilations"
+	) {}
 
 // Override.
 DecompilerImpl::~DecompilerImpl() = default;

@@ -25,6 +25,9 @@ public:
 	TestImpl(const Settings &settings,
 		const std::shared_ptr<ConnectionManager> &connectionManager);
 	virtual ~TestImpl() override;
+
+	/// URL to the @c echo sub-service.
+	const std::string echoUrl;
 };
 
 ///
@@ -35,7 +38,8 @@ public:
 ///
 TestImpl::TestImpl(const Settings &settings,
 		const std::shared_ptr<ConnectionManager> &connectionManager):
-	ServiceImpl(settings, connectionManager, "test", "echo") {}
+	ServiceImpl(settings, connectionManager, "test"),
+	echoUrl(baseUrl + "/" + "echo") {}
 
 // Override.
 TestImpl::~TestImpl() = default;
@@ -71,7 +75,7 @@ void Test::auth() {
 	auto conn = impl()->connectionManager->newConnection(impl()->settings);
 	// We do not need any parameters; simply send a GET request to /test/echo,
 	// and if the authentication fails, ApiError will be automatically thrown.
-	auto response = conn->sendGetRequest(impl()->resourcesUrl);
+	auto response = conn->sendGetRequest(impl()->echoUrl);
 	verifyRequestSucceeded(*response);
 }
 
