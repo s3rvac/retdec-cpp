@@ -31,6 +31,7 @@ set(RETDEC_SOURCES
 	resource_arguments.cpp
 	service.cpp
 	settings.cpp
+	test.cpp
 )
 
 add_library(retdec ${RETDEC_SOURCES})
