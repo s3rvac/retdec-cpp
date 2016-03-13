@@ -113,6 +113,32 @@ ThrowsApiErrorWithCorrectMessageWhenRequestFailedAndResponseHasJsonBody) {
 	}
 }
 
+TEST_F(VerifyRequestSucceededTests,
+ThrowsAuthErrorWithCorrectMessageWhenRequestFailedDueToAuthError) {
+	NiceMock<ResponseMock> response;
+	ON_CALL(response, statusCode())
+		.WillByDefault(Return(401)); // HTTP 401 Unauthorized
+	ON_CALL(response, statusMessage())
+		.WillByDefault(Return("Unauthorized"));
+	ON_CALL(response, bodyAsJson())
+		.WillByDefault(Return(toJson(R"(
+			{
+				"code": 401,
+				"message": "Unauthorized",
+				"description": "Unauthorized."
+			}
+		)")));
+
+	try {
+		verifyRequestSucceeded(response);
+		FAIL() << "expected AuthError to be thrown";
+	} catch (const AuthError &ex) {
+		ASSERT_EQ(401, ex.getCode());
+		ASSERT_EQ("Unauthorized", ex.getMessage());
+		ASSERT_EQ("Unauthorized.", ex.getDescription());
+	}
+}
+
 ///
 /// Tests for ResponseVerifyingConnection().
 ///

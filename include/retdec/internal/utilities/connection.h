@@ -23,7 +23,7 @@ void verifyRequestSucceeded(const Connection::Response &response);
 ///
 /// This class wraps an existing connection. Then, when a response from a
 /// GET/POST request is received, it verifies that the request succeeded. If it
-/// failed, it throws ApiError.
+/// failed, it throws ApiError or its subclass.
 ///
 class ResponseVerifyingConnection: public Connection {
 public:

@@ -67,14 +67,14 @@ Test::~Test() = default;
 ///
 /// Tries to authenticate.
 ///
-/// @throws ApiError When the authentication fails.
+/// @throws AuthError When the authentication fails.
 ///
 /// Does nothing when the authentication succeeds.
 ///
 void Test::auth() {
 	auto conn = impl()->connectionManager->newConnection(impl()->settings);
 	// We do not need any parameters; simply send a GET request to /test/echo,
-	// and if the authentication fails, ApiError will be automatically thrown.
+	// and if the authentication fails, AuthError will be automatically thrown.
 	auto response = conn->sendGetRequest(impl()->echoUrl);
 	verifyRequestSucceeded(*response);
 }
