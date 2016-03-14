@@ -14,6 +14,21 @@
 namespace retdec {
 namespace internal {
 
+namespace {
+
+///
+/// Throws ApiError or its subclass, depending on @a code.
+///
+void throwApiError(int code, const std::string &message,
+		const std::string &description = "") {
+	if (code == 401) {
+		throw AuthError(code, message, description);
+	}
+	throw ApiError(code, message, description);
+}
+
+} // anonymous namespace
+
 ///
 /// Checks if a request resulted in the given @a response succeeded.
 ///
@@ -32,13 +47,13 @@ void verifyRequestSucceeded(const Connection::Response &response) {
 	if (!requestSucceeded(response)) {
 		try {
 			auto jsonBody = response.bodyAsJson();
-			throw ApiError(
+			return throwApiError(
 				jsonBody.get("code", response.statusCode()).asInt(),
 				jsonBody.get("message", response.statusMessage()).asString(),
 				jsonBody.get("description", "").asString()
 			);
 		} catch (const JsonDecodingError &) {
-			throw ApiError(
+			return throwApiError(
 				response.statusCode(),
 				response.statusMessage()
 			);

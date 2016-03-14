@@ -11,9 +11,6 @@
 #include <memory>
 #include <string>
 
-#include <json/json.h>
-
-#include "retdec/internal/connection_manager.h"
 #include "retdec/internal/utilities/connection.h"
 #include "retdec/settings.h"
 
@@ -32,9 +29,8 @@ class ServiceImpl {
 public:
 	ServiceImpl(const Settings &settings,
 		const std::shared_ptr<ConnectionManager> &connectionManager,
-		const std::string &serviceName,
-		const std::string &resourcesName);
-	virtual ~ServiceImpl();
+		const std::string &serviceName);
+	virtual ~ServiceImpl() = 0;
 
 	/// @name Request Arguments Creation
 	/// @{
@@ -44,23 +40,6 @@ public:
 		const ResourceArguments &args) const;
 	/// @}
 
-	///
-	/// Runs a new resource with the given arguments.
-	///
-	template <typename ResourceType>
-	std::unique_ptr<ResourceType> runResource(const ResourceArguments &args) {
-		auto conn = connectionManager->newConnection(settings);
-		auto response = conn->sendPostRequest(
-			resourcesUrl,
-			createRequestArguments(args),
-			createRequestFiles(args)
-		);
-		verifyRequestSucceeded(*response);
-		auto jsonBody = response->bodyAsJson();
-		auto id = jsonBody.get("id", "?").asString();
-		return std::make_unique<ResourceType>(id, conn);
-	}
-
 	/// Settings.
 	const Settings settings;
 
@@ -69,9 +48,6 @@ public:
 
 	/// Base URL.
 	const std::string baseUrl;
-
-	/// URL to resources.
-	const std::string resourcesUrl;
 };
 
 } // namespace internal

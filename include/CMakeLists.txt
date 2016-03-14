@@ -21,6 +21,7 @@ set(PUBLIC_INCLUDES
 	retdec/retdec.h
 	retdec/service.h
 	retdec/settings.h
+	retdec/test.h
 )
 
 install(FILES ${PUBLIC_INCLUDES} DESTINATION "${INSTALL_INCLUDE_DIR}/retdec")

@@ -2,14 +2,14 @@
 /// @file      retdec/fileinfo.cpp
 /// @copyright (c) 2015-2016 by Petr Zemek (s3rvac@gmail.com) and contributors
 /// @license   MIT, see the @c LICENSE file for more details
-/// @brief     Implementation of the fileinfo.
+/// @brief     Implementation of the fileinfo service.
 ///
 
 #include "retdec/analysis.h"
 #include "retdec/analysis_arguments.h"
 #include "retdec/fileinfo.h"
 #include "retdec/internal/connection_managers/real_connection_manager.h"
-#include "retdec/internal/service_impl.h"
+#include "retdec/internal/service_with_resources_impl.h"
 #include "retdec/settings.h"
 
 using namespace retdec::internal;
@@ -20,7 +20,7 @@ namespace internal {
 ///
 /// Private implementation of Fileinfo.
 ///
-class FileinfoImpl: public ServiceImpl {
+class FileinfoImpl: public ServiceWithResourcesImpl {
 public:
 	FileinfoImpl(const Settings &settings,
 		const std::shared_ptr<ConnectionManager> &connectionManager);
@@ -35,10 +35,15 @@ public:
 ///
 FileinfoImpl::FileinfoImpl(const Settings &settings,
 		const std::shared_ptr<ConnectionManager> &connectionManager):
-	ServiceImpl(settings, connectionManager, "fileinfo", "analyses") {}
+	ServiceWithResourcesImpl(
+		settings,
+		connectionManager,
+		"fileinfo",
+		"analyses"
+	) {}
 
 // Override.
-FileinfoImpl::~FileinfoImpl() {}
+FileinfoImpl::~FileinfoImpl() = default;
 
 } // namespace internal
 

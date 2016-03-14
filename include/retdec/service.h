@@ -8,6 +8,8 @@
 #ifndef RETDEC_SERVICE_H
 #define RETDEC_SERVICE_H
 
+#include <memory>
+
 namespace retdec {
 
 namespace internal {

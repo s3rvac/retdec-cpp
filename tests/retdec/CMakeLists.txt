@@ -29,6 +29,7 @@ set(RETDEC_TESTS_SOURCES
 	internal/utilities/string_tests.cpp
 	resource_arguments_tests.cpp
 	settings_tests.cpp
+	test_tests.cpp
 	test_utilities/tmp_file.cpp
 )
 

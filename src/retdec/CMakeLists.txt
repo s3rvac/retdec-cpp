@@ -23,6 +23,7 @@ set(RETDEC_SOURCES
 	internal/files/string_file.cpp
 	internal/resource_impl.cpp
 	internal/service_impl.cpp
+	internal/service_with_resources_impl.cpp
 	internal/utilities/connection.cpp
 	internal/utilities/json.cpp
 	internal/utilities/os.cpp
@@ -31,6 +32,7 @@ set(RETDEC_SOURCES
 	resource_arguments.cpp
 	service.cpp
 	settings.cpp
+	test.cpp
 )
 
 add_library(retdec ${RETDEC_SOURCES})

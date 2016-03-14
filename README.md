@@ -47,8 +47,9 @@ Status
 ------
 
 The library currently provides basic support of the
-[decompilation](https://retdec.com/api/docs/decompiler.html) and
-[file-analyzing](https://retdec.com/api/docs/fileinfo.html) services.
+[decompilation](https://retdec.com/api/docs/decompiler.html),
+[file-analyzing](https://retdec.com/api/docs/fileinfo.html), and
+[test](https://retdec.com/api/docs/test.html) services.
 
 Requirements
 ------------

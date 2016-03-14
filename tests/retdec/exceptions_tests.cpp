@@ -93,6 +93,28 @@ GetDescriptionReturnsSameValueAsWhatWhenDescriptionIsNotGiven) {
 }
 
 ///
+/// Tests for AuthError.
+///
+class AuthErrorTests: public Test {};
+
+TEST_F(AuthErrorTests,
+GettersAndWhatReturnCorrectValuesWhenDescriptionIsGiven) {
+	AuthError ex(401, "Unauthorized by API Key", "API key authorization failed.");
+
+	ASSERT_STREQ("401 Unauthorized by API Key", ex.what());
+	ASSERT_EQ(401, ex.getCode());
+	ASSERT_EQ("Unauthorized by API Key", ex.getMessage());
+	ASSERT_EQ("API key authorization failed.", ex.getDescription());
+}
+
+TEST_F(AuthErrorTests,
+GetDescriptionReturnsSameValueAsWhatWhenDescriptionIsNotGiven) {
+	AuthError e(401, "Unauthorized by API Key");
+
+	ASSERT_EQ(e.what(), e.getDescription());
+}
+
+///
 /// Tests for DecompilationError.
 ///
 class DecompilationErrorTests: public Test {};
