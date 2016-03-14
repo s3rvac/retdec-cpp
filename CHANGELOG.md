@@ -4,6 +4,11 @@ Changelog
 dev
 ---
 
+* (nothing yet)
+
+0.2 (2016-03-14)
+----------------
+
 * Added basic support for the [file-analyzing
   service](https://retdec.com/api/docs/fileinfo.html). Also added a sample tool
   that uses this service to analyze binary files (`fileinfo`).
