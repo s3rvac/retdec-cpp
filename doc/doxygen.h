@@ -193,7 +193,7 @@ int main(int argc, char **argv) {
 
 @section SectionContact Contact
 
-If you have any remarks or questions concerning the library, feel free to <a href="http://petrzemek.net" title="Contact me">contact me</a>.
+If you have any remarks or questions concerning the library, feel free to <a href="https://petrzemek.net" title="Contact me">contact me</a>.
 */
 
 // Document the used namespaces (there is no better place).
