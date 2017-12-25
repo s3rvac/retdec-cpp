@@ -111,7 +111,7 @@ your project in the following way:
 ```
 set(retdec_DIR "/path/to/installed/retdec/lib/cmake")
 find_package(retdec)
-include_directories(SYSTEM ${retdec_INCLUDE_DIR})
+include_directories(SYSTEM ${retdec_INCLUDE_DIRS})
 
 add_executable(your_app your_app.cpp)
 target_link_libraries(your_app retdec)
