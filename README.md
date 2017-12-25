@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
 Status
 ------
 
-The library currently provides basic support of the
+The library currently provides very basic support of the
 [decompilation](https://retdec.com/api/docs/decompiler.html),
 [file-analyzing](https://retdec.com/api/docs/fileinfo.html), and
 [test](https://retdec.com/api/docs/test.html) services.
@@ -72,7 +72,7 @@ automatically downloaded and built if they are not present on your system.
 Build and Installation
 ----------------------
 
-* Clone the repository or download the sources into a directory. Lets call the
+* Clone the repository or download the sources into a directory. Let's call the
   directory `retdec`.
 * `cd retdec`
 * `mkdir build && cd build`
@@ -80,26 +80,26 @@ Build and Installation
 * `make && make install`
 
 You can pass additional parameters to `cmake`:
-* `-DRETDEC_DOC=1` to build with API documentation (requires
+* `-DRETDEC_DOC=ON` to build with API documentation (requires
     [Doxygen](http://www.doxygen.org/), disabled by default).
-* `-DRETDEC_TOOLS=1` to build with tools (disabled by default).
-* `-DRETDEC_TESTS=1` to build with unit tests (disabled by default).
-* `-DRETDEC_COVERAGE=1` to build with code coverage support (requires
+* `-DRETDEC_TOOLS=ON` to build with tools (disabled by default).
+* `-DRETDEC_TESTS=ON` to build with unit tests (disabled by default).
+* `-DRETDEC_COVERAGE=ON` to build with code coverage support (requires
     [LCOV](http://ltp.sourceforge.net/coverage/lcov.php), disabled by default).
 * `-DCMAKE_BUILD_TYPE=Debug` to build with debugging information, which is
     useful during development. By default, the library is built in the
     `Release` mode.
-* `-DCMAKE_INSTALL_PREFIX:PATH=/usr` to set a custom installation path.
+* `-DCMAKE_INSTALL_PREFIX:PATH=/opt/retdec` to set a custom installation path.
 
-You can force a specific version of the required libraries by using the
-following `cmake` parameters:
+You can force a specific version of the required libraries by passing the
+following parameters to `cmake`:
 * `-DBOOST_ROOT=$BOOST_DIR`
 * `-DCPPNETLIB_ROOT=$CPPNETLIB_DIR`
 * `-DOPENSSL_ROOT_DIR=$OPENSSL_DIR`
 * `-DJsonCpp_ROOT_DIR=$JSONCPP_DIR`
 
 The `make` call supports standard parameters, such as:
-* `-j N` to build the library by using `N` processors.
+* `-j N` to build the library in parallel using `N` processes.
 * `VERBOSE=1` to show verbose output when building the library.
 
 Use
@@ -125,7 +125,7 @@ The API documentation is available here:
 * [0.2](https://projects.petrzemek.net/retdec-cpp/doc/0.2/)
 * [0.1](https://projects.petrzemek.net/retdec-cpp/doc/0.1/)
 
-You can also generate it by yourself (pass `-DRETDEC_DOC=1` to `cmake` and run
+You can also generate it by yourself (pass `-DRETDEC_DOC=ON` to `cmake` and run
 `make doc`).
 
 License
