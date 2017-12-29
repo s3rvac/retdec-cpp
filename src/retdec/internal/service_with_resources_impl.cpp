@@ -1,6 +1,6 @@
 ///
 /// @file      retdec/internal/service_with_resources_impl.cpp
-/// @copyright (c) 2015-2017 by Petr Zemek (s3rvac@gmail.com) and contributors
+/// @copyright (c) 2015 by Petr Zemek (s3rvac@gmail.com) and contributors
 /// @license   MIT, see the @c LICENSE file for more details
 /// @brief     Implementation of the base class of private implementations of
 ///            services with resources.

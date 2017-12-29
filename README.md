@@ -131,7 +131,7 @@ You can also generate it by yourself (pass `-DRETDEC_DOC=ON` to `cmake` and run
 License
 -------
 
-Copyright (c) 2015-2017 Petr Zemek (<s3rvac@gmail.com>) and contributors.
+Copyright (c) 2015 Petr Zemek (<s3rvac@gmail.com>) and contributors.
 
 Distributed under the MIT license. See the
 [`LICENSE`](https://github.com/s3rvac/retdec-cpp/blob/master/LICENSE) file for
